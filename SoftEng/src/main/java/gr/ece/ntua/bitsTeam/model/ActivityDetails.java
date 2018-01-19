@@ -9,6 +9,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class ActivityDetails {
 
@@ -22,6 +26,10 @@ public class ActivityDetails {
 	
 	private Integer cost;
 	
+	private Integer ticketNumber;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "PST")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 	
 	private String ageRange;
@@ -97,5 +105,13 @@ public class ActivityDetails {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+	public Integer getTicketNumber() {
+		return ticketNumber;
+	}
+
+	public void setTicketNumber(Integer ticketNumber) {
+		this.ticketNumber = ticketNumber;
 	}
 }

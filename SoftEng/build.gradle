@@ -11,8 +11,9 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
 
-jar {
+war {
     baseName = 'gs-spring-boot'
     version =  '0.1.0'
 }
@@ -27,9 +28,11 @@ targetCompatibility = 1.8
 dependencies {
 	// compileOnly "org.projectlombok:lombok:1.16.16"
 
+	compile('org.springframework.boot:spring-boot-starter-web','org.apache.tomcat.embed:tomcat-embed-jasper', 'org.springframework.boot:spring-boot-starter-tomcat')
+    compile('org.springframework.boot:spring-boot-devtools')    
+    compile('javax.servlet:jstl')
+    
 
-
-    compile("org.springframework.boot:spring-boot-starter-web") 
     
     // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -38,11 +41,12 @@ dependencies {
     compile 'mysql:mysql-connector-java'    
     compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
 
+
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.2.RELEASE'
     
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
     // end::actuator[]
-    
+
     testCompile("junit:junit")
 }
