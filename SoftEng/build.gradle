@@ -26,8 +26,9 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-	// compileOnly "org.projectlombok:lombok:1.16.16"
-
+	compile group: 'com.cloudinary', name: 'cloudinary-taglib', version: '1.14.0'
+	compile group: 'com.cloudinary', name: 'cloudinary-http44', version: '1.14.0'
+	
 	compile('org.springframework.boot:spring-boot-starter-web','org.apache.tomcat.embed:tomcat-embed-jasper', 'org.springframework.boot:spring-boot-starter-tomcat')
     compile('org.springframework.boot:spring-boot-devtools')    
     compile('javax.servlet:jstl')
@@ -40,6 +41,7 @@ dependencies {
     // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'    
     compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+
 
 
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.2.RELEASE'

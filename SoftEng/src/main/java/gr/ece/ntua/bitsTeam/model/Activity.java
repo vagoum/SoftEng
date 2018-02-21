@@ -32,9 +32,9 @@ public class Activity {
                 inverseJoinColumns={@JoinColumn(name="BOOKING_ID")})
 	private List<Booking> bookings = new ArrayList<>();
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private ActivityDetails activityDetails;
-
+	
 	private Boolean elapsed;
 	
 	

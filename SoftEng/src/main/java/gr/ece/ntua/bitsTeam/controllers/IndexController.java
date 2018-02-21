@@ -11,9 +11,9 @@ import gr.ece.ntua.bitsTeam.model.ActivityDetails;
 
 @Controller
 public class IndexController {
-	@RequestMapping("/")
+	@RequestMapping("/a")
 	public String index(Map<String, Object> model) {
-		return "index";
+		return "upload_form";
 	}
 	
 	

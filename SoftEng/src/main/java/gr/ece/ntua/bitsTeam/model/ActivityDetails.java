@@ -8,41 +8,44 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.Future;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+
 @Entity
 public class ActivityDetails {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	private String name;
-	
+
+	private String name = "";
+
 	private String type;
-	
+
 	private Integer cost;
-	
+
 	private Integer ticketNumber;
-	
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "PST")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Future(message = "Activity day must be in the future.")
 	private Date date;
-	
+
 	private String ageRange;
-	
+
 	private String description;
+
+	private String address;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	private Activity activity;
-	
+
 	@OneToOne(fetch = FetchType.EAGER)
 	private Location location;
-	
-	
+
 	public String getName() {
 		return name;
 	}
@@ -114,4 +117,13 @@ public class ActivityDetails {
 	public void setTicketNumber(Integer ticketNumber) {
 		this.ticketNumber = ticketNumber;
 	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 }
