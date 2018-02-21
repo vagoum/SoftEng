@@ -3,6 +3,9 @@ package gr.ece.ntua.bitsTeam.cloudinary;
 import com.cloudinary.Singleton;
 import com.cloudinary.StoredFile;
 import com.cloudinary.Transformation;
+
+import gr.ntua.ece.bitsTeam.watermark.Watermark;
+
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -14,6 +17,8 @@ public class PhotoUpload extends StoredFile {
     private MultipartFile file;
 
     public String getUrl() {
+
+    	
         if (version != null && format != null && publicId != null) {
             return Singleton.getCloudinary().url()
                     .resourceType(resourceType)
