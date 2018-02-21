@@ -42,7 +42,8 @@ dependencies {
     // Use MySQL Connector-J
     compile 'mysql:mysql-connector-java'    
     compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
-
+	compile group: 'com.sun.mail', name: 'javax.mail', version: '1.5.5'
+	compile group: 'com.lowagie', name: 'itext', version:'2.1.7'
 
 
 	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.2.RELEASE'
