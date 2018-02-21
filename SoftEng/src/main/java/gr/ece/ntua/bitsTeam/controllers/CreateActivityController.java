@@ -63,36 +63,37 @@ public class CreateActivityController {
 	 */
 	@PostMapping("/activity_create")
 	public String activityCreate(@ModelAttribute("activityDetails") @Validated ActivityDetails activityDetails,
-			BindingResult result, @RequestParam("file") MultipartFile file, Model model) {
+			BindingResult result, @RequestParam("file") MultipartFile[] files, Model model) {
 
 		if (result.hasErrors()) {
 			return "activity_create";
 		}
-		
+
 		if (activityDetails != null) {
 			Activity activity = new Activity();
-			
-			activityDetails.setActivity(activity);
+
 			activity.setActivityDetails(activityDetails);
 			activity.setElapsed(false);
-			
+
 			activityRepository.save(activity);
 		}
-		
-		if (file != null) {
-			Photo photo = new Photo();
-			Map uploadResult;
-			try {
-				uploadResult = cld.upload(file.getBytes(), ObjectUtils.emptyMap());
 
-				java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-				photo.setCreatedAt(date);
-				photo.setUrl((String) uploadResult.get("url"));
-				photo.setName((String) uploadResult.get("original_filename"));
-				photoRepository.save(photo);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if (files != null) {
+			for (MultipartFile file : files) {
+				Photo photo = new Photo();
+				Map uploadResult;
+				try {
+					uploadResult = cld.upload(file.getBytes(), ObjectUtils.emptyMap());
+
+					java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+					photo.setCreatedAt(date);
+					photo.setUrl((String) uploadResult.get("url"));
+					photo.setName((String) uploadResult.get("original_filename"));
+					photoRepository.save(photo);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 
 		}

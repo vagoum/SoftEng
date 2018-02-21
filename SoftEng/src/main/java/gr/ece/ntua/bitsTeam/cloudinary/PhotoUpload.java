@@ -5,6 +5,9 @@ import com.cloudinary.StoredFile;
 import com.cloudinary.Transformation;
 import org.springframework.web.multipart.MultipartFile;
 
+
+// not used yet
+
 public class PhotoUpload extends StoredFile {
     private String title;
 

@@ -1,6 +1,6 @@
 $(document).ready(function(){
     //Handle File Upload
-    $(".btn-add").click(function(){
+    $(".btn-add").click(function(e){
         e.preventDefault();
 
         var controlForm = $('.controls:first'),

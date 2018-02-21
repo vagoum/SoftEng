@@ -41,9 +41,6 @@ public class ActivityDetails {
 	private String address;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	private Activity activity;
-
-	@OneToOne(fetch = FetchType.EAGER)
 	private Location location;
 
 	public String getName() {
@@ -94,13 +91,6 @@ public class ActivityDetails {
 		this.description = description;
 	}
 
-	public Activity getActivity() {
-		return activity;
-	}
-
-	public void setActivity(Activity activity) {
-		this.activity = activity;
-	}
 
 	public Location getLocation() {
 		return location;

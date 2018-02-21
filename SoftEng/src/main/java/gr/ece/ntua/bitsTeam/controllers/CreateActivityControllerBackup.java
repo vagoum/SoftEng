@@ -56,7 +56,6 @@ public class CreateActivityControllerBackup {
 		if (ad != null) {
 			Activity activity = new Activity();
 			
-			ad.setActivity(activity);
 			activity.setActivityDetails(ad);
 			activity.setElapsed(false);
 			
