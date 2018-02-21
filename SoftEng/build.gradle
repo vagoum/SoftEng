@@ -19,13 +19,22 @@ war {
 }
 
 repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
     mavenCentral()
+    maven { url "https://jitpack.io" }
+    
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
+
+	compile 'com.github.andrewchantzos:binary_dependency_softeng:1f36ed380f'
+
+
 	compile group: 'com.cloudinary', name: 'cloudinary-taglib', version: '1.14.0'
 	compile group: 'com.cloudinary', name: 'cloudinary-http44', version: '1.14.0'
 	
@@ -33,7 +42,6 @@ dependencies {
     compile('org.springframework.boot:spring-boot-devtools')    
     compile('javax.servlet:jstl')
     
-	compile 'com.github.andrewchantzos:binary_dependency_softeng:-SNAPSHOT'
 	
     
     // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)

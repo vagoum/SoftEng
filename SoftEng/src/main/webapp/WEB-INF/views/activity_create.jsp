@@ -148,10 +148,12 @@
 					</div>
 
 					<div class="form-group" style="padding-top: 10px;">
-						<label><h4 class="my-3">Activity Description</h4></label>
-						<textarea type="text" id="activity-form-description"
-							name="description" placeholder="Enter the activity description"
-							rows="3" class="form-control"></textarea>
+					<form:label path="description">
+							<h4 class="my-4" id="activity-details-title">Activity Description</h4>
+						</form:label>
+						<form:textarea path="description" name="description" type="text"
+							id="activity-form-title" placeholder="" class="form-control" />
+						<form:errors path="description" class="text-danger" />
 					</div>
 
 					<div class="form-group"

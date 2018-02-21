@@ -22,6 +22,7 @@ public class ActivityValidator implements Validator {
       ValidationUtils.rejectIfEmptyOrWhitespace(err, "cost", "activitydetails.cost.empty");
       ValidationUtils.rejectIfEmptyOrWhitespace(err, "ticketNumber", "activitydetails.ticketNumber.empty");
       ValidationUtils.rejectIfEmptyOrWhitespace(err, "date", "activitydetails.date.empty");
+      ValidationUtils.rejectIfEmptyOrWhitespace(err, "description", "activitydetails.description.empty");
     
    }
 
