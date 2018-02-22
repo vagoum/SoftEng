@@ -5,15 +5,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Singleton;
-import com.cloudinary.Transformation;
 
 @Component
 public class CloudinaryConfig {
     private Cloudinary cloudinary;
+    
     @Autowired
     public CloudinaryConfig(@Value("${cloudinary.apikey}") String key,
                             @Value("${cloudinary.apisecret}") String secret,
@@ -24,6 +25,7 @@ public class CloudinaryConfig {
         cloudinary.config.apiKey=key;
     }
 
+    @Async
     public Map upload(Object file, Map options){
         try{
             return cloudinary.uploader().upload(file, options);

@@ -18,11 +18,8 @@ import org.hibernate.annotations.FetchMode;
 @DiscriminatorValue("organizer")
 public class Organizer extends User{
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "organizer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@Fetch(FetchMode.SELECT)
-    @JoinTable(name="ORGANIZER_ACTIVITY_ASSOC", 
-                joinColumns={@JoinColumn(name="ORGANIZER_ID")}, 
-                inverseJoinColumns={@JoinColumn(name="ACTIVITY_ID")})
 	private List<Activity> activities = new ArrayList<>();
 
 	public List<Activity> getActivities() {

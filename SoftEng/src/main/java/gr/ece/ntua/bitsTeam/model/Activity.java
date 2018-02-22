@@ -25,11 +25,11 @@ public class Activity {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@Fetch(FetchMode.SELECT)
-    @JoinTable(name="ACTIVITY_BOOKING_ASSOC", 
-                joinColumns={@JoinColumn(name="ACTIVITY_ID")}, 
-                inverseJoinColumns={@JoinColumn(name="BOOKING_ID")})
+	@OneToOne
+	private Organizer organizer;
+	
+
+	@OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Booking> bookings = new ArrayList<>();
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -61,4 +61,13 @@ public class Activity {
 	public void setElapsed(Boolean elapsed) {
 		this.elapsed = elapsed;
 	}
+	
+	public Organizer getOrganizer() {
+		return organizer;
+	}
+
+	public void setOrganizer(Organizer organizer) {
+		this.organizer = organizer;
+	}
+
 }
