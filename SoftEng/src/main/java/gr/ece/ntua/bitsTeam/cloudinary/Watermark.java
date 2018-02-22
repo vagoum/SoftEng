@@ -43,8 +43,8 @@ public class Watermark {
 
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 			ImageIO.write(resizedImage, "png", baos);
-			baos.flush();
 			imageInByte = baos.toByteArray();
+			baos.flush();
 			baos.close();
 			g2d.dispose();
 
