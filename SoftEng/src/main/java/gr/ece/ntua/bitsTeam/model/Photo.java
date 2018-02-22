@@ -33,9 +33,9 @@ public class Photo {
 	    @Basic
 	    private Boolean isThumbnail;
 	    
-	    @OneToOne
-	    private Activity activity;
-
+		@OneToOne
+	    private ActivityDetails activityDetails;
+	    
 		public Long getId() {
 			return id;
 		}
@@ -84,19 +84,14 @@ public class Photo {
 			this.isThumbnail = isThumbnail;
 		}
 
-		public Activity getActivity() {
-			return activity;
+		public ActivityDetails getActivityDetails() {
+			return activityDetails;
 		}
 
-		public void setActivity(Activity activity) {
-			this.activity = activity;
+		public void setActivityDetails(ActivityDetails activityDetails) {
+			this.activityDetails = activityDetails;
 		}
 
-		@Override
-		public String toString() {
-			return "Photo [id=" + id + ", name=" + name + ", image=" + image + ", createdAt=" + createdAt + ", url="
-					+ url + ", isThumbnail=" + isThumbnail + ", activity=" + activity + "]";
-		}
 
 		
 }

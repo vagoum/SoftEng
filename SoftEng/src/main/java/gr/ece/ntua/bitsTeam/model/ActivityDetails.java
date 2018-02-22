@@ -1,13 +1,18 @@
 package gr.ece.ntua.bitsTeam.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Future;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
+@Table(name = "activity_details")
 public class ActivityDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -40,6 +46,9 @@ public class ActivityDetails {
 
 	private String address;
 
+	@OneToMany(mappedBy = "activityDetails" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Photo> photos = new ArrayList<>();
+	
 	@OneToOne(fetch = FetchType.EAGER)
 	private Location location;
 
@@ -114,6 +123,14 @@ public class ActivityDetails {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 
 }

@@ -30,7 +30,6 @@ import com.cloudinary.utils.ObjectUtils;
 import gr.ece.ntua.bitsTeam.cloudinary.CloudinaryConfig;
 import gr.ece.ntua.bitsTeam.cloudinary.Watermark;
 import gr.ece.ntua.bitsTeam.formValidators.ActivityValidator;
-import gr.ece.ntua.bitsTeam.formValidators.ImageUploadValidator;
 import gr.ece.ntua.bitsTeam.model.Activity;
 import gr.ece.ntua.bitsTeam.model.ActivityDetails;
 import gr.ece.ntua.bitsTeam.model.Photo;
@@ -50,9 +49,6 @@ public class CreateActivityController {
 	@Autowired
 	private ActivityRepository activityRepository;
 
-	@Autowired
-	private ImageUploadValidator imageUploadValidator;
-	
 	@Autowired
 	private PhotoRepository photoRepository;
 
@@ -82,33 +78,35 @@ public class CreateActivityController {
 		}
 
 		
-		if (activityDetails != null) {
+		if (activityDetails != null && images != null) {
 			Activity activity = new Activity();
 
 			activity.setActivityDetails(activityDetails);
 			activity.setElapsed(false);
 
-			activityRepository.save(activity);
-		}
-
-		if (images != null) {
-			
 			
 			for (MultipartFile file : images) {
 				
-				// imageUploadValidator.validate(file, fileUploadingResult);
-				uploadFile(file);
+				Photo photo = uploadFile(file);
+				if (photo.getName() != null)  {
+					activityDetails.getPhotos().add(photo);
+				}
+				else {
+					return "activity_create";
+				}
 			}
+			
+			activityRepository.save(activity);
+	
 		}
+		
+
 		return "activity_create";
 	}
 	
-	
-	
-	// upload photos asynchronously
-	// MUST VALIDATE THAT ITS PHOTO
+
 	@Async
-	private void uploadFile(MultipartFile file) {
+	private Photo uploadFile(MultipartFile file) {
 
 		Photo photo = new Photo();
 		try {
@@ -121,12 +119,13 @@ public class CreateActivityController {
 			photo.setCreatedAt(date);
 			photo.setUrl((String) uploadResult.get("url"));
 			photo.setName((String) uploadResult.get("original_filename"));
-			photoRepository.save(photo);
+			return photo;
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		return null;
 	}
 	
 	private byte[] addWaterMark(MultipartFile file) throws IOException {
