@@ -1,5 +1,7 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,10 +14,11 @@ import gr.ece.ntua.bitsTeam.login.SecurityService;
 import gr.ece.ntua.bitsTeam.login.UserValidator;
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Parent;
+import gr.ece.ntua.bitsTeam.model.User;
 import gr.ece.ntua.bitsTeam.service.UserService;
 
 @Controller
-public class UserControllerMy {
+public class UserController {
 	
     @Autowired
     private UserService userService;
@@ -25,7 +28,7 @@ public class UserControllerMy {
 
     @Autowired
     private UserValidator userValidator;
-
+	
     @RequestMapping(value = "/registration2", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("parentForm", new Parent());
@@ -35,14 +38,14 @@ public class UserControllerMy {
     }
 
     @RequestMapping(value = "/users/parents/registration", method = RequestMethod.POST)
-    public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult, Model model) {
+    public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult, HttpServletRequest request,Model model) {
         userValidator.validate(parent, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
         }
 
-
+        setToSession(request, parent, "ROLE_PARENT");
         userService.save(parent,"ROLE_PARENT");
 
         securityService.autologin(parent.getEmail(), parent.getPassword());
@@ -52,13 +55,14 @@ public class UserControllerMy {
     
     
     @RequestMapping(value = "users/organizers/registration", method = RequestMethod.POST)
-    public String registrationOrganizer(@ModelAttribute("organizerForm") Organizer organizer, BindingResult bindingResult, Model model) {
+    public String registrationOrganizer(@ModelAttribute("organizerForm") Organizer organizer, BindingResult bindingResult, HttpServletRequest request, Model model) {
         userValidator.validate(organizer, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";
         }
 
+        setToSession(request, organizer, "ROLE_ORGANIZER");
         userService.save(organizer,"ROLE_ORGANIZER");
 
         securityService.autologin(organizer.getEmail(), organizer.getPassword());
