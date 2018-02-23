@@ -1,7 +1,5 @@
 package gr.ece.ntua.bitsTeam.service;
 
-import java.util.HashSet;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -30,6 +28,21 @@ public class UserServiceImpl implements UserService {
         	Role role = new Role();
         	role.setEmail(user.getEmail());
         	role.setAuthority("ROLE_UNAUTH");
+        	role.setUser(user);
+        	user.getRoles().add(role);
+        	userRepository.save(user);
+        }
+    }
+    
+    @Override
+    public void save(User user, String authority) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if (user.getUserId() == null) {
+        	
+
+        	Role role = new Role();
+        	role.setEmail(user.getEmail());
+        	role.setAuthority(authority);
         	role.setUser(user);
         	user.getRoles().add(role);
         	userRepository.save(user);

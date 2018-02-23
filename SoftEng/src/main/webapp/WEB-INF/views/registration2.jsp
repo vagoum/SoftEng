@@ -1,6 +1,41 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- jQuery core -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+<!-- Bootstrap core -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<!-- CSS files -->
+<link rel="stylesheet" href="./css/index_carousel.css">
+<link rel="stylesheet" href="./css/index_footer.css">
+
+<!-- js files -->
+<script type="text/javascript" src="./js/activity_create-controller.js"></script>
+
+
+
+
+<title>Little Explorers</title>
+</head>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,60 +76,12 @@
 
 		});
 	</script>
+
 </head>
 
 <body>
-	<!-- Carousel -->
-	<div class="container">
-		<div class="row">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
 
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
 
-					<div class="item active">
-						<img class="first-slide" src="http://192.241.175.50/videos/boston.jpg" alt="First slide" style="width:100%;">
-						<div class="carousel-caption">
-							<h3>Little Explorers</h3>      
-							<p>Adventures For Our Little Friends</p>
-						</div>
-					</div>
-
-					<div class="item">
-						<img class="second-slide" src="https://www.w3schools.com/w3images/workbench.jpg" alt="Second slide" style="width:100%;">
-						<div class="carousel-caption">
-							<h3>For Parents</h3>
-							<p>Explore Amazing Activies</p>
-						</div>
-					</div>
-
-					<div class="item">
-						<img class="third-slide" src="https://www.w3schools.com/w3images/coffee.jpg" alt="Third slide" style="width:100%;">
-						<div class="carousel-caption">
-							<h3>For Activity Organizers</h3>
-							<p>Create great experiences and adventures for amazing customers</p>
-						</div>
-					</div>
-				</div>
-
-				<!-- Left and right controls -->
-				<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#myCarousel" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-		</div>
-	</div>
 
 	<!-- Navbar -->
 	<div class="container side-bordering">
@@ -196,16 +183,16 @@
 							<div class="col-lg-12">
 
 								<!--Registration Form For Parents -->
-								<form id="parent-registration-form" action="users/parents/registration.jsp" method="post" role="form" style="display: block;">
+								<form:form modelAttribute="parentForm" id="parent-registration-form" action="users/parents/registration" method="post" role="form" style="display: block;">
 									<div class="col-sm-12">
 										<div class="row">
 											<div class="col-sm-6 form-group">
 												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control" name="first_name">
+												<form:input path="firstName" type="text" placeholder="Enter your First Name" class="form-control" name="firstName"/>
 											</div>
 											<div class="col-sm-6 form-group">
 												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control" name="last_name">
+												<form:input path="lastName" type="text" placeholder="Enter your Last Name" class="form-control" name="lastName"/>
 											</div>
 										</div>					
 										<div class="form-group">
@@ -214,42 +201,62 @@
 										</div>					
 										<div class="form-group">
 											<label>Phone Number</label>
-											<input type="text" placeholder="Enter your Phone Number" class="form-control" name="phone">
+											<form:input path="phone" type="text" placeholder="Enter your Phone Number" class="form-control" name="phone"/>
 										</div>		
 										<div class="form-group">
 											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address" class="form-control" name="email">
+											<form:input path="email" type="text" placeholder="Enter your Email Address" class="form-control" name="email"/>
 										</div>	
 										<div class="form-group">
 											<label>Password</label>
-											<input type="password" placeholder="Enter your Password" class="form-control" name="password">
+											<form:input path="password" type="password" placeholder="Enter your Password" class="form-control" name="password"/>
+											<form:errors path="password"></form:errors>					
 										</div>	
 										<div class="form-group">
 											<label>Password Again</label>
-											<input type="password" placeholder="Enter your Password Again" class="form-control" name="passwordConfirm">
+											<form:input path="passwordConfirm" type="password" placeholder="Enter your Password Again" class="form-control" name="passwordConfirm"/>
 										</div>
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+													<input type="submit" name="register-submit" id="register-submit" disabled tabindex="4" class="form-control btn btn-register" value="Register Now">
 												</div>
+												
+				<script>
+				$("#passwordConfirm").on("change paste keyup", function() {
+					var password = $("#password").val();
+					var confirmPassword = $("#passwordConfirm").val();
+
+					if (password != confirmPassword) {
+						$("#register-submit").prop('disabled', true);
+						$("#error").html("Passwords do not match!");
+					} else {
+						$("#register-submit").prop('disabled', false);
+						$("#error").html("");
+					}
+				});
+				function jsfunction() {
+					//you code
+					return false;
+				}
+			</script>
 											</div>
 										</div>
 														
 									</div>
-								</form>
+								</form:form>
 
 								<!--Registration Form For Activity Organizers -->
-								<form id="organizer-registration-form" action="users/organizers/registration.jsp" method="post" role="form" style="display: none;">
+								<form:form modelAttribute="organizerForm" id="organizer-registration-form" action="users/organizers/registration" method="post" role="form" style="display: none;">
 									<div class="col-sm-12">
 										<div class="row">
 											<div class="col-sm-6 form-group">
 												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control" name="first_name">
+												<input  type="text" placeholder="Enter your First Name" class="form-control" name="firstName">
 											</div>
 											<div class="col-sm-6 form-group">
 												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control" name="last_name">
+												<input type="text" placeholder="Enter your Last Name" class="form-control" name="lastName">
 											</div>
 										</div>					
 										<div class="form-group">
@@ -267,31 +274,47 @@
 
 										<div class="form-group">
 											<label>Phone Number</label>
-											<input type="text" placeholder="Enter your Phone Number" class="form-control" name="phone">
+											<form:input path="phone" type="text" placeholder="Enter your Phone Number" class="form-control" name="phone"/>
 										</div>		
 										<div class="form-group">
 											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address" class="form-control" name="email">
+											<form:input path="email" type="text" placeholder="Enter your Email Address" class="form-control" name="email"/>
 										</div>	
 										<div class="form-group">
 											<label>Password</label>
-											<input type="password" placeholder="Enter your Password" class="form-control" name="password">
+											<form:input path="password" id="password2" type="password" placeholder="Enter your Password" class="form-control" name="password2"/>
+											<form:errors path="password"></form:errors>						
 										</div>	
 										<div class="form-group">
 											<label>Password Again</label>
-											<input type="password" placeholder="Enter your Password Again" class="form-control" name="passwordConfirm">
+											<form:input path="passwordConfirm" id="passwordConfirm2" type="password" placeholder="Enter your Password Again" class="form-control" name="passwordConfirm2"/>
 										</div>	
 
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+													<input type="submit" name="register-submit2" id="register-submit2" disabled tabindex="4" class="form-control btn btn-register" value="Register Now">
 												</div>
+				<script>
+				$("#passwordConfirm2").on("change paste keyup", function() {
+					var password = $("#password2").val();
+					var confirmPassword = $("#passwordConfirm2").val();
+
+					if (password != confirmPassword) {
+						$("#register-submit2").prop('disabled', true);
+						$("#error").html("Passwords do not match!");
+					} else {
+						$("#register-submit2").prop('disabled', false);
+						$("#error").html("");
+					}
+				});
+			</script>
 											</div>
 										</div>
-														
+											
+		
 									</div>
-								</form>
+								</form:form>
 
 
 							</div>

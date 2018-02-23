@@ -14,8 +14,8 @@ public class Parent extends User {
 	
 	private String firstName;
 	
-	private String lastName;
-
+	private String lastName;	
+	
 	public Location getLocation() {
 		return location;
 	}

@@ -24,10 +24,11 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer userId;
 	
-	private String username;
 
 	private String email;
 	
+	private String phone;
+
 	private String password;
 
 	@Transient
@@ -98,12 +99,13 @@ public class User {
 		this.resetPassword = resetPassword;
 	}
 
-	public String getUsername() {
-		return username;
+
+	public String getPhone() {
+		return phone;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }
