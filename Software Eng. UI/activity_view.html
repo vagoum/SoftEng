@@ -184,18 +184,21 @@
 					<br>
 					<div class="col-xl-8 col-lg-8 col-md-10 col-sm-12 col-xs-12 activity-tickets">
 						<h4 class="x-price" id="activity-details-price">Price per Ticket: $179</h4>
-						<label for="proirty">Number of Tickets:</label>
-						<select name="dropdown" class="dropdown" id="activity-details-dropdown">
-							<option>0</option>
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-						</select> 
-						<a class="btn btn-success" id="activity-details-book-btn" style="margin-left: 15px;">Book Now</a>
+
+						<form action="/activities/book.jsp" method="post" id="booking_form">
+							<label for="proirty">Number of Tickets:</label>
+							<select name="tickets_dropdown" class="dropdown" id="activity-details-dropdown">
+								<option>0</option>
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>
+								<option>5</option>
+								<option>6</option>
+								<option>7</option>
+								<option>8</option>
+							</select> 
+							<button type="submit" form="booking_form" class="btn btn-success" id="activity-details-book-btn" style="margin-left: 15px;">Book Now</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -264,13 +267,13 @@
 								<div class="thumbnail-carousel-item item active">
 									<div class="row">
 										<div class="col-md-4 col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=zero"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=zero"></a>
 										</div>          
 										<div class="col-md-4 col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=1"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=1"></a>
 										</div>
 										<div class="col-md-4 col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=2"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=2"></a>
 										</div>        
 									</div>
 								</div>
@@ -278,13 +281,13 @@
 								<div class="thumbnail-carousel-item item">
 									<div class="row">
 										<div class="col-md-4 col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=3"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=3"></a>
 										</div>          
 										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=4"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=4"></a>
 										</div>
 										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=5"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=5"></a>
 										</div>        
 									</div>
 								</div>
@@ -292,13 +295,13 @@
 								<div class="thumbnail-carousel-item item">
 									<div class="row">
 										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=6"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=6"></a>
 										</div>          
 										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=7"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=7"></a>
 										</div>
 										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href="#"><img alt="" src="http://placehold.it/470x480&text=8"></a>
+											<a class="thumbnail" href=""><img alt="" src="http://placehold.it/470x480&text=8"></a>
 										</div>      
 									</div>
 								</div>

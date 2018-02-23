@@ -18,7 +18,7 @@
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 225px;
+        padding-left: 190px;
     }
 
     #page-wrapper {
@@ -27,7 +27,6 @@
 }
 
 /* Top Navigation */
-
 .top-nav {
     padding: 0 15px;
 }
@@ -42,6 +41,11 @@
     padding-bottom: 20px;
     line-height: 20px;
     color: #fff;
+}
+
+.navbar-header>.navbar-brand>h2{
+    color: white;
+    margin-top: 10px;
 }
 
 .top-nav>li>a:hover,
@@ -70,18 +74,17 @@
 }
 
 /* Side Navigation */
-
 @media(min-width:768px) {
     .side-nav {
         position: fixed;
         top: 60px;
-        left: 225px;
-        width: 225px;
-        margin-left: -225px;
+        left: 180px;
+        width: 180px;
+        margin-left: -180px;
         border: none;
         border-radius: 0;
         border-top: 1px rgba(0,0,0,.5) solid;
-        overflow-y: auto;
+        /*overflow-y: auto;*/
         background-color: #222;
         /*background-color: #5A6B7D;*/
         bottom: 0;

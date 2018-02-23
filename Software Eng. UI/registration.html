@@ -141,17 +141,17 @@
 								<li>
 									<div class="row">
 										<div class="col-md-12">
-											<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+											<form class="form" role="form" method="post" action="users/login.jsp" accept-charset="UTF-8" id="login-nav">
 												<div class="form-group">
 													<label class="sr-only" for="exampleInputEmail2">Welcome Back!</label>
 												</div>
 												<div class="form-group">
 													<label class="sr-only" for="exampleInputEmail2">Email address</label>
-													<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
+													<input type="email" class="form-control" name="email"placeholder="Email address" required>
 												</div>
 												<div class="form-group">
 													<label class="sr-only" for="exampleInputPassword2">Password</label>
-													<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
+													<input type="password" class="form-control"placeholder="Password" required name="password">
 												</div>
 												<div class="form-group">
 													<button type="submit" class="btn btn-success btn-block">Sign in</button>
@@ -196,53 +196,29 @@
 							<div class="col-lg-12">
 
 								<!--Registration Form For Parents -->
-								<form id="parent-registration-form" action="" method="post" role="form" style="display: block;">
+								<form id="parent-registration-form" action="users/parents/registration.jsp" method="post" role="form" style="display: block;">
 									<div class="col-sm-12">
 										<div class="row">
 											<div class="col-sm-6 form-group">
 												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control">
+												<input type="text" placeholder="Enter your First Name" class="form-control" name="first_name">
 											</div>
 											<div class="col-sm-6 form-group">
 												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control">
+												<input type="text" placeholder="Enter your Last Name" class="form-control" name="last_name">
 											</div>
 										</div>					
 										<div class="form-group">
 											<label>Address</label>
-											<textarea placeholder="Enter your Address" rows="3" class="form-control"></textarea>
-										</div>	
-										<div class="row">
-											<div class="col-sm-4 form-group">
-												<label>City</label>
-												<input type="text" placeholder="Enter your City Name" class="form-control">
-											</div>	
-											<div class="col-sm-4 form-group">
-												<label>State</label>
-												<input type="text" placeholder="Enter your State Name" class="form-control">
-											</div>	
-											<div class="col-sm-4 form-group">
-												<label>Zip</label>
-												<input type="text" placeholder="Enter your Zip Code" class="form-control">
-											</div>		
-										</div>
-										<div class="row">
-											<div class="col-sm-6 form-group">
-												<label>Title</label>
-												<input type="text" placeholder="Enter your Designation" class="form-control">
-											</div>		
-											<div class="col-sm-6 form-group">
-												<label>Company</label>
-												<input type="text" placeholder="Enter your Company Name" class="form-control">
-											</div>	
-										</div>						
+											<input type="text" placeholder="Enter your Address" class="form-control" name="address">
+										</div>					
 										<div class="form-group">
 											<label>Phone Number</label>
-											<input type="text" placeholder="Enter your Phone Number Here" class="form-control">
+											<input type="text" placeholder="Enter your Phone Number" class="form-control" name="phone">
 										</div>		
 										<div class="form-group">
 											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address Here" class="form-control">
+											<input type="text" placeholder="Enter your Email Address" class="form-control" name="email">
 										</div>	
 
 										<div class="form-group">
@@ -257,61 +233,38 @@
 								</form>
 
 								<!--Registration Form For Activity Organizers -->
-								<form id="organizer-registration-form" action="" method="post" role="form" style="display: none;">
+								<form id="organizer-registration-form" action="users/organizers/registration.jsp" method="post" role="form" style="display: none;">
 									<div class="col-sm-12">
 										<div class="row">
 											<div class="col-sm-6 form-group">
 												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control">
+												<input type="text" placeholder="Enter your First Name" class="form-control" name="first_name">
 											</div>
 											<div class="col-sm-6 form-group">
 												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control">
+												<input type="text" placeholder="Enter your Last Name" class="form-control" name="last_name">
 											</div>
 										</div>					
 										<div class="form-group">
-											<label>Info 1</label>
-											<textarea placeholder="Enter your Address" rows="3" class="form-control"></textarea>
-										</div>	
-										<div class="form-group">
-											<label>Info 2</label>
-											<textarea placeholder="Enter your Address" rows="3" class="form-control"></textarea>
-										</div>	
-										<div class="form-group">
-											<label>Info 3</label>
-											<textarea placeholder="Enter your Address" rows="3" class="form-control"></textarea>
+											<label>Company Name</label>
+											<input type="text" placeholder="Enter your Company Name" class="form-control" name="company_name">
 										</div>
-										<div class="row">
-											<div class="col-sm-4 form-group">
-												<label>City</label>
-												<input type="text" placeholder="Enter your City Name" class="form-control">
-											</div>	
-											<div class="col-sm-4 form-group">
-												<label>State</label>
-												<input type="text" placeholder="Enter your State Name" class="form-control">
-											</div>	
-											<div class="col-sm-4 form-group">
-												<label>Zip</label>
-												<input type="text" placeholder="Enter your Zip Code" class="form-control">
-											</div>		
+										<div class="form-group">
+											<label>Company Details</label>
+											<textarea placeholder="Please specify details about your organization" rows="3" class="form-control" name="company_details" style="resize: none;"></textarea>
 										</div>
-										<div class="row">
-											<div class="col-sm-6 form-group">
-												<label>Title</label>
-												<input type="text" placeholder="Enter your Designation" class="form-control">
-											</div>		
-											<div class="col-sm-6 form-group">
-												<label>Company</label>
-												<input type="text" placeholder="Enter your Company Name" class="form-control">
-											</div>	
-										</div>						
+										<div class="form-group">
+											<label>Address</label>
+											<input type="text" placeholder="Enter your Address" class="form-control" name="address">
+										</div>	
+
 										<div class="form-group">
 											<label>Phone Number</label>
-											<input type="text" placeholder="Enter your Phone Number Here" class="form-control">
+											<input type="text" placeholder="Enter your Phone Number" class="form-control" name="phone">
 										</div>		
 										<div class="form-group">
 											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address Here" class="form-control">
+											<input type="text" placeholder="Enter your Email Address" class="form-control" name="email">
 										</div>	
 
 										<div class="form-group">

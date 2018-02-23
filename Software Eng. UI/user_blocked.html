@@ -15,19 +15,19 @@
 	<!-- Bootstrap core -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	
 
 	<!-- CSS files -->
 	<link  rel="stylesheet" href="./css/index_carousel.css">
+	<link  rel="stylesheet" href="./css/activity_view.css">
 	<link  rel="stylesheet" href="./css/index_footer.css">
 
 	<!-- js files -->
-	<script type="text/javascript" src="./js/activity_create-controller.js"></script>
-
+	<script type="text/javascript" src="./js/activity_view-controller.js"></script>	
 	<title>Little Explorers</title>
 </head>
 
 <body>
-	
 	<!-- Carousel -->
 	<div class="container">
 		<div class="row">
@@ -43,7 +43,7 @@
 				<div class="carousel-inner">
 
 					<div class="item active">
-						<img class="first-slide" src="https://www.w3schools.com/w3images/workbench.jpg" alt="First slide" style="width:100%;">
+						<img class="first-slide" src="http://192.241.175.50/videos/boston.jpg" alt="First slide" style="width:100%;">
 						<div class="carousel-caption">
 							<h3>Little Explorers</h3>      
 							<p>Adventures For Our Little Friends</p>
@@ -160,80 +160,21 @@
 
 	<!-- Content -->
 	<div class="container side-bordering">
-
-		<div class="row ">
-			<div id="search_title" class="text-center">
-				<p class="h3">Create a new Activity</p>
+		<div class="row text-center">
+			<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3"></div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">			
+				<div style="padding-bottom: 20px;"> <!-- class="col-md-4" -->
+					<h3 class="my-4" id="activity-details-title">The user is Blocked</h3>
+					<hr>
+					<div id="activity-details-text">
+						Some details here:<br>
+						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.<br>
+					</div>
+				</div>
 			</div>
 		</div>
-
-		<div class="row">
-			<form id="activity-form" action="activities/create.jsp" method="post" role="form" style="display: block;">
-
-				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<div class="col-6 form-group">
-						<label><h4 class="my-4" id="activity-details-title">Activity Title</h4></label>
-						<input type="text" class="form-control" id="activity-form-title" name="activity_title" placeholder="Enter the activity name">
-					</div>
-
-					<div class="form-group" style="padding-top: 10px;">
-						<label><h4 class="my-3">Activity Description</h4></label>
-						<textarea type="text" class="form-control" id="activity-form-description" name="activity_description" placeholder="Enter the activity description" rows="3"></textarea>
-					</div>
-
-					<div class="form-group" style="padding-top: 10px; margin-left: -10px; margin-right: -10px;">
-						<div class="col-sm-6">
-							<label><h4 class="my-3">Number of Tickets</h4></label>
-							<input type="number" class="form-control" id="activity-form-ticket_number" name="ticket_number" placeholder="20">
-						</div>
-
-						<div class="col-sm-6">
-							<label><h4 class="my-3">Ticket Price</h4></label>
-							<input type="number" class="form-control" id="activity-form-ticket_price" name="ticket_price" placeholder="8">
-						</div>
-					</div>
-				</div>
-
-				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<h4 class="my-4" id="activity-photos-title">Select and Upload your photos</h4>
-				
-						<div class="controls">
-						<div class="entry input-group col-xs-3" style="padding-bottom: 7px;">
-
-							<input class="btn btn-primary" name="fields[]" type="file">
-							<span class="input-group-btn">
-								<button class="btn btn-success btn-add" type="button">
-									<span class="glyphicon glyphicon-plus"></span>
-								</button>
-							</span>
-
-						</div>
-					</div>
-
-					<div class="form-group" style="padding-top: 20px; width: 50%">
-						<label><h4 class="my-4" id="activity-date-title">Select Date</h4></label>
-						<input type="date" class="form-control" id="activity-form-date" name="date" placeholder="Enter the activity name">
-					</div>
-
-					<div class="form-group" style="width: 50%">
-						<label><h4 class="my-4" id="activity-address-title">Select Place</h4></label>
-						<input type="text" class="form-control" id="activity-form-address" name="address" placeholder="Enter the event address">
-					</div>
-
-					<div>
-						<iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" id="activity-form-map" src="https://maps.google.com/maps?&source=s_q&hl=en&geocode=&q=Syntagma+Square,Athens+Greece&aq=t&ie=UTF8&output=embed"></iframe>
-					</div>
-
-					<div class="form-group text-right" style="padding-top: 10px; padding-right: 10px;">
-						<button type="submit" form="activity-form" class="btn btn-success" id="activity-form-submit">Create Activity</button>
-					</div>
-				</div>
-
-			</form>
-
-		</div>
 	</div>
-
+	
 	<!-- Footer -->
 	<div class="container side-bordering">
 		<footer>
@@ -267,7 +208,7 @@
 							<li>
 								<div class="input-append newsletter-box text-center">
 									<input type="text" class="full text-center" placeholder="example@email.com">
-									
+
 									<button class="btn  bg-gray" type="button">Join our newslater<i class="fa fa-long-arrow-right"> </i> </button>
 								</div>
 							</li>
