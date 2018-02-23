@@ -60,7 +60,7 @@ public class CreateActivityController {
 		binder.addValidators(activityValidator);
 	}
 
-	@GetMapping("/")
+	@GetMapping("/a")
 	public String activityIndex(Locale locale, Model model) {
 		model.addAttribute("activityDetails", new ActivityDetails());
 		return "activity_create";
