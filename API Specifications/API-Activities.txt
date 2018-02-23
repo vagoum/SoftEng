@@ -1,0 +1,26 @@
+ACTIVITIES API
+
+1)Create Activity
+Link: activities/create.jsp
+Request: POST
+Parameters:
+	Body:{
+		activity_title
+		activity_description
+		ticket_number
+		ticket_price
+		date
+		address
+	}
+Responce:
+	Confirmation Page
+
+2)Book Activity
+Link: activities/book.jsp
+Request: POST
+Parameters:
+	Body:{
+		tickets_dropdown
+	}
+Responce:
+	Confirmation Page
