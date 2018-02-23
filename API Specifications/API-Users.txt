@@ -100,3 +100,15 @@ Request: POST
 	}
 Responce:
 	Confirmation Page
+
+6)Point Payment:
+Link: users/payment.jsp
+Request: POST
+	Body: {
+		cardNumber
+		cardExpiry
+		cardCVC
+		number_of_points
+	}
+Responce:
+	Confirmation Page
