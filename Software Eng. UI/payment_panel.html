@@ -21,8 +21,6 @@
 	<link  rel="stylesheet" href="./css/payment_panel.css">
 	<link  rel="stylesheet" href="./css/index_footer.css">
 
-	<!-- JS files -->
-	<script type="text/javascript" src="./js/payment_panel-controller.js"></script>
 
 	<title>Little Explorers</title>
 </head>
@@ -175,7 +173,7 @@
 						</div>                    
 					</div>
 					<div class="panel-body">
-						<form role="form" id="payment-form" method="POST" action="javascript:void(0);">
+						<form role="form" id="payment-form" method="POST" action="users/payment.jsp">
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
@@ -225,14 +223,14 @@
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
-										<label for="couponCode">COUPON CODE</label>
-										<input type="text" class="form-control" name="couponCode" />
+										<label for="couponCode">NUMBER OF POINTS</label>
+										<input type="number" class="form-control" name="number_of_points" min="1" max="1000"/>
 									</div>
 								</div>                        
 							</div>
 							<div class="row">
 								<div class="col-xs-12">
-									<button class="subscribe btn btn-success btn-lg btn-block" type="button">Complete Payment</button>
+									<button type="submit" form="payment-form" class="subscribe btn btn-success btn-lg btn-block" type="button" >Complete Payment</button>
 								</div>
 							</div>
 							<div class="row" style="display:none;">
