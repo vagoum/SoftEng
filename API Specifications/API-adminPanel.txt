@@ -1,0 +1,43 @@
+
+1)Admin Panel
+Link: "/admin/admin_panel.html.jsp"
+Request: GET
+
+Parameters:
+	?manage=parents
+	?manage=organizers
+
+Responce:
+	HTML page
+
+
+2)Manage Users
+Link: "/admin/manageUsers.jsp"
+Request: POST
+
+Parameters:
+	Body: {
+  		"user":{
+	  		"first_name" : ""
+	  		"last_name" : ""
+	  		"address" : ""
+	  		"email" : ""
+  		},
+  		"action": {"block", "delete", "verify", "reset"}
+  	};
+
+Responce:
+	200 OK
+
+
+3)Log out
+
+Link: "users/logout"
+Request: POST
+	
+Parameters:
+	Body: {
+		auth_cookie:
+	}
+Responce:
+	index page

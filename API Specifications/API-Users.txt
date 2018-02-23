@@ -1,0 +1,102 @@
+USER API
+
+1)Parent Registration:
+Link: users/parents/registration
+Request: POST
+Parameters:
+	Body:{
+		first_name
+		last_name
+		address
+		phone
+		email
+	}
+Responce:
+	Confirmation Page
+
+2)Organizer Registration:
+Link: users/organizers/registration
+Request: POST
+Parameters:
+	Body:{
+		first_name
+		last_name
+		company_name
+		company_details
+		address
+		phone
+		email
+	}
+Responce:
+	Confirmation Page
+
+3)Log In
+Link: users/login.jsp
+Request: POST
+Parameters:
+	Body:{
+		email:
+		password:
+	}
+Responce:
+	index
+
+*** Updated part of the nav bar in order for the upper call to work: ***
+<ul class="nav navbar-nav navbar-right">
+	<li><a href="#">Register</a></li>
+
+	<li class="dropdown">
+		<a href="http://www.jquery2dotnet.com" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+		<ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+			<li>
+				<div class="row">
+					<div class="col-md-12">
+						<form class="form" role="form" method="post" action="users/login.jsp" accept-charset="UTF-8" id="login-nav">
+							<div class="form-group">
+								<label class="sr-only" for="exampleInputEmail2">Welcome Back!</label>
+							</div>
+							<div class="form-group">
+								<label class="sr-only" for="exampleInputEmail2">Email address</label>
+								<input type="email" class="form-control" name="email"placeholder="Email address" required>
+							</div>
+							<div class="form-group">
+								<label class="sr-only" for="exampleInputPassword2">Password</label>
+								<input type="password" class="form-control"placeholder="Password" required name="password">
+							</div>
+							<div class="form-group">
+								<button type="submit" class="btn btn-success btn-block">Sign in</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Sign In with Google">
+				<input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Sign In with Twitter">
+			</li>
+		</ul>
+	</li>
+</ul>
+
+4)Log Out
+Link: "users/logout"
+Request: POST
+	
+Parameters:
+	Body: {
+		auth_cookie:
+	}
+Responce:
+	index page
+
+5)Password Reset
+Link: users/passwordreset.jsp
+Request: POST
+	Body: {
+		new_password
+		email
+		uid
+	}
+Responce:
+	Confirmation Page
