@@ -1,0 +1,26 @@
+.activy-title{
+	margin-top: 10px;
+}
+
+.activity-details{
+	margin-top: 10px;
+}
+
+.activy-image{
+	margin-top: 5%;
+}
+
+.book-btn{
+  	margin-top: 20%;
+}
+
+a.list-group-item {
+    height:auto;
+    min-height:220px;
+}
+a.list-group-item.active small {
+    color:#fff;
+}
+.stars {
+    margin: 5px auto 1px;    
+}
