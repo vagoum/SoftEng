@@ -45,7 +45,6 @@ public class UserController {
             return "registration";
         }
 
-        setToSession(request, parent, "ROLE_PARENT");
         userService.save(parent,"ROLE_PARENT");
 
         securityService.autologin(parent.getEmail(), parent.getPassword());
@@ -62,7 +61,6 @@ public class UserController {
             return "registration";
         }
 
-        setToSession(request, organizer, "ROLE_ORGANIZER");
         userService.save(organizer,"ROLE_ORGANIZER");
 
         securityService.autologin(organizer.getEmail(), organizer.getPassword());
