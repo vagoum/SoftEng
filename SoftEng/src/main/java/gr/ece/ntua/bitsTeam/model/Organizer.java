@@ -18,7 +18,7 @@ import org.hibernate.annotations.FetchMode;
 @DiscriminatorValue("organizer")
 public class Organizer extends User{
 
-	@OneToMany(mappedBy = "organizer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SELECT)
 	private List<Activity> activities = new ArrayList<>();
 

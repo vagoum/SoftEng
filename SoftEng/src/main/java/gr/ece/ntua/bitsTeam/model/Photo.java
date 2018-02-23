@@ -8,90 +8,80 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("photo")
 public class Photo {
 
-	 	@Id
-	    @GeneratedValue(strategy = GenerationType.AUTO)
-	    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long imageId;
 
-	    @Basic
-	    private String name;
+	@Basic
+	private String name;
 
-	    @Basic
-	    private String image = "";
+	@Basic
+	private String image = "";
 
-	    @Basic
-	    private Date createdAt = new Date();
-	    
-	    @Basic	    
-	    private String url = "";
-	    
-	    @Basic
-	    private Boolean isThumbnail;
-	    
-		@OneToOne
-	    private ActivityDetails activityDetails;
-	    
-		public Long getId() {
-			return id;
-		}
+	@Basic
+	private Date createdAt = new Date();
 
-		public void setId(Long id) {
-			this.id = id;
-		}
+	@Basic
+	private String url = "";
 
-		public String getName() {
-			return name;
-		}
+	@Basic
+	private Boolean isThumbnail;
 
-		public void setName(String name) {
-			this.name = name;
-		}
+	@ManyToOne
+	private ActivityDetails activityDetails;
 
-		public String getImage() {
-			return image;
-		}
+	public String getName() {
+		return name;
+	}
 
-		public void setImage(String image) {
-			this.image = image;
-		}
+	public void setName(String name) {
+		this.name = name;
+	}
 
-		public Date getCreatedAt() {
-			return createdAt;
-		}
+	public String getImage() {
+		return image;
+	}
 
-		public void setCreatedAt(Date createdAt) {
-			this.createdAt = createdAt;
-		}
+	public void setImage(String image) {
+		this.image = image;
+	}
 
-		public String getUrl() {
-			return url;
-		}
+	public Date getCreatedAt() {
+		return createdAt;
+	}
 
-		public void setUrl(String url) {
-			this.url = url;
-		}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
-		public Boolean getIsThumbnail() {
-			return isThumbnail;
-		}
+	public String getUrl() {
+		return url;
+	}
 
-		public void setIsThumbnail(Boolean isThumbnail) {
-			this.isThumbnail = isThumbnail;
-		}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
-		public ActivityDetails getActivityDetails() {
-			return activityDetails;
-		}
+	public Boolean getIsThumbnail() {
+		return isThumbnail;
+	}
 
-		public void setActivityDetails(ActivityDetails activityDetails) {
-			this.activityDetails = activityDetails;
-		}
+	public void setIsThumbnail(Boolean isThumbnail) {
+		this.isThumbnail = isThumbnail;
+	}
 
+	public ActivityDetails getActivityDetails() {
+		return activityDetails;
+	}
 
-		
+	public void setActivityDetails(ActivityDetails activityDetails) {
+		this.activityDetails = activityDetails;
+	}
+
 }

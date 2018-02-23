@@ -29,7 +29,7 @@ public class Activity {
 	private Organizer organizer;
 	
 
-	@OneToMany(mappedBy = "activity" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Booking> bookings = new ArrayList<>();
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

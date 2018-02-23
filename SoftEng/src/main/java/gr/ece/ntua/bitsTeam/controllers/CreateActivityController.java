@@ -60,7 +60,7 @@ public class CreateActivityController {
 		binder.addValidators(activityValidator);
 	}
 
-	@GetMapping("/a")
+	@GetMapping("/activity_create")
 	public String activityIndex(Locale locale, Model model) {
 		model.addAttribute("activityDetails", new ActivityDetails());
 		return "activity_create";
@@ -89,6 +89,9 @@ public class CreateActivityController {
 				
 				Photo photo = uploadFile(file);
 				if (photo.getName() != null)  {
+					if (activityDetails.getPhotos().size() == 0) {
+						activityDetails.setThumbNail(photo);
+					}
 					activityDetails.getPhotos().add(photo);
 				}
 				else {

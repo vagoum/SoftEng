@@ -35,6 +35,10 @@ public class ActivityDetails {
 
 	private Integer ticketNumber;
 
+	@OneToOne
+	private Photo thumbNail;
+	
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "PST")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Future(message = "Activity day must be in the future.")
@@ -46,7 +50,7 @@ public class ActivityDetails {
 
 	private String address;
 
-	@OneToMany(mappedBy = "activityDetails" ,cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Photo> photos = new ArrayList<>();
 	
 	@OneToOne(fetch = FetchType.EAGER)
@@ -131,6 +135,21 @@ public class ActivityDetails {
 
 	public void setPhotos(List<Photo> photos) {
 		this.photos = photos;
+	}
+
+	@Override
+	public String toString() {
+		return "ActivityDetails [id=" + id + ", name=" + name + ", type=" + type + ", cost=" + cost + ", ticketNumber="
+				+ ticketNumber + ", date=" + date + ", ageRange=" + ageRange + ", description=" + description
+				+ ", address=" + address + ", photos=" + photos + ", location=" + location + "]";
+	}
+
+	public Photo getThumbNail() {
+		return thumbNail;
+	}
+
+	public void setThumbNail(Photo thumbNail) {
+		this.thumbNail = thumbNail;
 	}
 
 }
