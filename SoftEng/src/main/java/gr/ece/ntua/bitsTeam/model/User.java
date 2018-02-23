@@ -1,5 +1,9 @@
 package gr.ece.ntua.bitsTeam.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -15,25 +22,49 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Integer userId;
 	
+	private String username;
+
 	private String email;
 	
-	private String passwordSalt;
+	private String password;
+
+	@Transient
+	private String passwordConfirm;	
 	
-	private String passwordHash;
-		
+
 	private Boolean blocked = false;
 	
 	private Boolean resetPassword = false;
 	
-	public Integer getId() {
-		return id;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Role> roles = new ArrayList<>();
+
+	public List<Role> getRoles() {
+		return roles;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setRoles(List<Role> roles) {
+		this.roles = roles;
 	}
+
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	
+	public String getPasswordConfirm() {
+		return passwordConfirm;
+	}
+
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+
 
 	public String getEmail() {
 		return email;
@@ -43,20 +74,12 @@ public class User {
 		this.email = email;
 	}
 
-	public String getPasswordSalt() {
-		return passwordSalt;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setPasswordSalt(String passwordSalt) {
-		this.passwordSalt = passwordSalt;
-	}
-
-	public String getPasswordHash() {
-		return passwordHash;
-	}
-
-	public void setPasswordHash(String passwordHash) {
-		this.passwordHash = passwordHash;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Boolean getBlocked() {
@@ -73,6 +96,14 @@ public class User {
 
 	public void setResetPassword(Boolean resetPassword) {
 		this.resetPassword = resetPassword;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

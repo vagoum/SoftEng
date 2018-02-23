@@ -1,9 +1,10 @@
 package gr.ece.ntua.bitsTeam.model.jparepos;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import javax.transaction.Transactional;
 
 import gr.ece.ntua.bitsTeam.model.Organizer;
 
-public interface OrganizerRepository extends JpaRepository<Organizer, Long> {
+@Transactional
+public interface OrganizerRepository extends UserRepository<Organizer> {
 
 }

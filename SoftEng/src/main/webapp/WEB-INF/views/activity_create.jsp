@@ -186,7 +186,7 @@
 						<div class="entry input-group col-xs-3"
 							style="padding-bottom: 7px;">
 
-							<input class="btn btn-primary" name="file" type="file" /> <span
+							<input class="btn btn-primary" name="file" type="file" onchange="ValidateSingleInput(this);"/> <span
 								class="input-group-btn">
 								<button class="btn btn-success btn-add" type="button">
 									<span class="glyphicon glyphicon-plus"></span>
