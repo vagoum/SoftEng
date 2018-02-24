@@ -1,0 +1,77 @@
+USER API
+
+1)Parent Registration:
+Link: users/parents/registration
+Request: POST
+Parameters:
+	Body:{
+		first_name
+		last_name
+		address
+		phone
+		email
+	}
+Responce:
+	Confirmation Page
+
+2)Organizer Registration:
+Link: users/organizers/registration
+Request: POST
+Parameters:
+	Body:{
+		first_name
+		last_name
+		company_name
+		company_details
+		address
+		phone
+		email
+	}
+Responce:
+	Confirmation Page
+
+3)Log In
+Link: users/login.jsp
+Request: POST
+Parameters:
+	Body:{
+		email:
+		password:
+	}
+Responce:
+	index
+
+
+4)Log Out
+Link: "users/logout"
+Request: POST
+	
+Parameters:
+	Body: {
+		auth_cookie:
+	}
+Responce:
+	index page
+
+5)Password Reset
+Link: users/passwordreset.jsp
+Request: POST
+	Body: {
+		new_password
+		email
+		uid
+	}
+Responce:
+	Confirmation Page
+
+6)Point Payment:
+Link: users/payment.jsp
+Request: POST
+	Body: {
+		cardNumber
+		cardExpiry
+		cardCVC
+		number_of_points
+	}
+Responce:
+	Confirmation Page

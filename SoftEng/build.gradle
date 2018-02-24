@@ -1,0 +1,64 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
+war {
+    baseName = 'gs-spring-boot'
+    version =  '0.1.0'
+}
+
+repositories {
+    // Use jcenter for resolving your dependencies.
+    // You can declare any Maven/Ivy/file repository here.
+    jcenter()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+    
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+
+	compile 'com.github.andrewchantzos:binary_dependency_softeng:1f36ed380f'
+
+
+	compile group: 'com.cloudinary', name: 'cloudinary-taglib', version: '1.14.0'
+	compile group: 'com.cloudinary', name: 'cloudinary-http44', version: '1.14.0'
+	
+	compile('org.springframework.boot:spring-boot-starter-web','org.apache.tomcat.embed:tomcat-embed-jasper', 'org.springframework.boot:spring-boot-starter-tomcat')
+    compile('org.springframework.boot:spring-boot-devtools')    
+    compile('javax.servlet:jstl')
+    
+	
+    
+    // JPA Data (We are going to use Repositories, Entities, Hibernate, etc...)
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Use MySQL Connector-J
+    compile 'mysql:mysql-connector-java'    
+    compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
+	compile group: 'com.sun.mail', name: 'javax.mail', version: '1.5.5'
+	compile group: 'com.lowagie', name: 'itext', version:'2.1.7'
+
+
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.2.RELEASE'
+    
+    // tag::actuator[]
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    // end::actuator[]
+
+    testCompile("junit:junit")
+}
