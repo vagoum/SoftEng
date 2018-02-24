@@ -1,0 +1,184 @@
+.activity-tickets{
+    border: 1px solid red;
+    border-radius: 10px;
+    webkit-box-shadow: none;
+    box-shadow: none;
+    padding:15px
+}
+
+
+/* Main Image carousel*/
+.main-carousel-inner>.item>img, .main-carousel-inner>.item>a>img {
+    width: 100%;
+}
+
+/* Main Carousel Buttons button  */
+.main-carousel .carousel-control.left{
+	background-image: none;
+	left: 20px;
+}
+
+.main-carousel .carousel-control.right {
+	background-image: none;
+	right: 20px
+}
+
+/* Thumbnail carousel*/
+.thumbnail-carousel{
+	margin-top: 12px;
+	margin-bottom: 0;
+ 	padding: 0 40px 0px 40px;
+}
+
+/* Previous button  */
+.thumbnail-carousel .carousel-control.left {
+  left: -10px;
+  background-image: none;
+  background: none repeat scroll 0 0 #222222;
+  border: 4px solid #FFFFFF;
+  border-radius: 23px 23px 23px 23px;
+  height: 40px;
+  width : 40px;
+  top: 25%;
+}
+
+/* Next button  */
+.thumbnail-carousel .carousel-control.right {
+  right: -12px !important;
+  background-image: none;
+  background: none repeat scroll 0 0 #222222;
+  border: 4px solid #FFFFFF;
+  border-radius: 23px 23px 23px 23px;
+  height: 40px;
+  width : 40px;
+  top: 25%;
+}
+
+/* Changes the colour of the indicators */
+.thumbnail-carousel .carousel-indicators li {
+  background: #c0c0c0;
+}
+
+
+.thumbnail-carousel .carousel-indicators .active {
+  background: #333333;
+}
+
+.thumbnail-carousel img{
+/*  width: 250px;
+  height: 100px*/
+}
+
+/*
+  Calendar
+ */
+@main-bg:rgb(40,40,59);
+@calendar-border:rgb(220,220,255);
+@calendar-bg:#fff;
+@calendar-standout:rgb(40,40,59);
+@calendar-color:#444;
+@calendar-fade-color:#c0c0c0;
+@body-color:#444;
+
+.calendar-wrapper {
+/*  width:360px;*/
+/*  margin:5em auto;*/
+/*  padding:2em;*/
+  border:1px solid @calendar-border;
+  border-radius:5px;
+  background:@calendar-bg;
+  
+}
+table {
+  clear:both;
+  width:100%;
+  border:1px solid @calendar-border;
+  border-radius:3px;
+  border-collapse:collapse;
+  color:@calendar-color;
+}
+td {
+  height:25px;
+  text-align:center;
+  vertical-align:middle;
+  border-right:1px solid @calendar-border;
+  border-top:1px solid @calendar-border;
+  width:100% / 7;
+}
+td.not-current {
+  color:@calendar-fade-color;;
+}
+td.normal {}
+td.today {
+  font-weight:700;
+  color:@calendar-standout;
+  font-size:1.5em;
+}
+thead td {
+  border:none;
+  color:@calendar-standout;
+  text-transform:uppercase;
+  font-size:1.5em;
+}
+#btnPrev {
+  float:left;
+  margin-bottom:20px;
+  &:before {
+    content:'\f104';
+    font-family:FontAwesome;
+    padding-right:4px;
+  }
+}
+#btnNext {
+  float:right;
+  margin-bottom:20px;
+  &:after {
+    content:'\f105';
+    font-family:FontAwesome;
+    padding-left:4px;
+  }
+}
+
+#btnPrev, #btnNext {
+  background:transparent;
+  border:none;
+  outline:none;
+  font-size:1em;
+  color:@calendar-fade-color;
+  cursor:pointer;
+  font-family:"Roboto Condensed", sans-serif;
+  text-transform:uppercase;
+  transition:all 0.3s ease;
+  &:hover {
+    color:@calendar-standout;
+    font-weight:bold;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .event-address-date{
+    margin-left: 3px;
+  }
+}
+
+.event-address{
+  margin-right: -10px;
+}
+
+.organizer-details {
+  padding: 15px 20px 10px 20px;
+  border: 1px solid lightgrey;
+  border-radius: 5px 5px 5px 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.event-map{
+  height: 100%;
+  width: 100%;
+}
+
+.side-bordering{
+  border-left: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
+}

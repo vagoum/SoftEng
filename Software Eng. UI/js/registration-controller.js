@@ -86,7 +86,7 @@ $(document).ready(function() {
         });
       }
 
-    //Initialize map view
+  //Initialize map view
 	initMap($("#parent-registration-form"));
 
 	//Handle Form selection clicks

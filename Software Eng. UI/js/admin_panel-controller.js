@@ -29,50 +29,50 @@ $( document ).ready(function() {
     //currentTableRow.children("#user_first-name").val();
     console.log(currentTableRow.children("#user_first-name").html());
   	//Notify the server about the taken action
-    // $.ajax({
-    //     type:"POST",
-    //     url: "URL",
-    //     data: data,
-    //     contentType: "application/json; charset=utf-8",
-    //     dataType: "json",
-    //     success: function(message) {
-    //       if(clickedId == "block_btn"){
-    //         currentTableRow.children("#"+clickedId).addClass("disabled");
-    //         console.log(currentTableRow.children("#"+clickedId).html());
-    //         $(this).addClass("disabled");
-    //       }else if(clickedId == "delete_btn"){
-    //         currentTableRow.remove();
-    //         //delete the current row, with animation
-    //         //currentTableRow.hide('slow', function(){ currentTableRow.remove(); });
-    //       }else if(clickedId == "verify_btn"){
-    //        $(this).addClass("disabled");
-    //         currentTableRow.children("#"+clickedId).addClass("disabled");
-    //       }else if(clickedId == "reset_btn"){
-    //       }
-    //     },
-    //     failure: function(message){
-    //       alert("Something went wrong");
-    //     }
-    // });
-
-  	$.post("/admin/manageUsers.jsp", data)
-  		.done(function(responce){
-        if(clickedId == "block_btn"){
-          currentTableRow.children("#"+clickedId).addClass("disabled");
-          console.log(currentTableRow.children("#"+clickedId).html());
-          $(this).addClass("disabled");
-        }else if(clickedId == "delete_btn"){
-          currentTableRow.remove();
-          //delete the current row, with animation
-          //currentTableRow.hide('slow', function(){ currentTableRow.remove(); });
-        }else if(clickedId == "verify_btn"){
-         $(this).addClass("disabled");
-          currentTableRow.children("#"+clickedId).addClass("disabled");
-        }else if(clickedId == "reset_btn"){
+    $.ajax({
+        type:"POST",
+        url: "URL",
+        data: data,
+        contentType: "application/json; charset=utf-8",
+        dataType: "text", //html
+        success: function(response) {
+          if(clickedId == "block_btn"){
+            currentTableRow.children("#"+clickedId).addClass("disabled");
+            console.log(currentTableRow.children("#"+clickedId).html());
+            $(this).addClass("disabled");
+          }else if(clickedId == "delete_btn"){
+            currentTableRow.remove();
+            //delete the current row, with animation
+            //currentTableRow.hide('slow', function(){ currentTableRow.remove(); });
+          }else if(clickedId == "verify_btn"){
+           $(this).addClass("disabled");
+            currentTableRow.children("#"+clickedId).addClass("disabled");
+          }else if(clickedId == "reset_btn"){
+          }
+        },
+        error: function(error){
+          alert("Something went wrong");
         }
-  		}).fail(function(){
-  			alert("Something went wrong");
-  	});
+    });
+
+  	// $.post("/admin/manageUsers.jsp", data)
+  	// 	.done(function(responce){
+   //      if(clickedId == "block_btn"){
+   //        currentTableRow.children("#"+clickedId).addClass("disabled");
+   //        console.log(currentTableRow.children("#"+clickedId).html());
+   //        $(this).addClass("disabled");
+   //      }else if(clickedId == "delete_btn"){
+   //        currentTableRow.remove();
+   //        //delete the current row, with animation
+   //        //currentTableRow.hide('slow', function(){ currentTableRow.remove(); });
+   //      }else if(clickedId == "verify_btn"){
+   //       $(this).addClass("disabled");
+   //        currentTableRow.children("#"+clickedId).addClass("disabled");
+   //      }else if(clickedId == "reset_btn"){
+   //      }
+  	// 	}).fail(function(){
+  	// 		alert("Something went wrong");
+  	// });
   });
   
 });
