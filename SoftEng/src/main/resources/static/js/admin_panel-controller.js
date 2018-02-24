@@ -29,7 +29,7 @@ $( document ).ready(function() {
     console.log(currentTableRow.children("#"+clickedId).html());
   	
   	
-  //Notify the server about the taken action
+  /*Notify the server about the taken action
     $.ajax({
         type:"POST",
         url: "/admin/manageUsers",
@@ -55,8 +55,9 @@ $( document ).ready(function() {
           alert("Something went wrong");
         }
     });
+    */
   	
-  	/*Notify the server about the taken action
+  	//Notify the server about the taken action
   	$.post("/admin/manageUsers", data)
   		.done(function(responce){
   			console.log(responce);
@@ -75,7 +76,7 @@ $( document ).ready(function() {
           }}).fail(function(){
     			alert("Something went wrong");
   	});
-  	*/
+  	
 
   });
   
