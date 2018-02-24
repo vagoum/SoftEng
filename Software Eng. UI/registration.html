@@ -22,25 +22,10 @@
 	<link  rel="stylesheet" href="./css/index_footer.css">
 	<title>Little Explorers</title>
 
-	<script type="text/javascript">
-		$(function() {
-			$('#parent-registration-form-link').click(function(e) {
-				$("#parent-registration-form").delay(100).fadeIn(100);
-				$("#organizer-registration-form").fadeOut(100);
-				$('#organizer-registration-form-link').removeClass('active');
-				$(this).addClass('active');
-				e.preventDefault();
-			});
-			$('#organizer-registration-form-link').click(function(e) {
-				$("#organizer-registration-form").delay(100).fadeIn(100);
-				$("#parent-registration-form").fadeOut(100);
-				$('#parent-registration-form-link').removeClass('active');
-				$(this).addClass('active');
-				e.preventDefault();
-			});
+	<!-- js files -->
+	<script type="text/javascript" src="./js/registration-controller.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJOMB6wHxG1D4Y1ZCl3TXlH0NptQ8PWk&libraries=places"></script>
 
-		});
-	</script>
 </head>
 
 <body>
@@ -201,30 +186,31 @@
 										<div class="row">
 											<div class="col-sm-6 form-group">
 												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control" name="first_name">
+												<input type="text" placeholder="Enter your First Name" class="form-control" name="parent-first_name">
 											</div>
 											<div class="col-sm-6 form-group">
 												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control" name="last_name">
+												<input type="text" placeholder="Enter your Last Name" class="form-control" name="parent-last_name">
 											</div>
 										</div>					
 										<div class="form-group">
 											<label>Address</label>
-											<input type="text" placeholder="Enter your Address" class="form-control" name="address">
-										</div>					
+											<input type="text" placeholder="Enter your Address" class="form-control pac-input" name="parent-address">
+										</div>
+										<div class="map"></div>				
 										<div class="form-group">
 											<label>Phone Number</label>
-											<input type="text" placeholder="Enter your Phone Number" class="form-control" name="phone">
+											<input type="number" placeholder="Enter your Phone Number" class="form-control" name="parent-phone">
 										</div>		
 										<div class="form-group">
 											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address" class="form-control" name="email">
+											<input type="text" placeholder="Enter your Email Address" class="form-control" name="parent-email">
 										</div>	
 
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+													<button id="register-parent_btn" tabindex="4" class="form-control btn btn-register">Register Now</button>
 												</div>
 											</div>
 										</div>
@@ -235,16 +221,17 @@
 								<!--Registration Form For Activity Organizers -->
 								<form id="organizer-registration-form" action="users/organizers/registration.jsp" method="post" role="form" style="display: none;">
 									<div class="col-sm-12">
+
 										<div class="row">
 											<div class="col-sm-6 form-group">
 												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control" name="first_name">
+												<input type="text" placeholder="Enter your First Name" class="form-control" name="organizer-first_name">
 											</div>
 											<div class="col-sm-6 form-group">
 												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control" name="last_name">
+												<input type="text" placeholder="Enter your Last Name" class="form-control" name="organizer-last_name">
 											</div>
-										</div>					
+										</div>		
 										<div class="form-group">
 											<label>Company Name</label>
 											<input type="text" placeholder="Enter your Company Name" class="form-control" name="company_name">
@@ -255,30 +242,30 @@
 										</div>
 										<div class="form-group">
 											<label>Address</label>
-											<input type="text" placeholder="Enter your Address" class="form-control" name="address">
-										</div>	
+											<input type="text" placeholder="Enter your Address" class="form-control pac-input" name="organizer-address">
+										</div>
+
+										<div class="map"></div>
 
 										<div class="form-group">
 											<label>Phone Number</label>
-											<input type="text" placeholder="Enter your Phone Number" class="form-control" name="phone">
+											<input type="number" placeholder="Enter your Phone Number" class="form-control" name="organizer-phone">
 										</div>		
 										<div class="form-group">
 											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address" class="form-control" name="email">
+											<input type="text" placeholder="Enter your Email Address" class="form-control" name="organizer-email">
 										</div>	
 
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
-													<input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register" value="Register Now">
+													<button name="register-submit" id="register-organizer_btn" tabindex="4" class="form-control btn btn-register">Register Now</button>
 												</div>
 											</div>
 										</div>
 														
 									</div>
 								</form>
-
-
 							</div>
 						</div>
 					</div>
