@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -205,7 +206,14 @@
 											<label>Email Address</label>
 											<input type="text" placeholder="Enter your Email Address" class="form-control" name="parent-email">
 										</div>	
-
+										<div class="form-group">
+											<label>Password</label>
+											<input type="password" placeholder="Enter your Password" class="form-control" name="parent-password"/>
+										</div>	
+										<div class="form-group">
+											<label>Password Again</label>
+											<input  type="password" placeholder="Enter your Password Again" class="form-control" name="parentpasswordConfirm"/>
+										</div>
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">
@@ -254,7 +262,14 @@
 											<label>Email Address</label>
 											<input type="text" placeholder="Enter your Email Address" class="form-control" name="organizer-email">
 										</div>	
-
+										<div class="form-group">
+											<label>Password</label>
+											<input type="password" placeholder="Enter your Password" class="form-control" name="organizer-password"/>
+										</div>	
+										<div class="form-group">
+											<label>Password Again</label>
+											<input  type="password" placeholder="Enter your Password Again" class="form-control" name="organizer-passwordConfirm"/>
+										</div>
 										<div class="form-group">
 											<div class="row">
 												<div class="col-sm-6 col-sm-offset-3">

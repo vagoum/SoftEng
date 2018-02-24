@@ -19,12 +19,9 @@ public class AdminControllerRest {
 	private UserRepository<User> userRepository;
 
 	@RequestMapping(value = "/admin/manageUsers", method = RequestMethod.POST)
-	public Integer manageUsers()
+	public Integer manageUsers(@RequestParam("action") String action, @RequestParam("email") String email)
 			throws Exception {
-		String action, email;
 
-		return 200;
-		/*
 		System.out.println(action);
 		System.out.println(email);
 
@@ -50,8 +47,8 @@ public class AdminControllerRest {
 			default:
 				break;
 			}
-			*/
 
+		return 200;
 	}
 
 }

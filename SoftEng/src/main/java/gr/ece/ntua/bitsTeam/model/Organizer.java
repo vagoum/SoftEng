@@ -21,6 +21,10 @@ public class Organizer extends User{
 	
 	private Boolean verified = false;
 	
+	private String companyName;
+	
+	private String companyDetails;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SELECT)
 	private List<Activity> activities = new ArrayList<>();
@@ -39,5 +43,21 @@ public class Organizer extends User{
 
 	public void setVerified(Boolean verified) {
 		this.verified = verified;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getCompanyDetails() {
+		return companyDetails;
+	}
+
+	public void setCompanyDetails(String companyDetails) {
+		this.companyDetails = companyDetails;
 	}
 }

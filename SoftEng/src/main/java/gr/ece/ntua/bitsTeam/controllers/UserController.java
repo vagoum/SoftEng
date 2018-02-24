@@ -29,15 +29,15 @@ public class UserController {
     @Autowired
     private UserValidator userValidator;
 	
-    @RequestMapping(value = "/registration2", method = RequestMethod.GET)
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("parentForm", new Parent());
         model.addAttribute("organizerForm", new Organizer());
 
-        return "registration2";
+        return "registration";
     }
 
-    @RequestMapping(value = "/users/parents/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/users/parents/registrati", method = RequestMethod.POST)
     public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult, HttpServletRequest request,Model model) {
         userValidator.validate(parent, bindingResult);
 
@@ -53,7 +53,7 @@ public class UserController {
     }
     
     
-    @RequestMapping(value = "users/organizers/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "users/organizers/registrati", method = RequestMethod.POST)
     public String registrationOrganizer(@ModelAttribute("organizerForm") Organizer organizer, BindingResult bindingResult, HttpServletRequest request, Model model) {
         userValidator.validate(organizer, bindingResult);
 

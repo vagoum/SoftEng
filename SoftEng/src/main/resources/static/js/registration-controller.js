@@ -1,15 +1,14 @@
 $(document).ready(function() {
 
 	var userData = {
-		"first_name" : "",
-		"last_name" : "",
-		"address" : {
-			"full" :"",
-			"lat" : "",
-			"lon" : ""
-		},
-		"phone" : "",
-		"email" : ""
+			"firstName" : "",
+			"lastName" : "",
+			"phone" : "",
+			"email" : "",
+			"password" : "",
+			"address" :"",
+			"latitude" : "",
+			"longtitude" : ""
 	};
 
 	function initMap(currentForm) {
@@ -51,8 +50,8 @@ $(document).ready(function() {
         	marker.setVisible(false);
           	var place = autocomplete.getPlace();
 
-          	userData.address.lat = place.geometry.location.lat();
-          	userData.address.lon = place.geometry.location.lng(); 
+          	userData.latitude = place.geometry.location.lat();
+          	userData.longtitude = place.geometry.location.lng(); 
 
           	if (!place.geometry) {
             	// User entered the name of a Place that was not suggested and
@@ -80,16 +79,18 @@ $(document).ready(function() {
             	].join(' ');
           	}
 	          // infowindowContent.children['place-icon'].src = place.icon;
-	          // infowindowContent.children['place-name'].textContent = place.name;
-	          // infowindowContent.children['place-address'].textContent = address;
+	          // infowindowContent.children['place-name'].textContent =
+				// place.name;
+	          // infowindowContent.children['place-address'].textContent =
+				// address;
 	          infowindow.open(map, marker);
         });
       }
 
-    //Initialize map view
+    // Initialize map view
 	initMap($("#parent-registration-form"));
 
-	//Handle Form selection clicks
+	// Handle Form selection clicks
 	$('#parent-registration-form-link').click(function(e) {
 		$("#parent-registration-form").delay(100).fadeIn(100);
 		$("#organizer-registration-form").fadeOut(100);
@@ -109,37 +110,39 @@ $(document).ready(function() {
 	});
 
 
-	//register-submit
+	// register-submit
 	$("#register-parent_btn").on("click",function(e){
 		e.preventDefault();
-		userData.first_name = $("input[name=parent-first_name]").val();
-		userData.last_name = $("input[name=parent-last_name]").val();
-		userData.address.full = $("input[name=parent-address]").val();
+		userData.firstName = $("input[name=parent-first_name]").val();
+		userData.lastName = $("input[name=parent-last_name]").val();
+		userData.address = $("input[name=parent-address]").val();
 		userData.phone = $("input[name=parent-phone]").val();
 		userData.email = $("input[name=parent-email]").val();
+		userData.password = $("input[name=parent-password]").val();
 
-		$.post("users/parents/registration", userData)
+		$.post("/users/parents/registration", userData, "application/json")
   			.done(function(responce){
-  				//redirect
+  				// redirect
   				window.location.href = "/index";
   		}).fail(function(){
-  			alert("Something went wrong parents");
+  			alert("Something went wrong");
   		});
 	});
 
 	$("#register-organizer_btn").on("click",function(e){	
 		e.preventDefault();
-		userData.first_name = $("input[name=organizer-first_name]").val();
-		userData.last_name = $("input[name=organizer-last_name]").val();
-		userData.company_name = $("input[name=company_name]").val();
-		userData.company_details = $("textarea[name=company_details]").val();
-		userData.address.full = $("input[name=organizer-address]").val();
+		userData.firstName = $("input[name=organizer-first_name]").val();
+		userData.lastName = $("input[name=organizer-last_name]").val();
+		userData.companyName = $("input[name=company_name]").val();
+		userData.companyDetails = $("textarea[name=company_details]").val();
+		userDataaddress = $("input[name=organizer-address]").val();
 		userData.phone = $("input[name=organizer-phone]").val();
 		userData.email = $("input[name=organizer-email]").val();
+		userData.password = $("input[name=organizer-password]").val();
 
-		$.post("users/organizers/registration", userData)
+		$.post("/users/organizers/registration", userData)
   			.done(function(responce){
-  				//redirect
+  				// redirect
   				window.location.href = "/index";
   		}).fail(function(){
   			alert("Something went wrong");
