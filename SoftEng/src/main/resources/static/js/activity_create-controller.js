@@ -1,5 +1,6 @@
 $(document).ready(function(){
-    //Handle File Upload
+
+    //Handle File Upload UI
     $(".btn-add").click(function(e){
         e.preventDefault();
 
@@ -7,21 +8,35 @@ $(document).ready(function(){
             currentEntry = $(this).parents('.entry:first'),
             newEntry = $(currentEntry.clone()).appendTo(controlForm);
 
-        newEntry.find('input').val('');
+        newEntry.find('input btn').val('')
+            .addClass('btn-add')
+            .addClass('btn-success');
+            
+        //TODO
+        console.log("DOSE");
+        console.log(newEntry.attr('class'));
+
         controlForm.find('.entry:not(:last) .btn-add')
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
             .html('<span class="glyphicon glyphicon-minus"></span>');
     });
+
     $(".btn-remove").click(function(){
         $(this).parents('.entry:first').remove();
         e.preventDefault();
         return false;
     });
 
-    //Handle Address Type
-    $("#activity-form-address");
-    $("#activity-form-map");
+    //Handle Address Type & Dynamic Map Display
+    var typedAddress = $("#activity-form-address");
+    var googleMap = $("#activity-form-map");
+    typedAddress.on('keyup paste', function(){
+        googleMap.attr("src", "https://maps.google.co.uk/maps?&source=s_q&hl=en&geocode=&q="+
+        encodeURIComponent(typedAddress.val())+"&aq=t&ie=UTF8&output=embed");
+    });
+
+    
 
     //Handle Form Submition
     $("#activity-form-submit").click(function(){
@@ -34,31 +49,6 @@ $(document).ready(function(){
             "address": $("#activity-form-address").val()
         };
         console.log("Data: "+JSON.stringify(result_data, null, 2));
-        
     });
 
 });
-
-var _validFileExtensions = [".jpg", ".jpeg", ".png"];    
-function ValidateSingleInput(oInput) {
-    if (oInput.type == "file") {
-        var sFileName = oInput.value;
-         if (sFileName.length > 0) {
-            var blnValid = false;
-            for (var j = 0; j < _validFileExtensions.length; j++) {
-                var sCurExtension = _validFileExtensions[j];
-                if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
-                    blnValid = true;
-                    break;
-                }
-            }
-             
-            if (!blnValid) {
-                alert("Sorry, " + sFileName + " is invalid, allowed extensions are: " + _validFileExtensions.join(", "));
-                oInput.value = "";
-                return false;
-            }
-        }
-    }
-    return true;
-}
