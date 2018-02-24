@@ -11,7 +11,7 @@ $( document ).ready(function() {
   $("#organizer-details-text");
 
   $("#activity-details-book-btn").click(function() {
-    alert( "Handler for .click() called.");
+    // alert( "Handler for .click() called.");
   });
   
 });

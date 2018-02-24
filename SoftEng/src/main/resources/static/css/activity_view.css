@@ -72,8 +72,6 @@
 /*
   Calendar
  */
-
-
 @main-bg:rgb(40,40,59);
 @calendar-border:rgb(220,220,255);
 @calendar-bg:#fff;
@@ -140,6 +138,7 @@ thead td {
     padding-left:4px;
   }
 }
+
 #btnPrev, #btnNext {
   background:transparent;
   border:none;
@@ -155,14 +154,22 @@ thead td {
     font-weight:bold;
   }
 }
-.event-address{
 
+@media screen and (min-width: 576px) {
+  .event-address-date{
+    margin-left: 3px;
+  }
+}
+
+.event-address{
+  margin-right: -10px;
 }
 
 .organizer-details {
-  padding: 15px 20pc 10px 20px;
+  padding: 15px 20px 10px 20px;
   border: 1px solid lightgrey;
   border-radius: 5px 5px 5px 5px;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -173,5 +180,5 @@ thead td {
 
 .side-bordering{
   border-left: 1px solid lightgrey;
-    border-right: 1px solid lightgrey;
+  border-right: 1px solid lightgrey;
 }
