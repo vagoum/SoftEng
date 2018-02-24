@@ -18,6 +18,9 @@ import org.hibernate.annotations.FetchMode;
 @DiscriminatorValue("organizer")
 public class Organizer extends User{
 
+	
+	private Boolean verified = false;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SELECT)
 	private List<Activity> activities = new ArrayList<>();
@@ -28,5 +31,13 @@ public class Organizer extends User{
 
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
+	}
+
+	public Boolean getVerified() {
+		return verified;
+	}
+
+	public void setVerified(Boolean verified) {
+		this.verified = verified;
 	}
 }

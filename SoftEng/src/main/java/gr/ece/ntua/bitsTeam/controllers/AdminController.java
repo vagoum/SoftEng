@@ -1,27 +1,41 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import gr.ece.ntua.bitsTeam.model.Organizer;
+import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.model.jparepos.OrganizerRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.ParentRepository;
 
-@RestController
+@Controller
 public class AdminController {
 
 	@Autowired
-	private OrganizerRepository organizerRepository;
-	
+	private ParentRepository parents;
+
 	@Autowired
-	private ParentRepository parentRepository;
-	
-	@PostMapping("/admin/manageUsers")
-	public String manageUsers(HttpEntity<String> httpEntity) {
-		String json = httpEntity.getBody();
-		System.out.println(json);
-		
-		return "";
+	private OrganizerRepository organizers;
+
+	@GetMapping("/admin_panel")
+	public String admin_get(Model model, HttpServletRequest request) {
+
+		String param = request.getParameter("manage");
+		if (param == null || param.equals("parents")) {
+			ArrayList<Parent> parentList = (ArrayList<Parent>) parents.findAll();
+			model.addAttribute("userList", parentList);
+			model.addAttribute("user_class", 0);
+		} else if (param.equals("organizers")) {
+			ArrayList<Organizer> organizerList = (ArrayList<Organizer>) organizers.findAll();
+			model.addAttribute("userList", organizerList);
+			model.addAttribute("user_class", 1);
+		}
+		return "admin_panel";
 	}
 }

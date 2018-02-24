@@ -1,16 +1,16 @@
 $( document ).ready(function() {
 
+		
   $(".btn").on('click', function(){
   	//Get the data from the specific row, that was clicked
+    var clickedId = $(this).attr('id');
+    console.log(clickedId);
+	  
   	var clickedId = $(this).attr('id');
   	var currentTableRow = $(this).closest("tr");
   	var data = {
-  		"user":{
-	  		"first_name" : currentTableRow.children("#user_first-name").html(),
-	  		"last_name" : currentTableRow.children("#user_last-name").html(),
-	  		"address" : currentTableRow.children("#user_address").html(),
-	  		"email" : currentTableRow.children("#user_email").html()
-  		},
+
+	  	"email" : currentTableRow.children("#user_email").html(),
   		"action": ""
   	};
 
@@ -26,23 +26,56 @@ $( document ).ready(function() {
   	}
   	
   	console.log(JSON.stringify(data, null, 2));
-  	//Notify the server about the taken action
+    console.log(currentTableRow.children("#"+clickedId).html());
+  	
+  	
+  //Notify the server about the taken action
+    $.ajax({
+        type:"POST",
+        url: "/admin/manageUsers",
+        data: data,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(message) {
+          if(clickedId == "block_btn"){
+            currentTableRow.children("#"+clickedId).addClass("disabled");
+            console.log(currentTableRow.children("#"+clickedId).html());
+            $(this).addClass("disabled");
+          }else if(clickedId == "delete_btn"){
+            currentTableRow.remove();
+            //delete the current row, with animation
+            //currentTableRow.hide('slow', function(){ currentTableRow.remove(); });
+          }else if(clickedId == "verify_btn"){
+           $(this).addClass("disabled");
+            currentTableRow.children("#"+clickedId).addClass("disabled");
+          }else if(clickedId == "reset_btn"){
+          }
+        },
+        failure: function(message){
+          alert("Something went wrong");
+        }
+    });
+  	
+  	/*Notify the server about the taken action
   	$.post("/admin/manageUsers", data)
   		.done(function(responce){
-		  	if(clickedId == "block_btn"){
-			  	$(this).addClass("disabled");
-		  	}else if(clickedId == "delete_btn"){
-		  		currentTableRow.remove();
-		  		//delete the current row, with animation
-		  		//currentTableRow.hide('slow', function(){ currentTableRow.remove(); });
-		  	}else if(clickedId == "verify_btn"){
-		  		$(this).addClass("disabled");
-		  	}else if(clickedId == "reset_btn"){
-		  		//TODO
-		  	}
-  		}).fail(function(){
-  			alert("Something went wrong");
+  			console.log(responce);
+        if(clickedId == "block_btn"){
+
+            currentTableRow.children("#"+clickedId).addClass("disabled");
+            $(this).addClass("disabled");
+          }else if(clickedId == "delete_btn"){
+            currentTableRow.remove();
+            //delete the current row, with animation
+            //currentTableRow.hide('slow', function(){ currentTableRow.remove(); });
+          }else if(clickedId == "verify_btn"){
+           $(this).addClass("disabled");
+            currentTableRow.children("#"+clickedId).addClass("disabled");
+          }else if(clickedId == "reset_btn"){
+          }}).fail(function(){
+    			alert("Something went wrong");
   	});
+  	*/
 
   });
   

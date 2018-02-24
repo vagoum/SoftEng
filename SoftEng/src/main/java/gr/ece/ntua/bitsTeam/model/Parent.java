@@ -1,8 +1,11 @@
 package gr.ece.ntua.bitsTeam.model;
 
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -15,6 +18,9 @@ public class Parent extends User {
 	private String firstName;
 	
 	private String lastName;	
+	
+    @OneToMany(mappedBy = "parent")
+	private List<Activity> activities;
 	
 	public Location getLocation() {
 		return location;
@@ -38,6 +44,14 @@ public class Parent extends User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
 	}
 	
 }

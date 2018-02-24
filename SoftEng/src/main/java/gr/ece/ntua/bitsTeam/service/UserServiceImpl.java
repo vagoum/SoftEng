@@ -24,7 +24,9 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         if (user.getUserId() == null) {
         	
-
+        	user.setBlocked(false);
+        	user.setResetPassword(false);
+        	
         	Role role = new Role();
         	role.setEmail(user.getEmail());
         	role.setAuthority("ROLE_UNAUTH");
