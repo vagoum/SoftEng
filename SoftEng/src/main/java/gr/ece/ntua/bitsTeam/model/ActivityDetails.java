@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -25,12 +26,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ActivityDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Integer activityDetailsId;
 
 	private String name = "";
 
 	private String type;
 
+	
+	private String activityDescription;
+	
+	
 	private Integer cost;
 
 	private Integer ticketNumber;
@@ -51,9 +56,10 @@ public class ActivityDetails {
 	private String address;
 
 	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "activityDetailsId")
 	private List<Photo> photos = new ArrayList<>();
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Location location;
 
 	public String getName() {
@@ -139,7 +145,7 @@ public class ActivityDetails {
 
 	@Override
 	public String toString() {
-		return "ActivityDetails [id=" + id + ", name=" + name + ", type=" + type + ", cost=" + cost + ", ticketNumber="
+		return "ActivityDetails [id=" + activityDetailsId + ", name=" + name + ", type=" + type + ", cost=" + cost + ", ticketNumber="
 				+ ticketNumber + ", date=" + date + ", ageRange=" + ageRange + ", description=" + description
 				+ ", address=" + address + ", photos=" + photos + ", location=" + location + "]";
 	}
@@ -150,6 +156,14 @@ public class ActivityDetails {
 
 	public void setThumbNail(Photo thumbNail) {
 		this.thumbNail = thumbNail;
+	}
+
+	public String getActivityDescription() {
+		return activityDescription;
+	}
+
+	public void setActivityDescription(String activityDescription) {
+		this.activityDescription = activityDescription;
 	}
 
 }

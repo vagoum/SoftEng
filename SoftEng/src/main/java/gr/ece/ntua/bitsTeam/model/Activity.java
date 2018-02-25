@@ -23,13 +23,14 @@ public class Activity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Integer activityId;
 	
 	@OneToOne
 	private Organizer organizer;
 	
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "activityId")
 	private List<Booking> bookings = new ArrayList<>();
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

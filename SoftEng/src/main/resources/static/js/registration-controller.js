@@ -1,15 +1,18 @@
 $(document).ready(function() {
 
 	var userData = {
-			"firstName" : "",
-			"lastName" : "",
-			"phone" : "",
-			"email" : "",
-			"password" : "",
-			"address" :"",
-			"latitude" : "",
-			"longtitude" : ""
+			firstName : "",
+			lastName : "",
+			phone : "",
+			email : "",
+			password : "",
+			location : {
+				address :"",
+				latitude : "",
+				longtitude : ""
+			}
 	};
+	
 
 	function initMap(currentForm) {
 
@@ -50,8 +53,8 @@ $(document).ready(function() {
         	marker.setVisible(false);
           	var place = autocomplete.getPlace();
 
-          	userData.latitude = place.geometry.location.lat();
-          	userData.longtitude = place.geometry.location.lng(); 
+          	userData.location.latitude = place.geometry.location.lat();
+          	userData.location.longtitude = place.geometry.location.lng(); 
 
           	if (!place.geometry) {
             	// User entered the name of a Place that was not suggested and
@@ -120,13 +123,22 @@ $(document).ready(function() {
 		userData.email = $("input[name=parent-email]").val();
 		userData.password = $("input[name=parent-password]").val();
 
-		$.post("/users/parents/registration", userData, "application/json")
-  			.done(function(responce){
-  				// redirect
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/users/parents/registration",
+			data : JSON.stringify(userData),
+			dataType : 'json',
+			success : function(result) {
   				window.location.href = "/index";
-  		}).fail(function(){
-  			alert("Something went wrong");
-  		});
+				console.log(result);
+			},
+			error : function(e) {
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
+		
 	});
 
 	$("#register-organizer_btn").on("click",function(e){	
@@ -140,14 +152,23 @@ $(document).ready(function() {
 		userData.email = $("input[name=organizer-email]").val();
 		userData.password = $("input[name=organizer-password]").val();
 
-		$.post("/users/organizers/registration", userData)
-  			.done(function(responce){
-  				// redirect
-  				window.location.href = "/index";
-  		}).fail(function(){
-  			alert("Something went wrong");
-  		});
-	});
 
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/users/organizers/registration",
+			data : JSON.stringify(userData),
+			dataType : 'json',
+			success : function(result) {
+  				window.location.href = "/index";
+				console.log(result);
+			},
+			error : function(e) {
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
+	});
+		
 
 }); 
