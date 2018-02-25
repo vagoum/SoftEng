@@ -6,35 +6,35 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link rel="icon" href="">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- jQuery core -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- jQuery core -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
-	<!-- Bootstrap core -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<!-- Bootstrap core -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-	<!-- CSS files -->
-	<link  rel="stylesheet" href="./css/index_carousel.css">
-	<link  rel="stylesheet" href="./css/activity_create.css">
-	<link  rel="stylesheet" href="./css/index_footer.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
 
-	<!-- js files -->
-	<script type="text/javascript" src="./js/activity_create-controller.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJOMB6wHxG1D4Y1ZCl3TXlH0NptQ8PWk&libraries=places"></script>
+<!-- CSS files -->
+<link rel="stylesheet" href="./css/index_carousel.css">
+<link rel="stylesheet" href="./css/activity_view.css">
+<link rel="stylesheet" href="./css/index_footer.css">
 
-	<title>Little Explorers</title>
+<link rel="stylesheet" href="./css/adventures_list.css">
+
+<title>Little Explorers</title>
 </head>
 
 <body>
-
 	<!-- Carousel -->
 	<div class="container">
 		<div class="row">
@@ -49,16 +49,6 @@
 
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner">
-
-					<div class="item active">
-						<img class="first-slide"
-							src="https://www.w3schools.com/w3images/workbench.jpg"
-							alt="First slide" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>Little Explorers</h3>
-							<p>Adventures For Our Little Friends</p>
-						</div>
-					</div>
 
 					<div class="item">
 						<img class="second-slide"
@@ -186,119 +176,100 @@
 	<!-- Content -->
 	<div class="container side-bordering">
 
-		<div class="row ">
-			<div id="search_title" class="text-center">
-				<p class="h3">Create a new Activity</p>
+		<div class="row">
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+				<h3 class="my-4" id="activity-details-title">Welcome:
+					${parent.firstName} ${parent.lastName}</h3>
+
+				<hr>
+				<form action="users/resetpassword.jsp" method="get"
+					id="reset-pass_form">
+					<label for="proirty">Forgot your pasword?</label>
+
+					<button type="submit" form="reset-pass_form"
+						class="btn btn-success" id="activity-details-book-btn"
+						style="margin-left: 15px;">Reset Password!</button>
+				</form>
+				<hr>
+
+				<h4 class="x-price" id="activity-details-price">Current Point
+					Balance: ${parent.pointBalance }</h4>
+
+				<form action="users/parents/getPoints.jsp" method="post"
+					id="booking_form">
+					<label for="proirty">Add Points:</label>
+
+					<button type="submit" form="booking_form" class="btn btn-success"
+						id="activity-details-book-btn" style="margin-left: 15px;">More
+						Points!</button>
+				</form>
+			</div>
+			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+				<figure class="pull-right">
+					<img class="media-object img-rounded img-responsive activy-image"
+						src="http://placehold.it/350x250">
+				</figure>
+			</div>
+		</div>
+		<br>
+
+		<!-- Booked Activities -->
+		<div class="row">
+			<div class="well">
+				<h1 class="text-center">Scheduled Activities</h1>
+				<div class="list-group">
+					<c:forEach var="activityDetail" items="${scheduledBookings}">
+
+						<a href="#" class="list-group-item">
+							<div class="media col-md-3">
+								<figure class="pull-left">
+									<img
+										class="media-object img-rounded img-responsive activy-image"
+										src=${activityDetail.thumbNail.url}>
+								</figure>
+							</div>
+							<div class="col-md-6">
+								<h3 class="list-group-item-heading activy-title">
+									${activityDetail.name}</h3>
+								<p class="list-group-item-text activity-details">
+									${activityDetail.activityDescription}</p>
+							</div>
+						</a>
+					</c:forEach>
+				</div>
 			</div>
 		</div>
 
+		<!-- Past Activities -->
 		<div class="row">
-			<form id="activity-form" action="activities/create.jsp" method="post"
-				enctype="multipart/form-data" role="form" style="display: block;">
+			<div class="well">
+				<h1 class="text-center">Past Activities</h1>
+				<div class="list-group">
 
-				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<div class="col-6 form-group">
-						<label><h4 class="my-4" id="activity-details-title">Activity
-								Title</h4></label> <input type="text" class="form-control"
-							id="activity-form-title" name="activity_title"
-							placeholder="Enter the activity name" required>
-					</div>
+					<c:forEach var="activityDetail" items="${completedBookings}">
 
-					<div class="form-group" style="padding-top: 10px;">
-						<label><h4 class="my-3">Activity Description</h4></label>
-						<textarea type="text" class="form-control"
-							id="activity-form-description" name="activity_description"
-							placeholder="Enter the activity description" rows="3"></textarea required>
-					</div>
-
-					<div class="form-group"
-						style="padding-top: 10px; margin-left: -10px; margin-right: -10px;">
-						<div class="col-sm-4">
-							<label><h4 class="my-3">Number of Tickets</h4></label> <input
-								type="number" class="form-control"
-								id="activity-form-ticket_number" name="ticket_number"
-								placeholder="20" required>
-						</div>
-
-						<div class="col-sm-4">
-							<label><h4 class="my-3">Ticket Price</h4></label> <input
-								type="number" class="form-control"
-								id="activity-form-ticket_price" name="ticket_price"
-								placeholder="8" required>
-						</div>
-
-						<div class="col-sm-4">
-							<h4 class="my-3" style="padding-bottom: 5px;">Select
-								Category</h4>
-
-							<div class="btn-group pull-left" id="categories_group">
-								<button type="button" class="btn btn-default dropdown-toggle"
-									data-toggle="dropdown">
-									Categories <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu" id="activity_categories-list"
-									role="menu">
-									<c:forEach items="${categories}" var="category">
-
-										<li class="activity_list-item">
-											<div class="pretty p-icon p-round p-smooth">
-												<input type="radio" name="icon_solid" />
-												<div class="state p-success">
-													<i class="icon glyphicon glyphicon-ok"></i> <label>${category}</label>
-												</div>
-											</div>
-										</li>
-									</c:forEach>
-
-								</ul>
+						<a href="#" class="list-group-item">
+							<div class="media col-md-3">
+								<figure class="pull-left">
+									<img
+										class="media-object img-rounded img-responsive activy-image"
+										src=${activityDetail.thumbNail.url}>
+								</figure>
 							</div>
-						</div>
-					</div>
+							<div class="col-md-6">
+								<h3 class="list-group-item-heading activy-title">
+									${activityDetail.name}</h3>
+								<p class="list-group-item-text activity-details">
+									${activityDetail.activityDescription}</p>
+							</div>
+						</a>
+					</c:forEach>
+					
 				</div>
-
-				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-					<h4 class="my-4" id="activity-photos-title">Select and Upload
-						your photos</h4>
-
-					<div class="controls">
-						<div class="entry input-group col-xs-3"
-							style="padding-bottom: 7px;">
-
-							<input class="btn btn-primary" id="photo_file" name="photo_file"
-								type="file" /> <span class="input-group-btn">
-								<button class="btn btn-success btn-add" type="button">
-									<span class="glyphicon glyphicon-plus"></span>
-								</button>
-							</span>
-
-						</div>
-					</div>
-
-					<div class="form-group" style="padding-top: 20px; width: 50%">
-						<label><h4 class="my-4" id="activity-date-title">Select
-								Date</h4></label> <input type="date" class="form-control"
-							id="activity-form-date" name="date"
-							placeholder="Enter the activity name" required>
-					</div>
-
-					<div class="form-group" style="width: 50%">
-						<label><h4 class="my-4" id="activity-address-title">Select
-								Place</h4></label> <input type="text" class="form-control pac-input"
-							id="activity-form-address" name="address"
-							placeholder="Enter the event address" required>
-					</div>
-					<div class="map"></div>
-
-					<div class="form-group text-right"
-						style="padding-top: 10px; padding-right: 10px;">
-						<button class="btn btn-success" id="activity-form-submit">Create
-							Activity</button>
-					</div>
-				</div>
-
-			</form>
-
+			</div>
 		</div>
+
 	</div>
 
 	<!-- Footer -->

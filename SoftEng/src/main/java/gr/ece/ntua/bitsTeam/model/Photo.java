@@ -33,8 +33,7 @@ public class Photo {
 	@Basic
 	private Boolean isThumbnail;
 
-	@ManyToOne
-	private ActivityDetails activityDetails;
+
 
 	public String getName() {
 		return name;
@@ -76,12 +75,6 @@ public class Photo {
 		this.isThumbnail = isThumbnail;
 	}
 
-	public ActivityDetails getActivityDetails() {
-		return activityDetails;
-	}
 
-	public void setActivityDetails(ActivityDetails activityDetails) {
-		this.activityDetails = activityDetails;
-	}
 
 }

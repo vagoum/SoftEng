@@ -4,7 +4,9 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -62,13 +64,15 @@ public class CreateActivityController {
 
 	@GetMapping("/activity_create")
 	public String activityIndex(Locale locale, Model model) {
-		model.addAttribute("activityDetails", new ActivityDetails());
+		List<String> categories = new ArrayList<>();
+		categories.add("Sports");
+		categories.add("Camps");
+		categories.add("Music");
+		model.addAttribute("categories", categories);
 		return "activity_create";
 	}
 
-	/*
-	 * Save user object
-	 */
+
 	@PostMapping("/activity_create")
 	public String activityCreate(@ModelAttribute("activityDetails") @Validated ActivityDetails activityDetails,
 			BindingResult result, @RequestParam("file") MultipartFile[] images, BindingResult  fileUploadingResult, Model model) {

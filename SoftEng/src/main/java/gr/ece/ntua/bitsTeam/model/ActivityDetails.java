@@ -40,13 +40,13 @@ public class ActivityDetails {
 
 	private Integer ticketNumber;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Photo thumbNail;
 	
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd", timezone = "PST")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Future(message = "Activity day must be in the future.")
+	// @Future(message = "Activity day must be in the future.")
 	private Date date;
 
 	private String ageRange;

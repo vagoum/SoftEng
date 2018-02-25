@@ -12,7 +12,6 @@ $(document).ready(function(){
 			latitude : "",
 			longtitude : ""
 		}
-        //TODO upload files
     };
 
     function initMap(currentForm) {
@@ -159,6 +158,7 @@ $(document).ready(function(){
 
 
         var formData = new FormData();
+        
         formData.append('activityData', new Blob([JSON.stringify(activityData)], {
             type: "application/json"
         }));
@@ -169,10 +169,6 @@ $(document).ready(function(){
         	console.log($('input[type=file]')[i].files[0]);
         	formData.append('files', $('input[type=file]')[i].files[0]);
         }
-        //formData.append("files", $('input[type=file]')[0].files[0]);
-        //console.log(fileList);
-        //formData.append("files", fileList);
-        
         
         
         console.log(JSON.stringify(formData));

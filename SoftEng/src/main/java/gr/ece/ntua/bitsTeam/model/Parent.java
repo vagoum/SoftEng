@@ -19,11 +19,11 @@ public class Parent extends User {
 	private Location location;
 	
 
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "userId")
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
 	private List<Booking> bookings = new ArrayList<>();
 	
-
+	private Integer pointBalance;
+	
 	public Location getLocation() {
 		return location;
 	}
@@ -43,6 +43,14 @@ public class Parent extends User {
 	@Override
 	public String toString() {
 		return "Parent [location=" + location + ", bookings=" + bookings + "]";
+	}
+
+	public Integer getPointBalance() {
+		return pointBalance;
+	}
+
+	public void setPointBalance(Integer pointBalance) {
+		this.pointBalance = pointBalance;
 	}
 
 }
