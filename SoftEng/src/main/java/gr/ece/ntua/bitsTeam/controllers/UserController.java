@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,9 +17,6 @@ import gr.ece.ntua.bitsTeam.login.SecurityService;
 import gr.ece.ntua.bitsTeam.login.UserValidator;
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Parent;
-import gr.ece.ntua.bitsTeam.model.Role;
-import gr.ece.ntua.bitsTeam.model.User;
-import gr.ece.ntua.bitsTeam.model.jparepos.UserRepository;
 import gr.ece.ntua.bitsTeam.service.UserService;
 
 @Controller
@@ -45,34 +41,16 @@ public class UserController {
 	}
 
 	
-<<<<<<< HEAD
 	@RequestMapping(value = "/users/parents/registration", method = RequestMethod.POST)
 	public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult,
 			HttpServletRequest request, Model model) {
 		userValidator.validate(parent, bindingResult);
-=======
-    @RequestMapping(value = "/registration", method = RequestMethod.GET)
-    public String registration(Model model) {
-        model.addAttribute("parentForm", new Parent());
-        model.addAttribute("organizerForm", new Organizer());
->>>>>>> refs/heads/spring
 
-<<<<<<< HEAD
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
-=======
-        return "registration";
-    }
->>>>>>> refs/heads/spring
 
-<<<<<<< HEAD
 		userService.save(parent, "ROLE_PARENT");
-=======
-    @RequestMapping(value = "/users/parents/registrati", method = RequestMethod.POST)
-    public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult, HttpServletRequest request,Model model) {
-        userValidator.validate(parent, bindingResult);
->>>>>>> refs/heads/spring
 
 		securityService.autologin(parent.getEmail(), parent.getPassword());
 
@@ -85,19 +63,9 @@ public class UserController {
 			BindingResult bindingResult, HttpServletRequest request, Model model) {
 		userValidator.validate(organizer, bindingResult);
 
-<<<<<<< HEAD
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
-=======
-        return "redirect:/welcome";
-    }
-    
-    
-    @RequestMapping(value = "users/organizers/registrati", method = RequestMethod.POST)
-    public String registrationOrganizer(@ModelAttribute("organizerForm") Organizer organizer, BindingResult bindingResult, HttpServletRequest request, Model model) {
-        userValidator.validate(organizer, bindingResult);
->>>>>>> refs/heads/spring
 
 		userService.save(organizer, "ROLE_ORGANIZER");
 
