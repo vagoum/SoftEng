@@ -2,13 +2,11 @@ package gr.ece.ntua.bitsTeam.model;
 
 import java.util.Date;
 
-import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 @Entity
 @DiscriminatorValue("photo")
@@ -18,19 +16,14 @@ public class Photo {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long imageId;
 
-	@Basic
-	private String name;
+	private String name = "";
 
-	@Basic
 	private String image = "";
 
-	@Basic
 	private Date createdAt = new Date();
 
-	@Basic
 	private String url = "";
 
-	@Basic
 	private Boolean isThumbnail;
 
 

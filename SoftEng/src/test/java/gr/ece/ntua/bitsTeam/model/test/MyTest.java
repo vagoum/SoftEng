@@ -21,11 +21,16 @@ public class MyTest {
 	@org.junit.Test
 	public void newTest() {
 
-		List<Activity> list = ar.findAll();
+		Activity activity = new Activity();
 		
-		System.out.println(list.get(0));
-	}
-	
-	
+		activity.setName("AAAAAAA");
+		
+		ar.save(activity);
+		
+		activity = ar.findAll().get(0);
+		
+		activity.setName("BBBBBBBB");
+		ar.save(activity);
 
+	}
 }

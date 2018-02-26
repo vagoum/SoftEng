@@ -12,10 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 
 @Entity
+@Table(name = "app_user")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "user_type")
 public class User {
@@ -24,13 +26,13 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userId;
 	
-	private String firstName;
+	private String firstName = "";
 	
-	private String lastName;	
+	private String lastName = "";	
 	
-	private String email;
+	private String email = "";
 	
-	private String phone;
+	private String phone = "";
 
 	private String password;
 

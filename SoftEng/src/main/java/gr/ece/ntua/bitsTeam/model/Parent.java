@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("parent")
 public class Parent extends User {
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Location location;
 	
 

@@ -19,7 +19,7 @@ public class UserControllerRest {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/users/parents/registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/users/parent/registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpStatus register(@RequestBody Parent parent)  {
     	
     	

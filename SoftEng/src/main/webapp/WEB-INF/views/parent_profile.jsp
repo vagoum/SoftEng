@@ -219,21 +219,26 @@
 			<div class="well">
 				<h1 class="text-center">Scheduled Activities</h1>
 				<div class="list-group">
-					<c:forEach var="activityDetail" items="${scheduledBookings}">
+					<c:forEach var="activity" items="${scheduledBookings}">
 
-						<a href="#" class="list-group-item">
+						<a href="/activity_view/id=${activity.activityId }" class="list-group-item">
 							<div class="media col-md-3">
 								<figure class="pull-left">
 									<img
 										class="media-object img-rounded img-responsive activy-image"
-										src=${activityDetail.thumbNail.url}>
+										src=${activity.thumbNail.url}>
 								</figure>
 							</div>
 							<div class="col-md-6">
 								<h3 class="list-group-item-heading activy-title">
-									${activityDetail.name}</h3>
+									${activity.name}</h3>
 								<p class="list-group-item-text activity-details">
-									${activityDetail.activityDescription}</p>
+									${activity.activityDescription}</p>
+							</div>
+							<div class="col-md-3 text-center">
+								<form>
+    							<button type="submit" class="btn btn-success btn-lg btn-block book-btn">Link</button>
+							</form>
 							</div>
 						</a>
 					</c:forEach>
@@ -247,25 +252,30 @@
 				<h1 class="text-center">Past Activities</h1>
 				<div class="list-group">
 
-					<c:forEach var="activityDetail" items="${completedBookings}">
+					<c:forEach var="activity" items="${completedBookings}">
 
-						<a href="#" class="list-group-item">
+						<a href="/activity_view?id=${activity.activityId }" class="list-group-item">
 							<div class="media col-md-3">
 								<figure class="pull-left">
 									<img
 										class="media-object img-rounded img-responsive activy-image"
-										src=${activityDetail.thumbNail.url}>
+										src=${activity.thumbNail.url}>
 								</figure>
 							</div>
 							<div class="col-md-6">
 								<h3 class="list-group-item-heading activy-title">
-									${activityDetail.name}</h3>
+									${activity.name}</h3>
 								<p class="list-group-item-text activity-details">
-									${activityDetail.activityDescription}</p>
+									${activity.activityDescription}</p>
+							</div>
+							<div class="col-md-3 text-center">
+							
+    							<button type="submit" class="btn btn-success btn-lg btn-block book-btn">View</button>
+							
 							</div>
 						</a>
 					</c:forEach>
-					
+
 				</div>
 			</div>
 		</div>

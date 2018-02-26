@@ -213,13 +213,12 @@
 				<h1 class="text-center">Scheduled Activities</h1>
 				<div class="list-group">
 					<c:forEach var="activity" items="${scheduledActivities}">
-
-						<a href="#" class="list-group-item">
+						<a href="/activity_view?id=${activity.activityId}" class="list-group-item">
 							<div class="media col-md-3">
 								<figure class="pull-left">
 									<img
 										class="media-object img-rounded img-responsive activy-image"
-										src=${activity.thumbNail.url}  >
+										src=${activity.thumbNail.url}>
 								</figure>
 							</div>
 							<div class="col-md-6">

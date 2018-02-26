@@ -124,22 +124,6 @@ public class Activity {
 		this.ageRange = ageRange;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public List<Photo> getPhotos() {
 		return photos;
 	}
@@ -156,18 +140,14 @@ public class Activity {
 		this.location = location;
 	}
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyy", timezone = "PST")
-	@DateTimeFormat(pattern = "MM/dd/yyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM/dd/yyyy", timezone = "PST")
+	@DateTimeFormat(pattern = "MM/dd/yyyy")
 	// @Future(message = "Activity day must be in the future.")
 	private Date date;
 
 	private String time;
 	
 	private String ageRange;
-
-	private String description;
-
-	private String address;
 
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "activityDetailsId")

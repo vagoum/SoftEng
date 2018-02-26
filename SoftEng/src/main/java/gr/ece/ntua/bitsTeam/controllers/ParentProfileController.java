@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.ece.ntua.bitsTeam.model.Activity;
 import gr.ece.ntua.bitsTeam.model.Booking;
+import gr.ece.ntua.bitsTeam.model.Location;
 import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
@@ -38,16 +39,19 @@ public class ParentProfileController {
 		Date date4 = null;
 
 		try {
-			date1 = new SimpleDateFormat("yyyy-MM-dd").parse("2017-03-05");
-			date2 = new SimpleDateFormat("yyyy-MM-dd").parse("2019-03-05");
-			date3 = new SimpleDateFormat("yyyy-MM-dd").parse("2019-03-05");
-			date4 = new SimpleDateFormat("yyyy-MM-dd").parse("2016-03-05");
+			date1 = new SimpleDateFormat("MM/dd/yyyy").parse("05/03/2017");
+			date2 = new SimpleDateFormat("MM/dd/yyyy").parse("05/03/2019");
+			date3 = new SimpleDateFormat("MM/dd/yyyy").parse("05/03/2017");
+			date4 = new SimpleDateFormat("MM/dd/yyyy").parse("05/03/2019");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-
+		Location location = new Location();
+		location.setAddress("Syntagma Square");
+		location.setLatitude(37.975543);
+		location.setLongtitude(23.734851);
 		Parent parent = new Parent();
 		parent.setBlocked(false);
 		parent.setEmail("andrewhantzos@gmail.com");
@@ -79,10 +83,12 @@ public class ParentProfileController {
 		activity1.setName("Play Football");
 		activity1.setDate(date1);
 		activity1.setThumbNail(photo);
-		
+		activity1.setTime("15:00 AM");
+		activity1.setLocation(location);
 		activity1.getBookings().add(booking1);
 		booking1.setActivity(activity1);
-
+		activity1.setElapsed(true);
+		
 		Activity activity2 = new Activity();
 		activity2.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
 		activity2.setName("Play Football");
@@ -90,6 +96,9 @@ public class ParentProfileController {
 		activity2.getBookings().add(booking2);
 		activity2.setThumbNail(photo);
 		booking2.setActivity(activity2);
+		activity2.setLocation(location);
+		activity2.setTime("15:00 AM");
+		activity2.setElapsed(false);
 
 		Activity activity3 = new Activity();
 		activity3.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
@@ -98,6 +107,9 @@ public class ParentProfileController {
 		activity3.getBookings().add(booking3);
 		activity3.setThumbNail(photo);
 		booking3.setActivity(activity3);
+		activity3.setLocation(location);
+		activity3.setTime("15:00 AM");
+		activity3.setElapsed(true);
 
 		Activity activity4 = new Activity();
 		activity4.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
@@ -106,6 +118,9 @@ public class ParentProfileController {
 		activity4.getBookings().add(booking4);
 		activity4.setThumbNail(photo);
 		booking4.setActivity(activity4);
+		activity4.setLocation(location);
+		activity4.setTime("15:00 AM");
+		activity4.setElapsed(false);
 
 		activityRepository.save(activity1);
 		activityRepository.save(activity3);
@@ -136,11 +151,11 @@ public class ParentProfileController {
 		List<Activity> completedActivities  = new ArrayList<>();
 		for(Booking booking: bookings) {
 			
-			if (date.compareTo(booking.getActivity().getDate()) < 0) {
-				scheduledActivities.add(booking.getActivity());
+			if (booking.getActivity().getElapsed()) {
+				completedActivities.add(booking.getActivity());
 			}
 			else {
-				completedActivities.add(booking.getActivity());
+				scheduledActivities.add(booking.getActivity());
 			}
 		}
         

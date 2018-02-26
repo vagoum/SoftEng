@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import gr.ece.ntua.bitsTeam.model.Activity;
 import gr.ece.ntua.bitsTeam.model.Location;
 import gr.ece.ntua.bitsTeam.model.Organizer;
+import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.OrganizerRepository;
 
@@ -35,12 +36,19 @@ public class ActivityController {
 	private OrganizerRepository organizerRepository;
 	
 	public void createTestActivity() {
+		
 		Activity activity = new Activity();
+		Photo photo = new Photo();
+		photo.setUrl("http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png");
+		
+		activity.setThumbNail(photo);
+		activity.getPhotos().add(photo);
+		activity.getPhotos().add(photo);
 		
 		activity.setName("Football");
 		activity.setCost(200);
 		activity.setTime("15:00 AM");
-		activity.setDescription("lorem ipsum kai ta muala sta kagkela");
+		activity.setActivityDescription("lorem ipsum kai ta muala sta kagkela");
 		activity.setDate(new Date());
 		activity.setCategory("Football");
 		Location location = new Location();
@@ -70,10 +78,7 @@ public class ActivityController {
 	public String viewActivity(@RequestParam(value = "id", required = true) Long activityId, Model model,
 			HttpServletRequest request) throws IOException {
 		// set test objects
-		if (flag) {
-			flag = false;
-			createTestActivity();
-		}
+
 		
 		
 		Activity activity = activityRepository.findOne(activityId);
@@ -92,6 +97,8 @@ public class ActivityController {
 		model.addAttribute("year", year);
 		model.addAttribute("location", loc);
 
+		model.addAttribute("thumbnail", activity.getThumbNail());
+		model.addAttribute("photos", activity.getPhotos());
 		model.addAttribute("organizer", activity.getOrganizer());
 		return "activity_view";
 	}

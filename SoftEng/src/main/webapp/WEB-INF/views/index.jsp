@@ -34,35 +34,6 @@
 </head>
 
 
-
-		<!-- Activities 
-		<div class="row">
-			<div class="activities">
-				<c:forEach items="${activityDetails}" var="details">
-					<div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-xs-12">
-						<div class="card">
-							<div class="card-header bg-transparent">
-								<h4>${details.name}</h4>
-							</div>
-							<div class="card-body">
-								<img class="card-photo" src="${details.photos[0].url}">
-								<p class="card-text">
-									${details.description}
-								</p>
-							</div>
-							<div class="card-footer">
-								<a href="blog-ici.html" class="blue-button">Learn More</a>
-							</div>
-						</div>
-					</div>
-            	</c:forEach>
-			</div>
-		</div>
-	</div>
--->
-
-
-
 <body>
 
 	<!-- Carousel -->
@@ -323,20 +294,20 @@
 		<!-- Activities -->
 		<div class="row">
 			<div class="activities">
-				<c:forEach items="${activityDetails}" var="details">
+				<c:forEach items="${activityDetails}" var="activity">
 					<div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-xs-12">
 						<div class="card">
 							<div class="card-header bg-transparent">
-								<h4>${details.name}</h4>
+								<h4>${activity.name}</h4>
 							</div>
 							<div class="card-body">
-								<img class="card-photo" src="${details.thumbNail.url}">
+								<img class="card-photo" src="${activity.thumbNail.url}">
 								<p class="card-text">
-									${details.description}
+									${activity.activityDescription}
 								</p>
 							</div>
 							<div class="card-footer">
-								<a href="blog-ici.html" class="blue-button">Learn More</a>
+								<a href="/activity_view?id=${activity.activityId }" class="blue-button">Learn More</a>
 							</div>
 						</div>
 					</div>

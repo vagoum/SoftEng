@@ -228,40 +228,15 @@
 							<div class="carousel-inner main-carousel-inner">
 								<div class="main-carousel-item item active"
 									data-slide-number="0">
-									<img src="http://placehold.it/470x480&text=zero">
+									<img src=${thumbnail.url}>
 								</div>
+								<c:forEach var="photo" items="${photos}" varStatus="loop">
 
-								<div class="main-carousel-item item" data-slide-number="1">
-									<img src="http://placehold.it/470x480&text=1">
-								</div>
+									<div class="main-carousel-item item" data-slide-number=${loop.index}>
+										<img src=${photo.url}>
+									</div>
 
-								<div class="main-carousel-item item" data-slide-number="2">
-									<img src="http://placehold.it/470x480&text=2">
-								</div>
-
-								<div class="main-carousel-item item" data-slide-number="3">
-									<img src="http://placehold.it/470x480&text=3">
-								</div>
-
-								<div class="main-carousel-item item" data-slide-number="4">
-									<img src="http://placehold.it/470x480&text=4">
-								</div>
-
-								<div class="main-carousel-item item" data-slide-number="5">
-									<img src="http://placehold.it/470x480&text=5">
-								</div>
-
-								<div class="main-carousel-item item" data-slide-number="6">
-									<img src="http://placehold.it/470x480&text=6">
-								</div>
-
-								<div class="main-carousel-item item" data-slide-number="7">
-									<img src="http://placehold.it/470x480&text=7">
-								</div>
-
-								<div class="main-carousel-item item" data-slide-number="8">
-									<img src="http://placehold.it/470x480&text=8">
-								</div>
+								</c:forEach>
 							</div>
 
 							<!-- Main Carousel nav -->
@@ -286,53 +261,16 @@
 									<div class="row">
 										<div class="col-md-4 col-xs-4">
 											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=zero"></a>
+												src=${thumbnail.url}></a>
 										</div>
-										<div class="col-md-4 col-xs-4">
+										<c:forEach var="photo" items="${photos}" varStatus="loop">
+											<div class="col-md-4 col-xs-4">
 											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=1"></a>
+												src==${photo.url}></a>
 										</div>
-										<div class="col-md-4 col-xs-4">
-											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=2"></a>
-										</div>
+										</c:forEach>
 									</div>
 								</div>
-
-								<div class="thumbnail-carousel-item item">
-									<div class="row">
-										<div class="col-md-4 col-xs-4">
-											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=3"></a>
-										</div>
-										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=4"></a>
-										</div>
-										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=5"></a>
-										</div>
-									</div>
-								</div>
-
-								<div class="thumbnail-carousel-item item">
-									<div class="row">
-										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=6"></a>
-										</div>
-										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=7"></a>
-										</div>
-										<div class="col-md-4  col-xs-4">
-											<a class="thumbnail" href=""><img alt=""
-												src="http://placehold.it/470x480&text=8"></a>
-										</div>
-									</div>
-								</div>
-							</div>
 
 							<!-- Thumbnail Carousel nav -->
 							<a class="left carousel-control" href="#thumbnail-carousel"
@@ -351,7 +289,8 @@
 				class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-xs-12 well pull-right-lg"
 				style="border: 0px solid">
 				<div class="calendar-wrapper">
-					<div id="calendar" data-year="${year }" data-month="${month}" data-day="${day}"></div>
+					<div id="calendar" data-year="${year}" data-month="${month}"
+						data-day="${day}"></div>
 				</div>
 				<br>
 				<h4>Time: ${activity.time}</h4>

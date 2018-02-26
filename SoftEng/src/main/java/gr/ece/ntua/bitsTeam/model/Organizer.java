@@ -21,9 +21,9 @@ public class Organizer extends User{
 	
 	private Boolean verified = false;
 	
-	private String companyName;
+	private String companyName = "";
 	
-	private String companyDetails;
+	private String companyDetails = "";
 	
 	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
 	private List<Activity> activities = new ArrayList<>();

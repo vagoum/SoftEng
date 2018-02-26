@@ -126,7 +126,7 @@ $(document).ready(function() {
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "/users/parents/registration",
+			url : "/users/parent/registration",
 			data : JSON.stringify(userData),
 			dataType : 'json',
 			success : function(result) {
@@ -156,7 +156,7 @@ $(document).ready(function() {
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "/users/organizers/registration",
+			url : "/users/organizer/registration",
 			data : JSON.stringify(userData),
 			dataType : 'json',
 			success : function(result) {

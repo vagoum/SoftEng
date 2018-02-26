@@ -63,7 +63,6 @@ Cal.prototype.show = function() {
     html += '<td>' + this.DaysOfWeek[i] + '</td>';
   }
   html += '</tr>';
-  console.log(this.day);
 
   // Write the days
   var i=1;
