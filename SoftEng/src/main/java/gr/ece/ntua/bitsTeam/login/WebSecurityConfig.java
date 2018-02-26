@@ -1,12 +1,6 @@
 package gr.ece.ntua.bitsTeam.login;
 
-import org.apache.catalina.Context;
-import org.apache.catalina.connector.Connector;
-import org.apache.tomcat.util.descriptor.web.SecurityCollection;
-import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,9 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
@@ -32,26 +24,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     
     @Bean
     public AuthenticationSuccessHandler successHandler() {
     	SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
     	handler.setUseReferer(true);
-    	handler.setDefaultTargetUrl("/index");
     	return handler;
     }
-    
-    
-    /*
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-    	SimpleUrlAuthenticationFailureHandler handler = new SimpleUrlAuthenticationFailureHandler();
-    	handler.setUseForward(true);
-    	handler.setDefaultFailureUrl("/login_failure.jsp");
-    	return handler;
-    }
-    */
-    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -90,6 +70,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authenticationProvider;
     }
     
+    /*
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
       TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
@@ -117,6 +98,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       
       return connector;
   }
-    
+    */
     
 }
