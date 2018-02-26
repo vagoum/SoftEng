@@ -61,4 +61,11 @@ public class Location {
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
 	}
+	
+	@Override
+	public String toString() {
+		return "Location [id=" + id + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode
+				+ ", longtitude=" + longtitude + ", latitude=" + latitude + "]";
+	}
+
 }

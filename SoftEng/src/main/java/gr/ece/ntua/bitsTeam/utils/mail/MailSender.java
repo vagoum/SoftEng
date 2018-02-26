@@ -19,9 +19,9 @@ import javax.mail.internet.MimeMultipart;
 
 import com.lowagie.text.DocumentException;
 
+import gr.ece.ntua.bitsTeam.model.Activity;
 import gr.ece.ntua.bitsTeam.model.Booking;
 import gr.ece.ntua.bitsTeam.model.Parent;
-import gr.ece.ntua.bitsTeam.model.ActivityDetails;
 
 public class MailSender {
 
@@ -40,7 +40,7 @@ public class MailSender {
 	}
 	
 	public void sendBookingConfirmation(Booking booking) {
-		ActivityDetails details = booking.getActivity().getActivityDetails();
+		Activity details = booking.getActivity();
 		
 		Parent receiver = booking.getParent();
 		String receiverEmail = receiver.getEmail();

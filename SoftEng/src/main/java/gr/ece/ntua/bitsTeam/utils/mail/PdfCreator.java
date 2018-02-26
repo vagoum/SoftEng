@@ -15,7 +15,7 @@ import com.lowagie.text.Paragraph;
 import com.lowagie.text.Rectangle;
 import com.lowagie.text.pdf.PdfWriter;
 
-import gr.ece.ntua.bitsTeam.model.ActivityDetails;
+import gr.ece.ntua.bitsTeam.model.Activity;
 import gr.ece.ntua.bitsTeam.model.Booking;
 import gr.ece.ntua.bitsTeam.model.Parent;
  
@@ -45,7 +45,7 @@ public class PdfCreator {
        
     	NumberFormat priceFormat = NumberFormat.getCurrencyInstance(Locale.GERMANY);
     	
-    	ActivityDetails details = booking.getActivity().getActivityDetails();
+    	Activity details = booking.getActivity();
 		Parent receiver = booking.getParent();
     	
         Rectangle page = new Rectangle(PageSize.POSTCARD);

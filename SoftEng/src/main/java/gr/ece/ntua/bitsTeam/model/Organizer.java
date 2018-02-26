@@ -18,8 +18,14 @@ import org.hibernate.annotations.FetchMode;
 @DiscriminatorValue("organizer")
 public class Organizer extends User{
 
-	@OneToMany(mappedBy = "organizer",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@Fetch(FetchMode.SELECT)
+	
+	private Boolean verified = false;
+	
+	private String companyName = "";
+	
+	private String companyDetails = "";
+	
+	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
 	private List<Activity> activities = new ArrayList<>();
 
 	public List<Activity> getActivities() {
@@ -28,5 +34,29 @@ public class Organizer extends User{
 
 	public void setActivities(List<Activity> activities) {
 		this.activities = activities;
+	}
+
+	public Boolean getVerified() {
+		return verified;
+	}
+
+	public void setVerified(Boolean verified) {
+		this.verified = verified;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getCompanyDetails() {
+		return companyDetails;
+	}
+
+	public void setCompanyDetails(String companyDetails) {
+		this.companyDetails = companyDetails;
 	}
 }

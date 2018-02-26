@@ -1,46 +1,41 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.model.jparepos.OrganizerRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.ParentRepository;
 
-@RestController
+@Controller
 public class AdminController {
 
 	@Autowired
-	private OrganizerRepository organizerRepository;
-	
+	private ParentRepository parents;
+
 	@Autowired
-	private ParentRepository parentRepository;
-	
-	@GetMapping("/admin/admin_panel")
-	public String returnParentsOrganizers(Locale locale, Model model) throws JsonProcessingException {
-		
-		List<Parent> parents = parentRepository.findAll();
-		List<Organizer> organizers = organizerRepository.findAll();
+	private OrganizerRepository organizers;
 
-		Map mp = new HashMap();
-		
-		mp.put("parents", parents);
-		mp.put("organizers", organizers);
-		
+	@GetMapping("/admin_panel")
+	public String admin_get(Model model, HttpServletRequest request) {
 
-        ObjectMapper mapper = new ObjectMapper();
-        String json = mapper.writeValueAsString(mp);
-		return json;
+		String param = request.getParameter("manage");
+		if (param == null || param.equals("parents")) {
+			ArrayList<Parent> parentList = (ArrayList<Parent>) parents.findAll();
+			model.addAttribute("userList", parentList);
+			model.addAttribute("user_class", 0);
+		} else if (param.equals("organizers")) {
+			ArrayList<Organizer> organizerList = (ArrayList<Organizer>) organizers.findAll();
+			model.addAttribute("userList", organizerList);
+			model.addAttribute("user_class", 1);
+		}
+		return "admin_panel";
 	}
 }

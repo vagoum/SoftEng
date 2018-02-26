@@ -1,20 +1,28 @@
 package gr.ece.ntua.bitsTeam.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("parent")
 public class Parent extends User {
 	
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private Location location;
 	
-	private String firstName;
+
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+	private List<Booking> bookings = new ArrayList<>();
 	
-	private String lastName;	
+	private Integer pointBalance;
 	
 	private Integer balance;
 	
@@ -34,20 +42,25 @@ public class Parent extends User {
 		this.location = location;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public List<Booking> getBookings() {
+		return bookings;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setBookings(List<Booking> bookings) {
+		this.bookings = bookings;
 	}
 
-	public String getLastName() {
-		return lastName;
+	@Override
+	public String toString() {
+		return "Parent [location=" + location + ", bookings=" + bookings + "]";
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public Integer getPointBalance() {
+		return pointBalance;
 	}
-	
+
+	public void setPointBalance(Integer pointBalance) {
+		this.pointBalance = pointBalance;
+	}
+
 }

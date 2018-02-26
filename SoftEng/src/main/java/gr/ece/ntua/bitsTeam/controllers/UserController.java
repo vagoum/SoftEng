@@ -45,16 +45,34 @@ public class UserController {
 	}
 
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/users/parents/registration", method = RequestMethod.POST)
 	public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult,
 			HttpServletRequest request, Model model) {
 		userValidator.validate(parent, bindingResult);
+=======
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration(Model model) {
+        model.addAttribute("parentForm", new Parent());
+        model.addAttribute("organizerForm", new Organizer());
+>>>>>>> refs/heads/spring
 
+<<<<<<< HEAD
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
+=======
+        return "registration";
+    }
+>>>>>>> refs/heads/spring
 
+<<<<<<< HEAD
 		userService.save(parent, "ROLE_PARENT");
+=======
+    @RequestMapping(value = "/users/parents/registrati", method = RequestMethod.POST)
+    public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult, HttpServletRequest request,Model model) {
+        userValidator.validate(parent, bindingResult);
+>>>>>>> refs/heads/spring
 
 		securityService.autologin(parent.getEmail(), parent.getPassword());
 
@@ -67,9 +85,19 @@ public class UserController {
 			BindingResult bindingResult, HttpServletRequest request, Model model) {
 		userValidator.validate(organizer, bindingResult);
 
+<<<<<<< HEAD
 		if (bindingResult.hasErrors()) {
 			return "registration";
 		}
+=======
+        return "redirect:/welcome";
+    }
+    
+    
+    @RequestMapping(value = "users/organizers/registrati", method = RequestMethod.POST)
+    public String registrationOrganizer(@ModelAttribute("organizerForm") Organizer organizer, BindingResult bindingResult, HttpServletRequest request, Model model) {
+        userValidator.validate(organizer, bindingResult);
+>>>>>>> refs/heads/spring
 
 		userService.save(organizer, "ROLE_ORGANIZER");
 

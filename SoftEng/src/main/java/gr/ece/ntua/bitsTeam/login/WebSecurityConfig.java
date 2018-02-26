@@ -17,9 +17,13 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+<<<<<<< HEAD
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+=======
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+>>>>>>> refs/heads/spring
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
@@ -32,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+<<<<<<< HEAD
     
     @Bean
     public AuthenticationSuccessHandler successHandler() {
@@ -52,17 +57,35 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     */
     
+=======
+
+    
+    @Bean
+    public AuthenticationSuccessHandler successHandler() {
+    	SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
+    	handler.setUseReferer(true);
+    	return handler;
+    }
+>>>>>>> refs/heads/spring
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeRequests()
+<<<<<<< HEAD
                     .antMatchers("/resources/**", "/registration2", "/**").permitAll()
                     .anyRequest().authenticated()
+=======
+                    .antMatchers("/resources/**", "/registration", "/**").permitAll()
+                    .anyRequest().permitAll()
+>>>>>>> refs/heads/spring
                     .and()
                 .formLogin()
                     .loginPage("/login")
                     .successHandler(successHandler())
+<<<<<<< HEAD
                     .failureUrl("/login_failure")
+=======
+>>>>>>> refs/heads/spring
                     .usernameParameter("email")
                     .passwordParameter("password")
                     .permitAll()

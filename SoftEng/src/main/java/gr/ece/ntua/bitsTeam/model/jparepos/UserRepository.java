@@ -12,4 +12,7 @@ public interface UserRepository<T extends User> extends JpaRepository<T, Long> {
 	T findByEmail(String email);
 	
 	List<Role> findRolesByEmail(String email);
+		
+    @Transactional
+	void deleteByEmail(String email);
 }

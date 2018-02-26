@@ -1,9 +1,8 @@
 
 
-var Cal = function(divId) {
-
+var Cal = function(element, y, m, d) {
   //Store div id
-  this.divId = divId;
+  this.htmlElement = element;
 
   // Days of week, starting on Sunday
   this.DaysOfWeek = [
@@ -17,38 +16,44 @@ var Cal = function(divId) {
   ];
 
   // Months, stating on January
-  this.Months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December' ];
+  this.Months = [
+    'January', 
+    'February', 
+    'March', 
+    'April', 
+    'May', 
+    'June', 
+    'July', 
+    'August', 
+    'September', 
+    'October', 
+    'November', 
+    'December'
+  ];
 
-  // Set the current month, year
-  var d = new Date();
-
-  this.currMonth = d.getMonth();
-  this.currYear = d.getFullYear();
-  this.currDay = d.getDate();
-};
-
-// Show current month
-Cal.prototype.showcurr = function() {
-  this.showMonth(this.currYear, this.currMonth);
+  //Set the day, month, year
+  this.month = m;
+  this.year = y;
+  this.day = d;
 };
 
 // Show month (year, month)
-Cal.prototype.showMonth = function(y, m) {
+Cal.prototype.show = function() {
 
   var d = new Date()
   // First day of the week in the selected month
-  , firstDayOfMonth = new Date(y, m, 1).getDay()
+  , firstDayOfMonth = new Date(this.year, this.month, 1).getDay()
   // Last day of the selected month
-  , lastDateOfMonth =  new Date(y, m+1, 0).getDate()
+  , lastDateOfMonth =  new Date(this.year, this.month+1, 0).getDate()
   // Last day of the previous month
-  , lastDayOfLastMonth = m == 0 ? new Date(y-1, 11, 0).getDate() : new Date(y, m, 0).getDate();
+  , lastDayOfLastMonth = this.month == 0 ? new Date(this.year-1, 11, 0).getDate() : new Date(this.year, this.month, 0).getDate();
 
 
   var html = '<table>';
 
   // Write selected month and year
   html += '<thead><tr>';
-  html += '<td colspan="7">' + this.Months[m] + ' ' + y + '</td>';
+  html += '<td colspan="7">' + this.Months[this.month] + ' ' + this.year + '</td>';
   html += '</tr></thead>';
 
 
@@ -62,8 +67,7 @@ Cal.prototype.showMonth = function(y, m) {
   // Write the days
   var i=1;
   do {
-
-    var dow = new Date(y, m, i).getDay();
+    var dow = new Date(this.year, this.month, i).getDay();  
 
     // If Sunday, start new row
     if ( dow == 0 ) {
@@ -81,10 +85,10 @@ Cal.prototype.showMonth = function(y, m) {
     }
 
     // Write the current day in the loop
-    var chk = new Date();
-    var chkY = chk.getFullYear();
-    var chkM = chk.getMonth();
-    if (chkY == this.currYear && chkM == this.currMonth && i == this.currDay) {
+    var chkY = this.year
+    var chkM = this.month
+
+    if (chkY == this.year && chkM == this.month && i == this.day) {
       html += '<td class="today">' + i + '</td>';
     } else {
       html += '<td class="normal">' + i + '</td>';
@@ -110,18 +114,18 @@ Cal.prototype.showMonth = function(y, m) {
   html += '</table>';
 
   // Write HTML to the div
-  document.getElementById(this.divId).innerHTML = html;
+  //document.getElementById(this.divId).innerHTML = html;
+  this.htmlElement.innerHTML = html;
 };
 
 // On Load of the window
 window.onload = function() {
-
   // Start calendar
-  var calendar = new Cal("calendar");            
-  calendar.showcurr();
-}
-
-// Get element by id
-function getId(id) {
-  return document.getElementById(id);
+  var calendarElement = document.getElementById("calendar");
+  var d = new Date();
+  var calendar = new Cal(calendarElement, 
+    calendarElement.getAttribute("data-year"), 
+    calendarElement.getAttribute("data-month"), 
+    calendarElement.getAttribute("data-day")); 
+  calendar.show();      
 }
