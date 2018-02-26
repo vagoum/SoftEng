@@ -25,8 +25,7 @@ public class Organizer extends User{
 	
 	private String companyDetails;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId")
+	@OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
 	private List<Activity> activities = new ArrayList<>();
 
 	public List<Activity> getActivities() {

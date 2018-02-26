@@ -26,7 +26,6 @@ import com.cloudinary.utils.ObjectUtils;
 import gr.ece.ntua.bitsTeam.cloudinary.CloudinaryConfig;
 import gr.ece.ntua.bitsTeam.cloudinary.Watermark;
 import gr.ece.ntua.bitsTeam.model.Activity;
-import gr.ece.ntua.bitsTeam.model.ActivityDetails;
 import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
 
@@ -40,24 +39,22 @@ public class CreateActivityControllerRest {
 	@Autowired
 	private CloudinaryConfig cld;
     
-    @RequestMapping(value = "/activity/create_activity", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-    public HttpStatus register(@RequestPart("activityData") ActivityDetails activityDetails , @RequestParam ArrayList<MultipartFile> files)  {
+    @RequestMapping(value = "/activity/create", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public HttpStatus register(@RequestPart("activityData") Activity activity , @RequestParam ArrayList<MultipartFile> files)  {
     	    	
-    	System.out.println(activityDetails);
+    	System.out.println(activity);
     	System.out.println(files.size());
-    	Activity activity = new Activity();
 
-		activity.setActivityDetails(activityDetails);
 		activity.setElapsed(false);
 		
 		for (MultipartFile file : files) {
 			
 			Photo photo = uploadFile(file);
 			if (photo.getName() != null)  {
-				if (activityDetails.getPhotos().size() == 0) {
-					activityDetails.setThumbNail(photo);
+				if (activity.getPhotos().size() == 0) {
+					activity.setThumbNail(photo);
 				}
-				activityDetails.getPhotos().add(photo);
+				activity.getPhotos().add(photo);
 			}
 			else {
 				return HttpStatus.OK;

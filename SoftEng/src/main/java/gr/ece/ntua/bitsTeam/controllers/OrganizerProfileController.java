@@ -14,23 +14,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gr.ece.ntua.bitsTeam.model.Activity;
-import gr.ece.ntua.bitsTeam.model.Booking;
-import gr.ece.ntua.bitsTeam.model.Parent;
+import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
-import gr.ece.ntua.bitsTeam.model.jparepos.ParentRepository;
+import gr.ece.ntua.bitsTeam.model.jparepos.OrganizerRepository;
 
 @Controller
-@RequestMapping("/parent")
-public class ParentProfileController {
+@RequestMapping("/organizer")
+public class OrganizerProfileController {
 
 	@Autowired
-	private ParentRepository parentRepository;
+	private OrganizerRepository organizerRepository;
 	
 	@Autowired
 	private ActivityRepository activityRepository;
 	
-	private void createTestParent() {
+	private void createTestOrganizer() {
 		
 		Date date1 = null;
 		Date date2 = null;
@@ -48,28 +47,14 @@ public class ParentProfileController {
 		}
 
 
-		Parent parent = new Parent();
-		parent.setBlocked(false);
-		parent.setEmail("andrewhantzos@gmail.com");
-		parent.setFirstName("Andreas");
-		parent.setLastName("Chantzos");
-		parent.setPhone("6940200292");
-		parent.setResetPassword(false);
-		parent.setPointBalance(200);
+		Organizer organizer = new Organizer();
+		organizer.setBlocked(false);
+		organizer.setEmail("andrewhantzos@gmail.com");
+		organizer.setFirstName("Andreas");
+		organizer.setLastName("Chantzos");
+		organizer.setPhone("6940200292");
+		organizer.setResetPassword(false);
 		
-		parentRepository.save(parent);
-
-		
-		Booking booking1 = new Booking();
-		booking1.setParent(parent);
-		Booking booking2 = new Booking();
-		booking2.setParent(parent);
-
-		Booking booking3 = new Booking();
-		booking3.setParent(parent);
-
-		Booking booking4 = new Booking();
-		booking4.setParent(parent);
 
 		Photo photo = new Photo();
 		photo.setUrl("http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png");
@@ -79,33 +64,32 @@ public class ParentProfileController {
 		activity1.setName("Play Football");
 		activity1.setDate(date1);
 		activity1.setThumbNail(photo);
-		
-		activity1.getBookings().add(booking1);
-		booking1.setActivity(activity1);
+		activity1.setOrganizer(organizer);
 
 		Activity activity2 = new Activity();
 		activity2.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
 		activity2.setName("Play Football");
 		activity2.setDate(date2);
-		activity2.getBookings().add(booking2);
 		activity2.setThumbNail(photo);
-		booking2.setActivity(activity2);
+		activity2.setOrganizer(organizer);
 
 		Activity activity3 = new Activity();
 		activity3.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
 		activity3.setName("Play Football");
 		activity3.setDate(date3);
-		activity3.getBookings().add(booking3);
 		activity3.setThumbNail(photo);
-		booking3.setActivity(activity3);
+		activity3.setOrganizer(organizer);
 
 		Activity activity4 = new Activity();
 		activity4.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
 		activity4.setName("Play Football");
 		activity4.setDate(date4);
-		activity4.getBookings().add(booking4);
 		activity4.setThumbNail(photo);
-		booking4.setActivity(activity4);
+		activity4.setOrganizer(organizer);
+
+		
+		
+		organizerRepository.save(organizer);
 
 		activityRepository.save(activity1);
 		activityRepository.save(activity3);
@@ -121,33 +105,34 @@ public class ParentProfileController {
 		// set test objects
 		if (flag) {
 			flag = false;
-			createTestParent();
+			createTestOrganizer();
 		}
 		
-		// Long parentId = (Long) request.getSession().getAttribute("parentId_");
-		Parent parent = parentRepository.findOne((long) 1);
+		// Long organizerId = (Long) request.getSession().getAttribute("parentId_");
+		Organizer organizer = organizerRepository.findOne((long) 1);
 		
-        model.addAttribute("parent", parent);
+        model.addAttribute("organizer", organizer);
 
-		
+		List<Activity> activities = organizer.getActivities();
         Date date = new Date();
-		List<Booking> bookings = parent.getBookings();
 		List<Activity> scheduledActivities = new ArrayList<>();
 		List<Activity> completedActivities  = new ArrayList<>();
-		for(Booking booking: bookings) {
+		for(Activity activity: organizer.getActivities()) {
 			
-			if (date.compareTo(booking.getActivity().getDate()) < 0) {
-				scheduledActivities.add(booking.getActivity());
+			if (date.compareTo(activity.getDate()) < 0) {
+				scheduledActivities.add(activity);
 			}
 			else {
-				completedActivities.add(booking.getActivity());
+				completedActivities.add(activity);
 			}
 		}
-        
-        model.addAttribute("scheduledBookings", scheduledActivities);
-        model.addAttribute("completedBookings", completedActivities);
+		
+		
+        model.addAttribute("organizer", organizer);
+        model.addAttribute("scheduledActivities", scheduledActivities);
+        model.addAttribute("completedActivities", completedActivities);
 	
-		return "parent_profile";
+		return "organizer_profile";
 	}
 
 }

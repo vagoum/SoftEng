@@ -89,7 +89,8 @@ $(document).ready(function(){
 
     //Initialize map view
 	initMap($("#activity-form"));
-    
+	//Initialize date and time picker
+    $("#datetimepicker").datetimepicker({viewMode:'years'});
     //Handle File Upload UI
     var controlForm = $('.controls:first');
     controlForm.on("click", ".btn-add", function(e){
@@ -151,8 +152,13 @@ $(document).ready(function(){
         activityData.activityDescription = $("#activity-form-description").val();
         activityData.ticketNumber = $("#activity-form-ticket_number").val();
         activityData.cost = $("#activity-form-ticket_price").val();
-        activityData.date = $("#activity-form-date").val();
         activityData.location.address = $("#activity-form-address").val();
+        
+        var timeAndDate = $("#activity-form-date").val().split(" ");
+        activityData.date = timeAndDate[0];
+        activityData.time = timeAndDate[1]+" "+timeAndDate[2];
+
+        
         var form = $('#activity-form')[0];
         var d = new FormData(form);
 
@@ -175,7 +181,7 @@ $(document).ready(function(){
         
         $.ajax({
 			type : "POST",
-			url : "/activity/create_activity",
+			url : "/activity/create",
 	        processData: false,
 	        contentType: false,
 			data : formData,

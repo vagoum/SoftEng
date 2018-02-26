@@ -8,19 +8,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import gr.ece.ntua.bitsTeam.model.ActivityDetails;
-import gr.ece.ntua.bitsTeam.model.jparepos.ActivityDetailsRepository;
+import gr.ece.ntua.bitsTeam.model.Activity;
+import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
 
 @Controller
 public class IndexController {
 
     @Autowired
-    private ActivityDetailsRepository activitydetails;
+    private ActivityRepository activityRepository;
         
     @GetMapping("/index")
     public String index(Locale locale, Model model) {
     	
-    	ArrayList<ActivityDetails> detailsList = (ArrayList<ActivityDetails>) activitydetails.findAll();
+    	ArrayList<Activity> detailsList = (ArrayList<Activity>) activityRepository.findAll();
         model.addAttribute("activityDetails", detailsList);
         return "index";
     }
