@@ -20,7 +20,6 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 public class Activity {
 	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;

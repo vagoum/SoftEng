@@ -16,6 +16,16 @@ public class Parent extends User {
 	
 	private String lastName;	
 	
+	private Integer balance;
+	
+	public Integer getBalance() {
+		return balance;
+	}
+
+	public void setBalance(Integer balance) {
+		this.balance = balance;
+	}
+
 	public Location getLocation() {
 		return location;
 	}

@@ -40,6 +40,10 @@ dependencies {
 	
 	
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.4.1.RELEASE'
+	compile group: 'org.springframework.boot', name: 'spring-security-taglibs', version: '3.0.5.RELEASE'
+	compile group: 'org.gridkit.lab', name: 'vicluster-core', version: '0.8.13'
+	
+	
 	
 	compile('org.springframework.boot:spring-boot-starter-web','org.apache.tomcat.embed:tomcat-embed-jasper', 'org.springframework.boot:spring-boot-starter-tomcat')
     compile('org.springframework.boot:spring-boot-devtools')    
