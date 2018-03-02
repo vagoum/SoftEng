@@ -1,13 +1,12 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import gr.ece.ntua.bitsTeam.jsonClasses.EmailActionWrapper;
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.User;
 import gr.ece.ntua.bitsTeam.model.jparepos.UserRepository;
@@ -19,8 +18,11 @@ public class AdminControllerRest {
 	private UserRepository<User> userRepository;
 
 	@RequestMapping(value = "/admin/manageUsers", method = RequestMethod.POST)
-	public Integer manageUsers(@RequestParam("action") String action, @RequestParam("email") String email)
+	public Integer manageUsers(@RequestBody EmailActionWrapper demo)
 			throws Exception {
+
+		String action = demo.getAction();
+		String email = demo.getEmail();
 
 		System.out.println(action);
 		System.out.println(email);

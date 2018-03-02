@@ -28,8 +28,7 @@
 <link rel="stylesheet" href="./css/index_carousel.css">
 <link rel="stylesheet" href="./css/activity_view.css">
 <link rel="stylesheet" href="./css/index_footer.css">
-
-<link rel="stylesheet" href="./css/adventures_list.css">
+<link rel="stylesheet" href="./css/organizer_manage.css">
 
 <title>Little Explorers</title>
 </head>
@@ -221,7 +220,7 @@
 				<div class="list-group">
 					<c:forEach var="activity" items="${scheduledBookings}">
 
-						<a href="/activity_view/id=${activity.activityId }" class="list-group-item">
+						<div class="list-group-item">
 							<div class="media col-md-3">
 								<figure class="pull-left">
 									<img
@@ -236,11 +235,9 @@
 									${activity.activityDescription}</p>
 							</div>
 							<div class="col-md-3 text-center">
-								<form>
-    							<button type="submit" class="btn btn-success btn-lg btn-block book-btn">Link</button>
-							</form>
+								<a href="activity_view?id=${activity.activityId}" type="button" class="btn btn-success btn-lg btn-block book-btn">View</a>
 							</div>
-						</a>
+						</div>
 					</c:forEach>
 				</div>
 			</div>
@@ -254,7 +251,7 @@
 
 					<c:forEach var="activity" items="${completedBookings}">
 
-						<a href="/activity_view?id=${activity.activityId }" class="list-group-item">
+						<div class="list-group-item">
 							<div class="media col-md-3">
 								<figure class="pull-left">
 									<img
@@ -269,11 +266,9 @@
 									${activity.activityDescription}</p>
 							</div>
 							<div class="col-md-3 text-center">
-							
-    							<button type="submit" class="btn btn-success btn-lg btn-block book-btn">View</button>
-							
+							    <a href="/activity_view?id=${activity.activityId}" type="button" class="btn btn-success btn-lg btn-block book-btn">View</a>
 							</div>
-						</a>
+						</div>
 					</c:forEach>
 
 				</div>

@@ -14,11 +14,11 @@
   	margin-top: 20%;
 }
 
-a.list-group-item {
+div .list-group-item {
     height:auto;
     min-height:220px;
 }
-a.list-group-item.active small {
+div .list-group-item.active small {
     color:#fff;
 }
 .stars {

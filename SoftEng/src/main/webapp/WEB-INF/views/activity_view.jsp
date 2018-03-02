@@ -194,7 +194,6 @@
 					<h4 class="my-3" style="padding-top: 20px;">Activity Details</h4>
 					<hr>
 					<ul id="activity-details-list">
-						<li>Lorem Ipsum</li>
 						<li>${activity.category}</li>
 					</ul>
 					<br>
@@ -218,8 +217,7 @@
 			</div>
 
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<div
-					class="col-xl-8 col-lg-9 col-md-10 col-sm-10 col-xs-12 col-xl-offset-3 col-lg-offset-3 col-md-offset-1 col-sm-offset-1">
+				<div class="col-xl-8 col-lg-9 col-md-10 col-sm-10 col-xs-12 col-xl-offset-3 col-lg-offset-3 col-md-offset-1 col-sm-offset-1">
 
 					<div class="row">
 						<div class="carousel slide main-carousel" id="main-carousel">
@@ -273,9 +271,8 @@
 								</div>
 
 							<!-- Thumbnail Carousel nav -->
-							<a class="left carousel-control" href="#thumbnail-carousel"
-								data-slide="prev">‹</a> <a class="right carousel-control"
-								href="#thumbnail-carousel" data-slide="next">›</a>
+							<a class="left carousel-control" href="#thumbnail-carousel" data-slide="prev"><</a> 
+							<a class="right carousel-control" href="#thumbnail-carousel" data-slide="next">></a>
 
 						</div>
 					</div>
@@ -285,9 +282,7 @@
 
 		<div class="row event-address-date">
 			<h4>Event Date & Address</h4>
-			<div
-				class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-xs-12 well pull-right-lg"
-				style="border: 0px solid">
+			<div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 col-xs-12 well pull-right-lg" style="border: 0px solid">
 				<div class="calendar-wrapper">
 					<div id="calendar" data-year="${year}" data-month="${month}"
 						data-day="${day}"></div>
@@ -296,19 +291,16 @@
 				<h4>Time: ${activity.time}</h4>
 			</div>
 
-			<div
-				class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-xs-12 col-xl-offset-2">
+			<div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-xs-12 col-xl-offset-2">
 				<address class="event-address">
-					<h3>Snail mail</h3>
-					<strong>Hythe Window Cleaning</strong><br> ${location.address}<br>
-					Hythe<br> Kent<br> United Kingdon<br> CT21 5SH<br>
-					<abbr title="Phone">P:</abbr> 01234 567 890
+					<h3>Address</h3><br><br>
+					<strong>${location.address}</strong><br><abbr title="Email">e:</abbr> ${organizer.email }<br>
+					<abbr title="Phone">P:</abbr> ${organizer.phone }
 				</address>
 			</div>
 
 			<div class="col-xl-8 col-lg-6 col-md-6 col-sm-5 col-xs-12">
-				<iframe width="100%" height="250" frameborder="0" scrolling="no"
-					marginheight="0" marginwidth="0"
+				<iframe width="100%" height="250" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
 					src="https://maps.google.com/maps?q=${location.latitude},${location.longtitude}&hl=es;z=14&output=embed"
 					style="padding-left: 0px;"></iframe>
 			</div>
@@ -323,10 +315,7 @@
 					</div>
 					<hr>
 					<div class="card-body" id="organizer-details-text">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Omnis et enim aperiam inventore, similique necessitatibus neque
-							non! Doloribus, modi sapiente laboriosam aperiam fugiat laborum.
-							Sequi mollitia, necessitatibus quae sint natus.</p>
+						<p>${organizer.companyDetails }</p>
 					</div>
 				</div>
 			</div>

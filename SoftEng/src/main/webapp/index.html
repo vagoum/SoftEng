@@ -18,17 +18,24 @@
 
 	<!-- CSS files -->
 	<link  rel="stylesheet" href="./css/index_carousel.css">
-	<link  rel="stylesheet" href="./css/registration_panel.css">
+	<link  rel="stylesheet" href="./css/index_search.css">
+	<link  rel="stylesheet" href="./css/index_album.css">
 	<link  rel="stylesheet" href="./css/index_footer.css">
-	<title>Little Explorers</title>
+	<link  rel="stylesheet" href="./css/index_map.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css">
 
 	<!-- js files -->
-	<script type="text/javascript" src="./js/registration-controller.js"></script>
+	<script type="text/javascript" src="./js/index-controller.js"></script>
+	<script type="text/javascript" src="./js/index-sliders.js"></script>
+	<script type="text/javascript" src="./js/index-map.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJOMB6wHxG1D4Y1ZCl3TXlH0NptQ8PWk&libraries=places"></script>
 
+	<title>Little Explorers</title>
 </head>
 
 <body>
+
 	<!-- Carousel -->
 	<div class="container">
 		<div class="row">
@@ -43,6 +50,13 @@
 				<!-- Wrapper for slides -->
 				<div class="carousel-inner">
 
+					<div class="item active">
+						<img class="first-slide" src="https://www.w3schools.com/w3images/workbench.jpg" alt="First slide" style="width:100%;">
+						<div class="carousel-caption">
+							<h3>Little Explorers</h3>      
+							<p>Adventures For Our Little Friends</p>
+						</div>
+					</div>
 
 					<div class="item">
 						<img class="second-slide" src="https://www.w3schools.com/w3images/workbench.jpg" alt="Second slide" style="width:100%;">
@@ -119,17 +133,17 @@
 								<li>
 									<div class="row">
 										<div class="col-md-12">
-											<form class="form" role="form" method="post" action="users/login.jsp" accept-charset="UTF-8" id="login-nav">
+											<form class="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
 												<div class="form-group">
 													<label class="sr-only" for="exampleInputEmail2">Welcome Back!</label>
 												</div>
 												<div class="form-group">
 													<label class="sr-only" for="exampleInputEmail2">Email address</label>
-													<input type="email" class="form-control" name="email"placeholder="Email address" required>
+													<input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email address" required>
 												</div>
 												<div class="form-group">
 													<label class="sr-only" for="exampleInputPassword2">Password</label>
-													<input type="password" class="form-control"placeholder="Password" required name="password">
+													<input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" required>
 												</div>
 												<div class="form-group">
 													<button type="submit" class="btn btn-success btn-block">Sign in</button>
@@ -154,132 +168,140 @@
 
 	<!-- Content -->
 	<div class="container side-bordering">
-		<!-- Sign-In or Register -->
+
+		<div class="row ">
+			<div id="search_title" class="text-center">
+				<p class="h3">Explore Adventures for our little friends near you</p>
+			</div>
+		</div>
+
+		<!-- Search -->
 		<div class="row">
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xl-offset-3 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
-				<div class="panel panel-login">
-					<div class="panel-heading">
-						<div class="row">
-							<div class="col-xs-6">
-								<a href="#" class="active" id="parent-registration-form-link">For Parents</a>
-							</div>
-							<div class="col-xs-6">
-								<a href="#" id="organizer-registration-form-link">For Activity Organizers</a>
-							</div>
-						</div>
-						<hr>
+				<div id="search-box"> 
+					<form id="search-form" method="post">
+						<fieldset>
+							<input id='search-text' name='q' placeholder='Search' type='text'/>
+							<button id='search-button' type='button'>                     
+								<span>Search</span>
+							</button>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+
+			<div id="search_criteria" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xl-offset-3 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+
+				<div class="slider_container row">
+					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4" style="margin-left: -15px;">
+						<label for="proximity_slider" class="slider_label">Proximity:</label>
 					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-lg-12">
+					<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
+						<input class="slider_range" id="proximity_slider" type="range" value="0" min="0" max="100" name="proximity_slider">
+						<output for="proximity_slider" onforminput="value=proximity_slider.valueAsNumber;"></output>
+					</div>
+				</div>
 
-								<!--Registration Form For Parents -->
-								<form id="parent-registration-form" action="users/parents/registration.jsp" method="post" role="form" style="display: block;">
-									<div class="col-sm-12">
-										<div class="row">
-											<div class="col-sm-6 form-group">
-												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control" name="parent-first_name">
-											</div>
-											<div class="col-sm-6 form-group">
-												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control" name="parent-last_name">
-											</div>
-										</div>					
-										<div class="form-group">
-											<label>Address</label>
-											<input type="text" placeholder="Enter your Address" class="form-control pac-input" name="parent-address">
-										</div>
-										<div class="map"></div>				
-										<div class="form-group">
-											<label>Phone Number</label>
-											<input type="number" placeholder="Enter your Phone Number" class="form-control" name="parent-phone">
-										</div>		
-										<div class="form-group">
-											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address" class="form-control" name="parent-email">
-										</div>	
-										<div class="form-group">
-											<label>Password</label>
-											<input type="password" placeholder="Enter your Password" class="form-control" name="parent-password"/>
-										</div>	
-										<div class="form-group">
-											<label>Password Again</label>
-											<input  type="password" placeholder="Enter your Password Again" class="form-control" name="parentpasswordConfirm"/>
-										</div>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-sm-6 col-sm-offset-3">
-													<button id="register-parent_btn" tabindex="4" class="form-control btn btn-register">Register Now</button>
-												</div>
-											</div>
-										</div>
-														
-									</div>
-								</form>
+				<div class="slider_container row">
+					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4" style="margin-left: -15px;">
+						<label for="age_slider" class="slider_label">Age:</label>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
+						<input class="slider_range" id="age_slider-min" type="range" value="0" min="0" max="12" name="age_slider-min">
+						<output for="age_slider-min" onforminput="value=age_slider-min.valueAsNumber;"></output>
 
-								<!--Registration Form For Activity Organizers -->
-								<form id="organizer-registration-form" action="users/organizers/registration.jsp" method="post" role="form" style="display: none;">
-									<div class="col-sm-12">
+						<input class="slider_range slider_double" id="age_slider-max" type="range" value="12" min="0" max="12" name="age_slider-max">
+						<output for="age_slider-max" onforminput="value=age_slider-max.valueAsNumber;"></output>
+					</div>
+				</div>
 
-										<div class="row">
-											<div class="col-sm-6 form-group">
-												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control" name="organizer-first_name">
-											</div>
-											<div class="col-sm-6 form-group">
-												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control" name="organizer-last_name">
-											</div>
-										</div>		
-										<div class="form-group">
-											<label>Company Name</label>
-											<input type="text" placeholder="Enter your Company Name" class="form-control" name="company_name">
-										</div>
-										<div class="form-group">
-											<label>Company Details</label>
-											<textarea placeholder="Please specify details about your organization" rows="3" class="form-control" name="company_details" style="resize: none;"></textarea>
-										</div>
-										<div class="form-group">
-											<label>Address</label>
-											<input type="text" placeholder="Enter your Address" class="form-control pac-input" name="organizer-address">
-										</div>
+				<div class="slider_container row">
+					<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4" style="margin-left: -15px;">
+						<label for="cost_slider" class="slider_label">Cost:</label>
+					</div>
+					<div class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
+						<input class="slider_range" id="cost_slider-min" type="range" value="0" min="0" max="100" name="cost_slider-min">
+						<output for="cost_slider-min" onforminput="value=cost_slider-min.valueAsNumber;"></output>
 
-										<div class="map"></div>
-
-										<div class="form-group">
-											<label>Phone Number</label>
-											<input type="number" placeholder="Enter your Phone Number" class="form-control" name="organizer-phone">
-										</div>		
-										<div class="form-group">
-											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address" class="form-control" name="organizer-email">
-										</div>	
-										<div class="form-group">
-											<label>Password</label>
-											<input type="password" placeholder="Enter your Password" class="form-control" name="organizer-password"/>
-										</div>	
-										<div class="form-group">
-											<label>Password Again</label>
-											<input  type="password" placeholder="Enter your Password Again" class="form-control" name="organizer-passwordConfirm"/>
-										</div>
-										<div class="form-group">
-											<div class="row">
-												<div class="col-sm-6 col-sm-offset-3">
-													<button name="register-submit" id="register-organizer_btn" tabindex="4" class="form-control btn btn-register">Register Now</button>
-												</div>
-											</div>
-										</div>
-														
-									</div>
-								</form>
-							</div>
-						</div>
+						<input class="slider_range slider_double" id="cost_slider-max" type="range" value="100" min="0" max="100" name="cost_slider-max">
+						<output for="cost_slider-max" onforminput="value=cost_slider-max.valueAsNumber;"></output>
 					</div>
 				</div>
 			</div>
 
+			<div id="search_criteria" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xl-offset-3 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+				<div class="row">
+					<div class="col-xl-6 col-lg-6 col-md-8 col-sm-10 col-xs-12">
+						Sort By:
+						<div id="sorting_tabs" class="btn-group"  data-toggle="buttons">
+							<label class="btn btn-outline-info active sorting_btn">
+						  		<input type="radio" name="options" id="Proximity" autocomplete="off" checked>Proximity
+						  	</label>
+						  	<label class="btn btn-outline-info sorting_btn">
+						    	<input type="radio" name="options" id="Age" autocomplete="off">Age
+						  	</label>
+						  	<label class="btn btn-outline-info sorting_btn">
+						    	<input type="radio" name="options" id="Cost" autocomplete="off">Cost
+						  	</label>
+						</div>
+					</div>
+
+					<div class="col-xl-1 col-lg-1 col-md-1 col-sm-2 col-xs-12 col-xl-offset-3 col-lg-offset-3 col-md-offset-1">
+						<div class="btn-group pull-left" id="categories_group">
+				          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				            Categories <span class="caret"></span>
+				          </button>
+				          <ul class="dropdown-menu" id="activity_categories-list" role="menu">
+
+				            <li class="activity_list-item">
+								<div class="pretty p-icon p-round p-smooth">
+							        <input type="checkbox"/>
+							        <div class="state p-success">
+							            <i class="icon glyphicon glyphicon-ok"></i>
+							            <label>Aquatics</label>
+							        </div>
+							    </div>
+				            </li>
+
+				            <li class="activity_list-item">
+								<div class="pretty p-icon p-round p-smooth">
+							        <input type="checkbox"/>
+							        <div class="state p-success">
+							            <i class="icon glyphicon glyphicon-ok"></i>
+							            <label>Camps</label>
+							        </div>
+							    </div>
+				            </li>
+
+				            <li class="activity_list-item">
+								<div class="pretty p-icon p-round p-smooth">
+							        <input type="checkbox"/>
+							        <div class="state p-success">
+							            <i class="icon glyphicon glyphicon-ok"></i>
+							            <label>Dance</label>
+							        </div>
+							    </div>
+				            </li>
+
+				          </ul>
+				        </div>
+					</div>
+
+				</div>
+			</div>
 		</div>
+
+		<!-- Activities -->
+		<div class="row">
+			<div class="activities">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="map">
+			</div>
+		</div>
+
 	</div>
 
 	<!-- Footer -->
@@ -332,6 +354,4 @@
 		</footer>
 		<!--/.footer --> 
 	</div>
-
 </body>
-</html>

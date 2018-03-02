@@ -22,56 +22,15 @@ import gr.ece.ntua.bitsTeam.service.UserService;
 @Controller
 public class UserController {
 
-	@Autowired
-	private UserService userService;
 
-	@Autowired
-	private SecurityService securityService;
-
-	@Autowired
-	private UserValidator userValidator;
 
 	
-	@RequestMapping(value = "/registration2", method = RequestMethod.GET)
+	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model) {
 		model.addAttribute("parentForm", new Parent());
 		model.addAttribute("organizerForm", new Organizer());
 
-		return "registration2";
-	}
-
-	
-	@RequestMapping(value = "/users/parents/registration", method = RequestMethod.POST)
-	public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult,
-			HttpServletRequest request, Model model) {
-		userValidator.validate(parent, bindingResult);
-
-		if (bindingResult.hasErrors()) {
-			return "registration";
-		}
-
-		userService.save(parent, "ROLE_PARENT");
-
-		securityService.autologin(parent.getEmail(), parent.getPassword());
-
-		return "redirect:/";
-	}
-
-	
-	@RequestMapping(value = "users/organizers/registration", method = RequestMethod.POST)
-	public String registrationOrganizer(@ModelAttribute("organizerForm") Organizer organizer,
-			BindingResult bindingResult, HttpServletRequest request, Model model) {
-		userValidator.validate(organizer, bindingResult);
-
-		if (bindingResult.hasErrors()) {
-			return "registration";
-		}
-
-		userService.save(organizer, "ROLE_ORGANIZER");
-
-		securityService.autologin(organizer.getEmail(), organizer.getPassword());
-
-		return "redirect:/";
+		return "registration";
 	}
 
 	

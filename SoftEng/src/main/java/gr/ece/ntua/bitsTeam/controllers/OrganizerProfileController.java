@@ -87,8 +87,11 @@ public class OrganizerProfileController {
 		activity4.setThumbNail(photo);
 		activity4.setOrganizer(organizer);
 
-		
-		
+		organizer.getActivities().add(activity4);
+		organizer.getActivities().add(activity3);
+		organizer.getActivities().add(activity2);
+		organizer.getActivities().add(activity1);
+	
 		organizerRepository.save(organizer);
 
 		activityRepository.save(activity1);

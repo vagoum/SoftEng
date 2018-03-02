@@ -4,17 +4,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.springframework.data.geo.Point;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name = "location_table")
 public class Location {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	
 	private String address;
 	
+	
 	private String city;
+	
 	
 	private String postalCode;
 	
@@ -26,6 +35,7 @@ public class Location {
 		return address;
 	}
 
+	@JsonIgnore
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -34,6 +44,7 @@ public class Location {
 		return city;
 	}
 
+	@JsonIgnore
 	public void setCity(String city) {
 		this.city = city;
 	}
@@ -41,7 +52,7 @@ public class Location {
 	public String getPostalCode() {
 		return postalCode;
 	}
-
+	@JsonIgnore
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
