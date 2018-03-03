@@ -56,9 +56,10 @@ $( document ).ready(function() {
 		contentType : "application/json",
 		url : "/admin/manageUsers",
 		data : JSON.stringify(data),
-		dataType : 'json',
+		dataType : 'text',
 		success : function(result) {
-			console.log(result)
+			console.log(result);
+			console.log(clickedId);
 			if(clickedId == "block_btn"){
 		          currentTableRow.children("#"+clickedId).addClass("disabled");
 		          console.log(currentTableRow.children("#"+clickedId).html());

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import gr.ece.ntua.bitsTeam.login.SecurityService;
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.service.UserService;
@@ -19,8 +20,13 @@ public class UserControllerRest {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/users/parent/registration1", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HttpStatus register(@RequestBody Parent parent)  {
+    
+	@Autowired
+	private SecurityService securityService;
+	
+	
+    @RequestMapping(value = "/parent_registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String  register(@RequestBody Parent parent)  {
     	
     	
     	System.out.println(parent);
@@ -29,19 +35,26 @@ public class UserControllerRest {
         if (userService.findByEmail(parent.getEmail()) != null) {
         }
 
+        
         userService.save(parent, "ROLE_PARENT");
         
-        return HttpStatus.OK;
+		securityService.autologin(parent.getEmail(), parent.getPassword());
+		
+        return "success";
+
     }
     
-    @RequestMapping(value = "/users/organizer/registration1", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public HttpStatus register(@RequestBody Organizer organizer)  {
+    @RequestMapping(value = "/organizer_registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String register(@RequestBody Organizer organizer)  {
 
         if (userService.findByEmail(organizer.getEmail()) != null) {
         }
 
         userService.save(organizer, "ROLE_ORGANIZER");
-        return HttpStatus.OK;
+        
+		securityService.autologin(organizer.getEmail(), organizer.getPassword());
+
+        return "success";
     }
     
     

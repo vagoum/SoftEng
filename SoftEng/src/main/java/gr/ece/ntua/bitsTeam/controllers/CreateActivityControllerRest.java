@@ -40,26 +40,29 @@ public class CreateActivityControllerRest {
 	private CloudinaryConfig cld;
     
     @RequestMapping(value = "/activity/create", method = RequestMethod.POST, consumes = {"multipart/form-data"})
-    public Long register(@RequestPart("activityData") Activity activity , @RequestParam ArrayList<MultipartFile> files)  {
+    public String register(@RequestPart("activityData") Activity activity , @RequestParam ArrayList<MultipartFile> files)  {
     	    	
     	System.out.println(activity);
     	System.out.println(files.size());
 
 		activity.setElapsed(false);
 		
+		boolean flag = true;
 		for (MultipartFile file : files) {
 			
 			Photo photo = uploadFile(file);
 			if (photo.getName() != null)  {
-				if (activity.getPhotos().size() == 0) {
+				if (flag) {
 					activity.setThumbNail(photo);
+					flag = !flag;
 				}
-				activity.getPhotos().add(photo);
+				else
+					activity.getPhotos().add(photo);
 			}
 		}
 		activityRepository.save(activity);
 
-        return activity.getActivityId();
+        return activity.getActivityId().toString();
     }
     
     @Async

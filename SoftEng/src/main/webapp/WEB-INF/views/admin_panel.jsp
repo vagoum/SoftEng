@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
+	
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -7,8 +8,8 @@
 <html lang="en">
 
 
+
 <head>
-<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="description" content="">
 <meta name="author" content="">
@@ -128,7 +129,7 @@
 												<tr>
 												<td id="user_first-name">${user.firstName}</td>
 												<td id="user_last-name">${user.lastName}</td>
-												<td id="user_address">${user.location}</td>
+												<td id="user_address">${user.location.address}</td>
 												<td id="user_email">${user.email}</td>
 												<td>
 													<!-- Block Button -->

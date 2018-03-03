@@ -18,7 +18,7 @@ public class AdminControllerRest {
 	private UserRepository<User> userRepository;
 
 	@RequestMapping(value = "/admin/manageUsers", method = RequestMethod.POST)
-	public Integer manageUsers(@RequestBody EmailActionWrapper demo)
+	public String manageUsers(@RequestBody EmailActionWrapper demo)
 			throws Exception {
 
 		String action = demo.getAction();
@@ -50,7 +50,7 @@ public class AdminControllerRest {
 				break;
 			}
 
-		return 200;
+		return "success";
 	}
 
 }

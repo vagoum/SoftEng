@@ -118,22 +118,26 @@ $(document).ready(function() {
 		e.preventDefault();
 		userData.firstName = $("input[name=parent-first_name]").val();
 		userData.lastName = $("input[name=parent-last_name]").val();
-		userData.address = $("input[name=parent-address]").val();
+		userData.location.address = $("input[name=parent-address]").val();
 		userData.phone = $("input[name=parent-phone]").val();
 		userData.email = $("input[name=parent-email]").val();
 		userData.password = $("input[name=parent-password]").val();
 
+		console.log(JSON.stringify(userData));
+		
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "/users/parent/registration",
+			url : "/parent_registration",
 			data : JSON.stringify(userData),
-			dataType : 'json',
+			dataType : 'text',
 			success : function(result) {
-  				window.location.href = "/index";
 				console.log(result);
+
+  				window.location.href = "/index";
 			},
 			error : function(e) {
+				console.log(e);
 				alert("Error!")
 				console.log("ERROR: ", e);
 			}
@@ -147,7 +151,7 @@ $(document).ready(function() {
 		userData.lastName = $("input[name=organizer-last_name]").val();
 		userData.companyName = $("input[name=company_name]").val();
 		userData.companyDetails = $("textarea[name=company_details]").val();
-		userDataaddress = $("input[name=organizer-address]").val();
+		userData.location.address = $("input[name=organizer-address]").val();
 		userData.phone = $("input[name=organizer-phone]").val();
 		userData.email = $("input[name=organizer-email]").val();
 		userData.password = $("input[name=organizer-password]").val();
@@ -156,14 +160,14 @@ $(document).ready(function() {
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "/users/organizer/registration",
+			url : "/organizer_registration",
 			data : JSON.stringify(userData),
-			dataType : 'json',
+			dataType : 'text',
 			success : function(result) {
   				window.location.href = "/index";
-				console.log(result);
 			},
 			error : function(e) {
+				console.log(e);
 				alert("Error!")
 				console.log("ERROR: ", e);
 			}

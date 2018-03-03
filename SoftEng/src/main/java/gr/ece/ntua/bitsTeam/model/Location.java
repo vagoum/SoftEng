@@ -21,7 +21,6 @@ public class Location {
 	
 	private String address;
 	
-	
 	private String city;
 	
 	
@@ -35,16 +34,17 @@ public class Location {
 		return address;
 	}
 
-	@JsonIgnore
+	
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
+	@JsonIgnore
 	public String getCity() {
 		return city;
 	}
 
-	@JsonIgnore
+	
 	public void setCity(String city) {
 		this.city = city;
 	}

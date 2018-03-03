@@ -3,6 +3,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="ISO-8859-1"%>
+	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -184,7 +187,7 @@
 				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="col-6 form-group">
 						<label><h4 class="my-4" id="activity-details-title">Activity Title</h4></label>
-						<input type="text" class="form-control" id="activity-form-title" name="activity_title" placeholder="Enter the activity name" required>
+						<input type="text" class="form-control" id="activity-form-title" name="activity_title" placeholder="Enter the activity name" required onkeypress="if (event.keyCode ==13) {return false;}">
 					</div>
 
 					<div class="form-group" style="padding-top: 10px;">
@@ -195,12 +198,12 @@
 					<div class="form-group" style="padding-top: 10px; margin-left: -10px; margin-right: -10px;">
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Number of Tickets</h4></label>
-							<input type="number" class="form-control" id="activity-form-ticket_number" name="ticket_number" placeholder="20" required>
+							<input type="number" class="form-control" id="activity-form-ticket_number" name="ticket_number" placeholder="20" required onkeypress="if (event.keyCode ==13) {return false;}">
 						</div> 
 
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Ticket Price</h4></label>
-							<input type="number" class="form-control" id="activity-form-ticket_price" name="ticket_price" placeholder="8" required>
+							<input type="number" class="form-control" id="activity-form-ticket_price" name="ticket_price" placeholder="8" required onkeypress="if (event.keyCode ==13) {return false;}">
 						</div>
 
 						<div class="col-sm-4">
@@ -252,7 +255,7 @@
 						<div class="controls">
 							<div class="entry input-group col-xs-3" style="padding-bottom: 7px;">
 
-								<input class="btn btn-primary" name="photo_file" type="file"/>
+								<input class="btn btn-primary" name="photo_file" type="file" onkeypress="if (event.keyCode ==13) {return false;}"/>
 								<span class="input-group-btn">
 									<button class="btn btn-success btn-add" type="button">
 										<span class="glyphicon glyphicon-plus"></span>
@@ -266,7 +269,7 @@
 						<label><h4 class="my-4" id="activity-date-title">Select Date & Time</h4></label>
 						<div class="form-group">
 				            <div class='input-group date' id='datetimepicker'>
-				                <input type='text' class="form-control" id="activity-form-date" name="date" required>
+				                <input type='text' class="form-control" id="activity-form-date" name="date" required onkeypress="if (event.keyCode ==13) {return false;}">
 				                <span class="input-group-addon">
 				                    <span class="glyphicon glyphicon-calendar">
 				                    </span>
@@ -277,7 +280,7 @@
 
 					<div class="form-group" style="width: 50%">
 						<label><h4 class="my-4" id="activity-address-title">Select Place</h4></label>
-						<input type="text" class="form-control pac-input" id="activity-form-address" name="address" placeholder="Enter the event address" required>
+						<input type="text" class="form-control pac-input" id="activity-form-address" name="address" placeholder="Enter the event address" required onkeypress="if (event.keyCode ==13) {return false;}">
 					</div>
 					<div class="map"></div>	
 

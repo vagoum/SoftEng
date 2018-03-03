@@ -148,7 +148,7 @@ $(document).ready(function(){
     $("#activity-form-submit").click(function(e){
         e.preventDefault();
         if(activityData.category == "") alert("Please specify a valid category for you activity");
-
+        else {
         activityData.name = $("#activity-form-title").val();
         activityData.activityDescription = $("#activity-form-description").val();
         activityData.ticketNumber = $("#activity-form-ticket_number").val();
@@ -196,6 +196,7 @@ $(document).ready(function(){
 				console.log("ERROR: ", e);
 			}
 		});
+        }
        });
 
 });
