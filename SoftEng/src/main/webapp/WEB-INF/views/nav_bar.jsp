@@ -6,8 +6,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -42,7 +40,7 @@
 	
 		<!-- Generic Navbar -->
 		
-	<!-- <sec:authorize access="!hasRole('ROLE_ORGANIZER') and !hasRole('ROLE_PARENT')"> -->
+	<sec:authorize access="!hasRole('ROLE_ORGANIZER') and !hasRole('ROLE_PARENT')">
 		<div class="container side-bordering">
 
 			<div class="row ">
@@ -114,9 +112,7 @@
 													<input type="password" class="form-control"
 														placeholder="Password" required name="password">
 												</div>
-
-												<input type="hidden" name="${_csrf.parameterName}"
-													value="${_csrf.token}" />
+												<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 												<div class="form-group">
 													<button type="submit" class="btn btn-success btn-block">Sign
 														in</button>
@@ -132,7 +128,7 @@
 				</nav>
 			</div>
 		</div>
-	<!-- </sec:authorize> -->
+	</sec:authorize>
 	
 	
 	<!-- Parent Navbar -->

@@ -10,5 +10,6 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="spring-security-taglibs-4.2.1.RELEASE.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

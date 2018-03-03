@@ -59,7 +59,7 @@ public class ParentProfileController {
 		parent.setLastName("Chantzos");
 		parent.setPhone("6940200292");
 		parent.setResetPassword(false);
-		parent.setPointBalance(200);
+		parent.setBalance(200);
 		
 		parentRepository.save(parent);
 

@@ -19,7 +19,7 @@ public class UserControllerRest {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/users/parent/registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/users/parent/registration1", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpStatus register(@RequestBody Parent parent)  {
     	
     	
@@ -34,7 +34,7 @@ public class UserControllerRest {
         return HttpStatus.OK;
     }
     
-    @RequestMapping(value = "/users/organizer/registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/users/organizer/registration1", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpStatus register(@RequestBody Organizer organizer)  {
 
         if (userService.findByEmail(organizer.getEmail()) != null) {

@@ -22,9 +22,9 @@ public class Parent extends User {
 	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
 	private List<Booking> bookings = new ArrayList<>();
 	
-	private Integer pointBalance;
+	// private Integer pointBalance ;
 	
-	private Integer balance;
+	private Integer balance = 0;
 	
 	public Integer getBalance() {
 		return balance;
@@ -53,14 +53,6 @@ public class Parent extends User {
 	@Override
 	public String toString() {
 		return "Parent [location=" + location + ", bookings=" + bookings + "]";
-	}
-
-	public Integer getPointBalance() {
-		return pointBalance;
-	}
-
-	public void setPointBalance(Integer pointBalance) {
-		this.pointBalance = pointBalance;
 	}
 
 }

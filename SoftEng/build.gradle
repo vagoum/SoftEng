@@ -34,8 +34,6 @@ dependencies {
 
 	compile 'com.github.andrewchantzos:binary_dependency_softeng:1f36ed380f'
 
-	compile group: 'org.springframework.security', name: 'spring-security-taglibs', version: '3.0.5.RELEASE'
-
 
 // https://mvnrepository.com/artifact/org.hibernate/hibernate-spatial
 	compile group: 'org.hibernate', name: 'hibernate-spatial', version: '5.0.3.Final'
