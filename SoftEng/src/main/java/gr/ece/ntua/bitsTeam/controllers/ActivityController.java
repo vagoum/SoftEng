@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -101,6 +102,12 @@ public class ActivityController {
 		model.addAttribute("photos", activity.getPhotos());
 		model.addAttribute("organizer", activity.getOrganizer());
 		return "activity_view";
+	}
+	
+	@PostMapping("/book_activity")
+	public String bookActivity(@RequestParam(value = "activityId", required = true) Long activityId, Model model, HttpServletRequest request) throws IOException {
+		
+		return "index";
 	}
 	
 	@GetMapping("/activity_create")

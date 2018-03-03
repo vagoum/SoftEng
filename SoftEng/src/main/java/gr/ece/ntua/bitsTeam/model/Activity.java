@@ -19,6 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Activity {
@@ -53,7 +54,7 @@ public class Activity {
 	// @Future(message = "Activity day must be in the future.")
 	private Date date;
 
-	@JsonIgnore
+	
 	private String time;
 	
 	private String ageRange;
@@ -92,20 +93,22 @@ public class Activity {
 		this.activityDescription = activityDescription;
 	}
 
+	
 	public Integer getCost() {
 		return cost;
 	}
 
-	@JsonIgnore
+	
 	public void setCost(Integer cost) {
 		this.cost = cost;
 	}
 
+	@JsonIgnore
 	public Integer getTicketNumber() {
 		return ticketNumber;
 	}
 
-	@JsonIgnore
+	@JsonProperty
 	public void setTicketNumber(Integer ticketNumber) {
 		this.ticketNumber = ticketNumber;
 	}
@@ -195,7 +198,6 @@ public class Activity {
 		return time;
 	}
 
-	@JsonIgnore
 	public void setTime(String time) {
 		this.time = time;
 	}

@@ -116,7 +116,6 @@ public class OrganizerProfileController {
 		
         model.addAttribute("organizer", organizer);
 
-		List<Activity> activities = organizer.getActivities();
         Date date = new Date();
 		List<Activity> scheduledActivities = new ArrayList<>();
 		List<Activity> completedActivities  = new ArrayList<>();

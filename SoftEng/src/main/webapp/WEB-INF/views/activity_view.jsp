@@ -202,7 +202,7 @@
 						<h4 class="x-price" id="activity-details-price">Price per
 							Ticket: ${activity.cost} Activity Points</h4>
 
-						<form action="/activities/book.jsp" method="post"
+						<form action="" method="post"
 							id="booking_form">
 							<label for="proirty">Number of Tickets:</label> <input
 								type="number" class="form-control" id="activity-details-tickets"

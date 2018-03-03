@@ -4,8 +4,9 @@ $(document).ready(function(){
         name:"",
         activityDescription:"",
         ticketNumber:"",
-        cost:"",
+        cost: "",
         date:"",
+        time:"",
         category:"",
         location : {
 			address :"",
@@ -153,15 +154,16 @@ $(document).ready(function(){
         activityData.ticketNumber = $("#activity-form-ticket_number").val();
         activityData.cost = $("#activity-form-ticket_price").val();
         activityData.location.address = $("#activity-form-address").val();
-        
+        console.log(activityData.cost)
         var timeAndDate = $("#activity-form-date").val().split(" ");
         activityData.date = timeAndDate[0];
         activityData.time = timeAndDate[1]+" "+timeAndDate[2];
-
+        console.log(activityData.time);
         
         var form = $('#activity-form')[0];
         var d = new FormData(form);
 
+        console.log(JSON.stringify(activityData));
 
         var formData = new FormData();
         
@@ -187,7 +189,7 @@ $(document).ready(function(){
 			data : formData,
 			success : function(result) {
 				console.log(result);
-  				//window.location.href = "/index";
+  				//window.location.href = "/activity_view?id=" + result;
 			},
 			error : function(data) {
 				alert("Error!")
