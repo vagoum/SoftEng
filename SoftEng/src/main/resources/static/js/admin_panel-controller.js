@@ -11,15 +11,26 @@ $( document ).ready(function() {
   	};
 
   	//Check which button was clicked
+  	
   	if(clickedId == "block_btn"){
   		data.action = "block";
-  	}else if(clickedId == "delete_btn"){
-  		data.action = "delete";
-  	}else if(clickedId == "verify_btn"){
-  		data.action = "verify";
-  	}else if(clickedId == "reset_btn"){
-  		data.action = "reset";
-  	}
+
+	      if ($(this).find('span').hasClass("glyphicon glyphicon-lock")){
+	        $(this).find('span').removeClass("glyphicon glyphicon-lock");
+	        $(this).find('span').addClass("glyphicon glyphicon-trash");
+	      }
+	      else {
+	        $(this).find('span').removeClass("glyphicon glyphicon-trash");
+	        $(this).find('span').addClass("glyphicon glyphicon-lock");
+	      }
+	  	}else if(clickedId == "delete_btn"){
+	  		data.action = "delete";
+	  	}else if(clickedId == "verify_btn"){
+	  		data.action = "verify";
+	         $(this).hide();
+	  	}else if(clickedId == "reset_btn"){
+	  		data.action = "reset";
+	  	}
   	
     //currentTableRow.children("#user_first-name").val();
     console.log(currentTableRow.children("#user_first-name").html());
@@ -60,19 +71,9 @@ $( document ).ready(function() {
 		success : function(result) {
 			console.log(result);
 			console.log(clickedId);
-			if(clickedId == "block_btn"){
-		          currentTableRow.children("#"+clickedId).addClass("disabled");
-		          console.log(currentTableRow.children("#"+clickedId).html());
-		          $(this).addClass("disabled");
-		        }else if(clickedId == "delete_btn"){
-		          currentTableRow.remove();
-		          //delete the current row, with animation
-		          //currentTableRow.hide('slow', function(){ currentTableRow.remove(); });
-		        }else if(clickedId == "verify_btn"){
-		         $(this).addClass("disabled");
-		          currentTableRow.children("#"+clickedId).addClass("disabled");
-		        }else if(clickedId == "reset_btn"){
-		        }
+		  	if (clickedId == "delete_btn") {
+		        currentTableRow.remove();
+		  	}
 		},
 		error : function(e) {
 			alert("Error!")

@@ -31,7 +31,7 @@ public class AdminControllerRest {
 		if (user != null)
 			switch (action) {
 			case "block":
-				user.setBlocked(true);
+				user.setBlocked(!user.getBlocked());
 				userRepository.save(user);
 				break;
 			case "reset":
