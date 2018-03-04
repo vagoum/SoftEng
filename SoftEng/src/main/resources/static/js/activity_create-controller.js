@@ -189,7 +189,7 @@ $(document).ready(function(){
 			data : formData,
 			success : function(result) {
 				console.log(result);
-  				//window.location.href = "/activity_view?id=" + result;
+  				// window.location.href = "/activity_view?id=" + result;
 			},
 			error : function(data) {
 				alert("Error!")

@@ -6,6 +6,7 @@ $(document).ready(function() {
 			phone : "",
 			email : "",
 			password : "",
+			passwordConfirm: "",
 			location : {
 				address :"",
 				latitude : "",
@@ -122,6 +123,7 @@ $(document).ready(function() {
 		userData.phone = $("input[name=parent-phone]").val();
 		userData.email = $("input[name=parent-email]").val();
 		userData.password = $("input[name=parent-password]").val();
+		userData.passwordConfirm = $("input[name=parentpasswordConfirm]").val();
 
 		console.log(JSON.stringify(userData));
 		
@@ -155,7 +157,10 @@ $(document).ready(function() {
 		userData.phone = $("input[name=organizer-phone]").val();
 		userData.email = $("input[name=organizer-email]").val();
 		userData.password = $("input[name=organizer-password]").val();
+		userData.passwordConfirm = $("input[name=organizer-passwordConfirm]").val();
 
+		
+		console.log(JSON.stringify(userData));
 
 		$.ajax({
 			type : "POST",

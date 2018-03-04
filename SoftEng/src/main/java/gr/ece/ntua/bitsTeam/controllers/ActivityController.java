@@ -74,7 +74,6 @@ public class ActivityController {
 	}
 	
 	
-	private Boolean flag = true;
 	@RequestMapping("/activity_view")
 	public String viewActivity(@RequestParam(value = "id", required = true) Long activityId, Model model,
 			HttpServletRequest request) throws IOException {
@@ -83,6 +82,7 @@ public class ActivityController {
 		
 		
 		Activity activity = activityRepository.findOne(activityId);
+
 		
 		Date date = activity.getDate();
 		Calendar cal = Calendar.getInstance();

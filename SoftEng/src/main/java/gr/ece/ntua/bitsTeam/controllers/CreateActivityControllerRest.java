@@ -11,8 +11,9 @@ import java.util.Map;
 import javax.imageio.ImageIO;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,8 +27,10 @@ import com.cloudinary.utils.ObjectUtils;
 import gr.ece.ntua.bitsTeam.cloudinary.CloudinaryConfig;
 import gr.ece.ntua.bitsTeam.cloudinary.Watermark;
 import gr.ece.ntua.bitsTeam.model.Activity;
+import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
+import gr.ece.ntua.bitsTeam.model.jparepos.OrganizerRepository;
 
 
 @RestController
@@ -39,6 +42,10 @@ public class CreateActivityControllerRest {
 	@Autowired
 	private CloudinaryConfig cld;
     
+	@Autowired
+	private OrganizerRepository organizerRepository;
+	
+	
     @RequestMapping(value = "/activity/create", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public String register(@RequestPart("activityData") Activity activity , @RequestParam ArrayList<MultipartFile> files)  {
     	    	
@@ -46,6 +53,13 @@ public class CreateActivityControllerRest {
     	System.out.println(files.size());
 
 		activity.setElapsed(false);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		String email = auth.getName();
+		
+		// Long organizerId = (Long) request.getSession().getAttribute("parentId_");
+		Organizer organizer = organizerRepository.findByEmail(email);
 		
 		boolean flag = true;
 		for (MultipartFile file : files) {
@@ -60,6 +74,8 @@ public class CreateActivityControllerRest {
 					activity.getPhotos().add(photo);
 			}
 		}
+		
+		activity.setOrganizer(organizer);
 		activityRepository.save(activity);
 
         return activity.getActivityId().toString();

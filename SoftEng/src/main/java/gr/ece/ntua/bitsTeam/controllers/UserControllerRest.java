@@ -38,8 +38,8 @@ public class UserControllerRest {
         
         userService.save(parent, "ROLE_PARENT");
         
-		securityService.autologin(parent.getEmail(), parent.getPassword());
-		
+		securityService.autologin(parent.getEmail(), parent.getPasswordConfirm());
+
         return "success";
 
     }
@@ -52,7 +52,7 @@ public class UserControllerRest {
 
         userService.save(organizer, "ROLE_ORGANIZER");
         
-		securityService.autologin(organizer.getEmail(), organizer.getPassword());
+		securityService.autologin(organizer.getEmail(), organizer.getPasswordConfirm());
 
         return "success";
     }

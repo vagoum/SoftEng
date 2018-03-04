@@ -9,6 +9,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import gr.ece.ntua.bitsTeam.model.Activity;
 import gr.ece.ntua.bitsTeam.model.Booking;
 import gr.ece.ntua.bitsTeam.model.Location;
+import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
@@ -134,13 +137,12 @@ public class ParentProfileController {
 	@RequestMapping()
 	public String account(HttpServletRequest request, Model model) {
 		// set test objects
-		if (flag) {
-			flag = false;
-			createTestParent();
-		}
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		
-		// Long parentId = (Long) request.getSession().getAttribute("parentId_");
-		Parent parent = parentRepository.findOne((long) 1);
+		String email = auth.getName();
+		
+		// Long organizerId = (Long) request.getSession().getAttribute("parentId_");
+		Parent parent = parentRepository.findByEmail(email);
 		
         model.addAttribute("parent", parent);
 
