@@ -4,6 +4,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -106,19 +107,21 @@
 										<th>Last Name</th>
 										<th>Address</th>
 										<th>Email</th>
-										<th>Block</th>
+										<th>Contact</th>
+										<th>Block/Unblock</th>
 										<th>Delete</th>
 										<th>Password Reset</th>
 									</thead>
 								</c:when>
 								<c:otherwise>
 									<thead>
+										<th>Company Name</th>
 										<th>Email</th>
 										<th>Contact</th>
-										<th>Block</th>
+										<th>Block/Unblock</th>
 										<th>Delete</th>
+										<th>Password Reset</th>										
 										<th>Verify</th>
-										<th>Password Reset</th>
 									</thead>
 								</c:otherwise>
 							</c:choose>
@@ -131,13 +134,21 @@
 												<td id="user_last-name">${user.lastName}</td>
 												<td id="user_address">${user.location.address}</td>
 												<td id="user_email">${user.email}</td>
+												<td id="user_phone">${user.phone}</td>
 												<td>
 													<!-- Block Button -->
 													<p data-placement="top" data-toggle="tooltip" title="Block">
 														<button class="btn btn-warning btn-sm" id="block_btn"
 															data-title="Block" data-toggle="modal"
 															data-target="#block">
-															<span class="glyphicon glyphicon-lock"></span>
+															<c:choose>
+															<c:when test="${user.blocked}">
+																<span class="glyphicon glyphicon-ok"></span>														
+															</c:when>
+															<c:otherwise>
+																<span class="glyphicon glyphicon-ban-circle"></span>
+															</c:otherwise>
+															</c:choose>
 														</button>
 													</p>
 												</td>
@@ -170,16 +181,24 @@
 										<c:otherwise>
 											<c:forEach items="${userList}" var="user">
 											<tr>
-												<td id="user_email">${user.email}</td>
+												<td id="user_company_name">${user.companyName}</td>
+												<td id="user_email">${user.email}</td>									
                                                 <td id="user_phone">${user.phone}</td>
 												<td>
 													<!-- Block Button -->
 													<p data-placement="top" data-toggle="tooltip" title="Block">
-															<button class="btn btn-warning btn-sm" id="block_btn"
-																data-title="Block" data-toggle="modal"
-																data-target="#block">
-																<span class="glyphicon glyphicon-lock"></span>
-															</button>
+														<button class="btn btn-warning btn-sm" id="block_btn"
+															data-title="Block" data-toggle="modal"
+															data-target="#block">
+															<c:choose>
+															<c:when test="${user.blocked}">
+																<span class="glyphicon glyphicon-ok"></span>														
+															</c:when>
+															<c:otherwise>
+																<span class="glyphicon glyphicon-ban-circle"></span>
+															</c:otherwise>
+															</c:choose>
+														</button>
 													</p>
 												</td>
 
@@ -194,20 +213,8 @@
 														</button>
 													</p>
 												</td>
-
 												<td>
-													<!-- Verify Button -->
-													<p data-placement="top" data-toggle="tooltip"
-														title="Verify">
-														<button class="btn btn-success btn-sm" id="verify_btn"
-															data-title="Verify" data-toggle="modal"
-															data-target="#verify">
-															<span class="glyphicon glyphicon-ok"></span>
-														</button>
-													</p>
-												</td>
-
-												<td>
+												
 													<!-- Password Reset Button -->
 													<p data-placement="top" data-toggle="tooltip" title="Reset">
 														<button class="btn btn-info btn-sm" id="reset_btn"
@@ -216,7 +223,22 @@
 															<span class="glyphicon glyphicon-refresh"></span>
 														</button>
 													</p>
+												</td>												
+
+												<td>
+													<!-- Verify Button -->
+													<p data-placement="top" data-toggle="tooltip"
+														title="Verify">
+														<c:if test="${!user.verified}">
+														<button class="btn btn-success btn-sm" id="verify_btn"
+															data-title="Verify" data-toggle="modal"
+															data-target="#verify">
+															<span class="glyphicon glyphicon-ok"></span>
+														</button>														
+														</c:if>
+													</p>
 												</td>
+
 												</tr>
 											</c:forEach>
 										</c:otherwise>
