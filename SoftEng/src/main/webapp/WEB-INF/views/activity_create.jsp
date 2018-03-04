@@ -262,36 +262,18 @@
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Categories <span class="caret"></span>
 							  </button>
 							  <ul class="dropdown-menu" id="activity_categories-list" role="menu">
-
+							<c:forEach items="${categories}" var="category">
+								
 							    <li class="activity_list-item">
 									<div class="pretty p-icon p-round p-smooth">
 								        <input type="radio" name="icon_solid"/>
 								        <div class="state p-success">
 								            <i class="icon glyphicon glyphicon-ok"></i>
-								            <label>Aquatics</label>
+								            <label>${category}</label>
 								        </div>
 								    </div>
 							    </li>
-
-							    <li class="activity_list-item">
-									<div class="pretty p-icon p-round p-smooth">
-								        <input type="radio" name="icon_solid"/>
-								        <div class="state p-success">
-								            <i class="icon glyphicon glyphicon-ok"></i>
-								            <label>Camps</label>
-								        </div>
-								    </div>
-							    </li>
-
-							    <li class="activity_list-item">
-									<div class="pretty p-icon p-round p-smooth">
-								        <input type="radio" name="icon_solid"/>
-								        <div class="state p-success">
-								            <i class="icon glyphicon glyphicon-ok"></i>
-								            <label>Dance</label>
-								        </div>
-								    </div>
-							    </li>
+							</c:forEach>
 							  </ul>
 							</div>
 						</div>

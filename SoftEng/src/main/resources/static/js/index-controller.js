@@ -2,22 +2,79 @@ $( document ).ready(function() {
 
 	var appliedSearchFilters = {
 		"text": "",
+		"latitude":"",
+		"longtitude":"",
 		"proximity": "",
-		"age":{
-			"min":"",
-			"max":""
-		},
-		"cost":{
-			"min":"",
-			"max":""
-		},
-		"categories":[],
+		"age_min": "",
+		"age_max": "",
+		"cost_min": "",
+		"cost_max": "",
+		"category":"",
 		"sortBy":""
 	};
+	
+	c_longtitude ="";
+	c_latitude = "";
+	
+	var c_longtitude = parseFloat(document.getElementById("longtitude-id").value);
+	var c_latitude = parseFloat(document.getElementById("latitude-id").value);
+	console.log(c_longtitude);
+	console.log(c_latitude);
+	
+	appliedSearchFilters.longtitude = c_longtitude;
+	appliedSearchFilters.latitude =  c_latitude;
+	
+	$("#range_cost").ionRangeSlider({
+	    type: "double",
+	    grid: false,
+	    min: 0,
+	    max: 100,
+	    from: 0,
+	    to: 400,
+	    prefix: "",
+	    onFinish: function (data) {
+	    	appliedSearchFilters.cost.min = data.from;
+	    	appliedSearchFilters.cost.max = data.to;
+	    }
+	});
 
+	
+	$("#range_distance").ionRangeSlider({
+	    type: "single",
+	    grid: false,
+	    min: 0,
+	    max: 200,
+	    from: 0,
+	    to: 200,
+	    prefix: "",
+	    onFinish: function (data) {
+	    	appliedSearchFilters.proximity = data.from;
+	    }
+	});
+
+	$("#range_age").ionRangeSlider({
+	    type: "double",
+	    grid: false,
+	    min: 3,
+	    max: 16,
+	    from: 3,
+	    to: 16,
+	    prefix: "",
+	    onFinish: function (data) {
+	    	appliedSearchFilters.age.min  = data.from;
+	    	appliedSearchFilters.age.max  = data.to;
+
+	    }
+	});
+
+	
 	//Initialize map view
-    var map = initMap();
+    var map = initMap(c_latitude, c_longtitude);
 
+    setInitialMarker(map, c_latitude, c_longtitude);
+    
+    
+    
 	//Handling Activity Category checkbox clicks
 	$("#activity_categories-list>li").on('click', function() {
 		var checkboxState = $(this).children().children("input").is(":checked");
@@ -51,7 +108,9 @@ $( document ).ready(function() {
                 "longtitude": positionDoubleclick.lng()
             }
         };
-        
+        appliedSearchFilters.latitude = activity.location.latitude;
+        appliedSearchFilters.longtitude = activity.location.longtitude;
+
         var geocoder = new google.maps.Geocoder;
         geocoder.geocode({'location': positionDoubleclick}, function(results, status) {
           if (status === 'OK') {
@@ -72,43 +131,61 @@ $( document ).ready(function() {
     });
 
 	//Handling Search
-	$("#search-button").on('click', function() {
+	$("#search_button1").on("click",function(e){	
+		e.preventDefault();
 		//Handle Text input
 		if($("#search-text").val() != ""){
 			appliedSearchFilters.text = $("#search-text").val();
 		}
 		
-		//Handling Slider input
-		var proximitySlider = $("#proximity_slider");
-		var ageSliderMin = $("#age_slider-min");
-		var ageSliderMax = $("#age_slider-max");
-		var costSliderMin= $("#cost_slider-min");
-		var costSliderMax= $("#cost_slider-max");
-
-		if(proximitySlider.val() != 0){
-			appliedSearchFilters.proximity = proximitySlider.val();
-		}
-
-		if(ageSliderMin.val() != 0){
-			appliedSearchFilters.age.min = ageSliderMin.val();
-		}
-
-		if(ageSliderMax.val() != ageSliderMax.attr("max")){
-			appliedSearchFilters.age.max = ageSliderMax.val();
-		}
-
-		if(costSliderMin.val() != 0){
-			appliedSearchFilters.cost.min = costSliderMin.val();
-		}
-
-		if(costSliderMax.val() != costSliderMax.attr("max")){
-			appliedSearchFilters.cost.max = costSliderMax.val();
-		}
-
-		console.log(JSON.stringify(appliedSearchFilters, null, 2));
+		console.log(appliedSearchFilters);
+		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/search",
+			data : JSON.stringify(appliedSearchFilters),
+			dataType : 'text',
+			success : function(result) {
+				console.log(result);
+				// window.location.href = "/index";
+			},
+			error : function(e) {
+				console.log(e);
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
 
 	});
 
+	$("#search_button2").on("click",function(e){	
+		e.preventDefault();
+		//Handle Text input
+		if($("#search-text").val() != ""){
+			appliedSearchFilters.text = $("#search-text").val();
+		}
+		
+		console.log(appliedSearchFilters);
+		
+		$.ajax({
+			type : "POST",
+			contentType : "application/json",
+			url : "/search",
+			data : JSON.stringify(appliedSearchFilters),
+			dataType : 'text',
+			success : function(result) {
+				console.log(result);
+				// window.location.href = "/index";
+			},
+			error : function(e) {
+				console.log(e);
+				alert("Error!")
+				console.log("ERROR: ", e);
+			}
+		});
+
+	});
 
 	var activities = [
 		{"activityId":2,"name":"Play Football1","category":"","activityDescription":"Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea","thumbNail":{"name":"","image":"","createdAt":1520024509663,"url":"http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png","isThumbnail":null},"date":"05/02/2017","location":{"longtitude":23.734851,"latitude":37.975443}},
@@ -118,7 +195,8 @@ $( document ).ready(function() {
 	];
 
 	//todo AFTER THE AJAX CALL
-
+	
+	
 	
 	for(var i=0;i<activities.length;i++){
 		attachActivity(activities[i]);

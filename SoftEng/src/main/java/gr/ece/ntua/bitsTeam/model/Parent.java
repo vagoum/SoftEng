@@ -15,8 +15,7 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("parent")
 public class Parent extends User {
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Location location;
+
 	
 
 	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
@@ -34,13 +33,6 @@ public class Parent extends User {
 		this.balance = balance;
 	}
 
-	public Location getLocation() {
-		return location;
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
 
 	public List<Booking> getBookings() {
 		return bookings;
@@ -52,7 +44,7 @@ public class Parent extends User {
 
 	@Override
 	public String toString() {
-		return "Parent [location=" + location + ", bookings=" + bookings + "]";
+		return "Parent [bookings=" + bookings + "]";
 	}
 
 }

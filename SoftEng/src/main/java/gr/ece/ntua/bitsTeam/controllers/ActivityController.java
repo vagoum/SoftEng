@@ -10,6 +10,8 @@ import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,28 +26,25 @@ import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.OrganizerRepository;
 
-
 @Controller
 public class ActivityController {
 
-
-	
 	@Autowired
 	private ActivityRepository activityRepository;
 
 	@Autowired
 	private OrganizerRepository organizerRepository;
-	
+
 	public void createTestActivity() {
-		
+
 		Activity activity = new Activity();
 		Photo photo = new Photo();
 		photo.setUrl("http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png");
-		
+
 		activity.setThumbNail(photo);
 		activity.getPhotos().add(photo);
 		activity.getPhotos().add(photo);
-		
+
 		activity.setName("Football");
 		activity.setCost(200);
 		activity.setTime("15:00 AM");
@@ -64,33 +63,29 @@ public class ActivityController {
 		organizer.setLastName("Chantzos");
 		organizer.setPhone("6940200292");
 		organizer.setResetPassword(false);
-		organizer.getActivities().add(activity);		
+		organizer.getActivities().add(activity);
 		activity.setOrganizer(organizer);
-		
+
 		organizerRepository.save(organizer);
-		
+
 		activityRepository.save(activity);
-		
+
 	}
-	
-	
+
 	@RequestMapping("/activity_view")
 	public String viewActivity(@RequestParam(value = "id", required = true) Long activityId, Model model,
 			HttpServletRequest request) throws IOException {
 		// set test objects
 
-		
-		
 		Activity activity = activityRepository.findOne(activityId);
 
-		
 		Date date = activity.getDate();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
 		int month = cal.get(Calendar.MONTH);
 		int year = cal.get(Calendar.YEAR);
 		int day = cal.get(Calendar.DAY_OF_MONTH);
-		
+
 		Location loc = activity.getLocation();
 		model.addAttribute("activity", activity);
 		model.addAttribute("day", day);
@@ -103,20 +98,39 @@ public class ActivityController {
 		model.addAttribute("organizer", activity.getOrganizer());
 		return "activity_view";
 	}
-	
+
 	@PostMapping("/book_activity")
-	public String bookActivity(@RequestParam(value = "activityId", required = true) Long activityId, Model model, HttpServletRequest request) throws IOException {
-		
+	public String bookActivity(@RequestParam(value = "activityId", required = true) Long activityId, Model model,
+			HttpServletRequest request) throws IOException {
+
 		return "index";
 	}
 	
+	@RequestMapping("/organizer_verification_failure")
+	public String verificationFailure(Model model,
+			HttpServletRequest request) throws IOException {
+
+		return "organizer_verification_failure";
+	}
+
 	@GetMapping("/activity_create")
 	public String activityIndex(Locale locale, Model model) {
-		List<String> categories = new ArrayList<>();
-		categories.add("Sports");
-		categories.add("Camps");
-		categories.add("Music");
-		model.addAttribute("categories", categories);
-		return "activity_create";
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		String email = auth.getName();
+
+		// Long organizerId = (Long)
+		// request.getSession().getAttribute("parentId_");
+		Organizer organizer = organizerRepository.findByEmail(email);
+		if (organizer.getVerified()) {
+			List<String> categories = new ArrayList<>();
+			categories.add("Sports");
+			categories.add("Camps");
+			categories.add("Music");
+			model.addAttribute("categories", categories);
+			return "activity_create";
+		}
+		return "organizer_verification_failure";
 	}
 }
