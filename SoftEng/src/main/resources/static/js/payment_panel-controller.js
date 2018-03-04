@@ -16,7 +16,7 @@ $(document).ready(function() {
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "",
+			url : "/user/payment",
 			data : JSON.stringify(data),
 			dataType : 'text',
 			success : function(result) {
