@@ -100,7 +100,7 @@
 							<div class="col-lg-12">
 
 								<!--Registration Form For Parents -->
-								<form id="parent-registration-form" action="users/parents/registration.jsp" method="post" role="form" style="display: block;">
+								<form id="parent-registration-form" action="users/parents/registration.jsp" method="post" role="form" style="display: block;" onkeypress="if (event.keyCode ==13) {return false;}">
 									<div class="col-sm-12">
 										<div class="row">
 											<div class="col-sm-6 form-group">
@@ -145,7 +145,7 @@
 								</form>
 
 								<!--Registration Form For Activity Organizers -->
-								<form id="organizer-registration-form" action="users/organizers/registration.jsp" method="post" role="form" style="display: none;">
+								<form id="organizer-registration-form" action="users/organizers/registration.jsp" method="post" role="form" style="display: none;" onkeypress="if (event.keyCode ==13) {return false;}">
 									<div class="col-sm-12">
 
 										<div class="row">

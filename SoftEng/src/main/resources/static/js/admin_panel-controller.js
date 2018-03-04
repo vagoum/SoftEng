@@ -15,13 +15,13 @@ $( document ).ready(function() {
   	if(clickedId == "block_btn"){
   		data.action = "block";
 
-	      if ($(this).find('span').hasClass("glyphicon glyphicon-lock")){
-	        $(this).find('span').removeClass("glyphicon glyphicon-lock");
-	        $(this).find('span').addClass("glyphicon glyphicon-trash");
+	      if ($(this).find('span').hasClass("glyphicon glyphicon-ban-circle")){
+	        $(this).find('span').removeClass("glyphicon glyphicon-ban-circle");
+	        $(this).find('span').addClass("glyphicon glyphicon-ok");
 	      }
 	      else {
-	        $(this).find('span').removeClass("glyphicon glyphicon-trash");
-	        $(this).find('span').addClass("glyphicon glyphicon-lock");
+	        $(this).find('span').removeClass("glyphicon glyphicon-ok");
+	        $(this).find('span').addClass("glyphicon glyphicon-ban-circle");
 	      }
 	  	}else if(clickedId == "delete_btn"){
 	  		data.action = "delete";
