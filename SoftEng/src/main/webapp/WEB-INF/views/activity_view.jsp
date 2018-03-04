@@ -256,7 +256,8 @@
 										</div>
 									</div>											
 										
-										<c:forEach begin="2" end="${fn:length(photos)-1}" step="3" var="photo" items="${photos}" varStatus="loop">
+										<c:forEach begin="2" end="${fn:length(photos)}" step="3" var="photo" items="${photos}" varStatus="loop">
+											<c:if test="${loop.index != fn:length(photos)}">
 											<div class="thumbnail-carousel-item item">
 												<div class="row">
 													
@@ -278,6 +279,7 @@
 													</c:if>														
 												</div>
 											</div>
+											</c:if>
 										</c:forEach>							
 									
 							<!-- Thumbnail Carousel nav -->

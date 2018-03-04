@@ -24,6 +24,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
+<script type="text/javascript" src="./js/payment_panel-controller.js"></script>
+
 <!-- CSS files -->
 <link rel="stylesheet" href="./css/index_carousel.css">
 <link rel="stylesheet" href="./css/payment_panel.css">
@@ -103,74 +105,78 @@
 			</div>
 			<div class="col-xs-12 col-md-4 col-md-offset-4">
 				<div class="panel panel-default credit-card-box">
-					<div class="panel-heading display-table">
-						<div class="row display-tr">
+					<div class="panel-heading display-table" >
+						<div class="row display-tr" >
 							<h3 class="panel-title display-td">Payment Details</h3>
-							<div class="display-td">
-								<img class="img-responsive pull-right"
-									src="http://i76.imgup.net/accepted_c22e0.png">
+							<div class="display-td" >                            
+								<img class="img-responsive pull-right" src="http://i76.imgup.net/accepted_c22e0.png">
 							</div>
-						</div>
+						</div>                    
 					</div>
 					<div class="panel-body">
-						<form:form role="form" id="payment-form" modelAttribute="paymentForm" method="POST"
-							action="users/payment.jsp">
+						<form id="payment-form">
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
 										<label for="cardNumber">CARD NUMBER</label>
 										<div class="input-group">
-											<input type="tel" class="form-control" name="cardNumber" 
-												placeholder="Valid Card Number" autocomplete="cc-number"
-												required autofocus /> <span
-												class="input-group-addon"><i
-												class="fa fa-credit-card"></i></span>
+											<input type="tel" class="form-control" name="cardNumber" placeholder="Valid Card Number" autocomplete="cc-number"required autofocus/>
+											<span class="input-group-addon"><i class="fa fa-credit-card"></i></span>
 										</div>
-									</div>
+									</div>                            
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-7 col-md-7">
 									<div class="form-group">
-										<label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span
-											class="visible-xs-inline">EXP</span> DATE</label> <input type="tel"
-											class="form-control" name="cardExpiry" placeholder="MM / YY"
-											autocomplete="cc-exp" required />
+										<label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+										<input 
+										type="date" 
+										class="form-control" 
+										name="cardExpiry"
+										placeholder="MM / YY"
+										autocomplete="cc-exp"
+										required 
+										/>
 									</div>
 								</div>
 								<div class="col-xs-5 col-md-5 pull-right">
 									<div class="form-group">
-										<label for="cardCVC">CV CODE</label> <input type="tel"
-											class="form-control" name="cardCVC" placeholder="CVC"
-											autocomplete="cc-csc" required />
+										<label for="cardCVC">CV CODE</label>
+										<input type="number" 
+										class="form-control"
+										name="cardCVC"
+										placeholder="CVC"
+										autocomplete="cc-csc"
+										min="0"
+										max="999"
+										required
+										/>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
-										<form:label path="activityPoints" for="couponCode">NUMBER OF POINTS</form:label> 
-										<form:input type="number" class="form-control" path="activityPoints" name="number_of_points"
-											min="1" max="1000" />
+										<label for="couponCode">NUMBER OF POINTS</label>
+										<input type="number" class="form-control" name="number_of_points" min="1" max="1000" required/>
 									</div>
-								</div>
+								</div>                        
 							</div>
 							<div class="row">
 								<div class="col-xs-12">
-									<button type="submit" form="payment-form"
-										class="subscribe btn btn-success btn-lg btn-block"
-										type="button">Complete Payment</button>
+									<button type="submit" class="subscribe btn btn-success btn-lg btn-block" type="button" >Complete Payment</button>
 								</div>
 							</div>
-							<div class="row" style="display: none;">
+							<div class="row" style="display:none;">
 								<div class="col-xs-12">
 									<p class="payment-errors"></p>
 								</div>
 							</div>
-						</form:form>
+						</form>
 					</div>
 				</div>
-			</div>
+			</div> 
 		</div>
 	</div>
 

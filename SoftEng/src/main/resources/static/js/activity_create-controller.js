@@ -187,9 +187,10 @@ $(document).ready(function(){
 	        processData: false,
 	        contentType: false,
 			data : formData,
+			dataType : 'text',
 			success : function(result) {
 				console.log(result);
-  				// window.location.href = "/activity_view?id=" + result;
+  				window.location.href = "/activity_view?id=" + result;
 			},
 			error : function(data) {
 				alert("Error!")
