@@ -26,6 +26,15 @@ public class Payment {
 	private Parent parent;
 	
 	private Date timestamp;
+	
+	Integer activityPoints;
+
+	public Payment(Parent parent, Date timestamp, Integer activityPoints) {
+		super();
+		this.parent = parent;
+		this.timestamp = timestamp;
+		this.activityPoints = activityPoints;
+	}
 
 	public Parent getParent() {
 		return parent;
@@ -51,6 +60,6 @@ public class Payment {
 		this.activityPoints = activityPoints;
 	}
 
-	Integer activityPoints;
+
 	
 }

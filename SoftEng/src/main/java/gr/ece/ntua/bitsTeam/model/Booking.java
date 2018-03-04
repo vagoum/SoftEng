@@ -10,12 +10,12 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Booking {
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+
 	@ManyToOne
 	private Activity activity;
 	
@@ -25,6 +25,18 @@ public class Booking {
 	
 	private Integer ticketsBought;
 
+	public Booking(Activity activity, Parent parent, Integer ticketsBought) {
+		super();
+		this.activity = activity;
+		this.parent = parent;
+		this.ticketsBought = ticketsBought;
+	}
+	
+	public Booking() {
+		super();
+	}
+
+	
 	public Activity getActivity() {
 		return activity;
 	}

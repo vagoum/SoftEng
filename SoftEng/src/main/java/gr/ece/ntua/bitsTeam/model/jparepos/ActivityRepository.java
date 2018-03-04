@@ -10,6 +10,6 @@ import com.vividsolutions.jts.geom.Geometry;
 import gr.ece.ntua.bitsTeam.model.Activity;
 
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
-
+	
 
 }

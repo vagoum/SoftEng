@@ -4,7 +4,7 @@ public class BookActivityWrapper {
 
 	private Integer ticketsBought;
 	
-	private Integer activityId;
+	private Long activityId;
 
 	public Integer getTicketsBought() {
 		return ticketsBought;
@@ -14,11 +14,11 @@ public class BookActivityWrapper {
 		this.ticketsBought = ticketsBought;
 	}
 
-	public Integer getActivityId() {
+	public Long getActivityId() {
 		return activityId;
 	}
 
-	public void setActivityId(Integer activityId) {
+	public void setActivityId(Long activityId) {
 		this.activityId = activityId;
 	}
 }
