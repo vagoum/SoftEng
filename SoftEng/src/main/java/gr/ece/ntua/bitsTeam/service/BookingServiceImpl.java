@@ -12,29 +12,39 @@ import gr.ece.ntua.bitsTeam.model.jparepos.BookingRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.ParentRepository;
 
 @Service
-public class BookingServiceImpl {
-	
+public class BookingServiceImpl implements BookingService {
+
 	@Autowired
 	private ParentRepository parentRepository;
-	
+
 	@Autowired
 	private ActivityRepository activityRepository;
-	
+
 	@Autowired
 	private BookingRepository bookingRepository;
-    
-    @Transactional
-    public String book(String email, Long activityId, Integer ticketsBought) {
+
+	@Transactional
+	public String book(String email, Long activityId, Integer ticketsBought) {
 		Parent parent = parentRepository.findByEmail(email);
 		Activity activity = activityRepository.findOne(activityId);
 		Integer totalCost = activity.getCost() * ticketsBought;
-		if (totalCost <= parent.getBalance()) {
+		Integer balance = parent.getBalance();
+		if (activity.getTicketsLeft() >= ticketsBought) {
+			activity.setTicketsLeft(activity.getTicketsLeft() - ticketsBought);
+			activityRepository.save(activity);
+		} else {
+			return "no tickets left";
+		}
+		
+		if (totalCost <= balance) {
 			Booking new_booking = new Booking(activity, parent, ticketsBought);
 			bookingRepository.save(new_booking);
+			parent.setBalance(balance - totalCost);
+			parentRepository.save(parent);
 			return "success";
 		} else {
 			return "not enough points";
 		}
-		
-    }
+
+	}
 }

@@ -3,13 +3,15 @@ package gr.ece.ntua.bitsTeam.service;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.model.Payment;
 import gr.ece.ntua.bitsTeam.model.jparepos.ParentRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.PaymentRepository;
 
-public class PaymentServiceImpl {
+@Service
+public class PaymentServiceImpl implements PaymentService {
 
 	@Autowired
 	private ParentRepository parentRepository;

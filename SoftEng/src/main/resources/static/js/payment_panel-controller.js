@@ -13,13 +13,15 @@ $(document).ready(function() {
 			"points" : $("input[name=number_of_points]").val()
 		};
 		
+		console.log(JSON.stringify(data));
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
-			url : "/user/payment",
+			url : "/users/payment",
 			data : JSON.stringify(data),
 			dataType : 'text',
 			success : function(result) {
+				console.log(JSON.stringify(result));
 				if (result == "success") {
 					window.location.href = "/parent";
 				}

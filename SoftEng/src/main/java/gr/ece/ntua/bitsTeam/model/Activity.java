@@ -54,7 +54,8 @@ public class Activity {
 	// @Future(message = "Activity day must be in the future.")
 	private Date date;
 
-	
+	private Integer ticketsLeft;
+
 	private String time;
 	
 	private String ageRange;
@@ -111,6 +112,7 @@ public class Activity {
 	@JsonProperty
 	public void setTicketNumber(Integer ticketNumber) {
 		this.ticketNumber = ticketNumber;
+		this.setTicketsLeft(ticketNumber);
 	}
 
 	public Photo getThumbNail() {
@@ -200,6 +202,14 @@ public class Activity {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	public Integer getTicketsLeft() {
+		return ticketsLeft;
+	}
+
+	public void setTicketsLeft(Integer ticketsLeft) {
+		this.ticketsLeft = ticketsLeft;
 	}
 
 }

@@ -240,7 +240,7 @@
 				<h4 class="x-price" id="activity-details-price">Current Point
 					Balance: ${parent.balance }</h4>
 
-				<form action="users/parents/getPoints.jsp" method="post"
+				<form action="/payment" method="get"
 					id="booking_form">
 					<label for="proirty">Add Points:</label>
 

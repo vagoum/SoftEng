@@ -161,8 +161,7 @@
 	<div class="container side-bordering">
 		<div class="row">
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
-				<h3 class="my-4" id="activity-details-title">${activity.name}</h3>
-
+				<h3 class="my-4" id="activity-details-title" data-activity_id="${activity.activityId}">${activity.name}</h3>
 				<div>
 					<!-- class="col-md-4" -->
 					<h4 class="my-3" style="padding-top: 20px;">Activity
