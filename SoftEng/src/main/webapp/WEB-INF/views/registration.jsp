@@ -77,7 +77,10 @@
 		</div>
 	</div>
 
-
+  <input type="hidden" name="country1" value="Norway">
+    <input type="hidden" name="country2" value="Norway">
+      <input type="hidden" name="country3" value="Norway">
+      
 	<!-- Content -->
 	<div class="container side-bordering">
 		<!-- Sign-In or Register -->
