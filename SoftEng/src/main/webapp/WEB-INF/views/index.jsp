@@ -71,7 +71,7 @@
 
 					<div class="item active">
 						<img class="first-slide"
-							src="https://www.w3schools.com/w3images/workbench.jpg"
+							src="./images/kids-for_organizers.jpg"
 							alt="First slide" style="width: 100%;">
 						<div class="carousel-caption">
 							<h3>Little Explorers</h3>
@@ -81,7 +81,7 @@
 
 					<div class="item">
 						<img class="second-slide"
-							src="https://www.w3schools.com/w3images/workbench.jpg"
+							src="./images/kids-for_parents_1.jpg"
 							alt="Second slide" style="width: 100%;">
 						<div class="carousel-caption">
 							<h3>For Parents</h3>
@@ -91,7 +91,17 @@
 
 					<div class="item">
 						<img class="third-slide"
-							src="https://www.w3schools.com/w3images/coffee.jpg"
+							src="./images/kids-for_parents_3.jpg"
+							alt="Third slide" style="width: 100%;">
+						<div class="carousel-caption">
+							<h3>For Activity Organizers</h3>
+							<p>Create great experiences and adventures for amazing
+								customers</p>
+						</div>
+					</div>
+					<div class="item">
+						<img class="third-slide"
+							src="./images/kids-for_parents_2.jpg"
 							alt="Third slide" style="width: 100%;">
 						<div class="carousel-caption">
 							<h3>For Activity Organizers</h3>
