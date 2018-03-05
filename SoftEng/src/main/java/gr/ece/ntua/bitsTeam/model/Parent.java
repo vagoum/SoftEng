@@ -15,13 +15,9 @@ import javax.persistence.OneToOne;
 @DiscriminatorValue("parent")
 public class Parent extends User {
 	
-
-	
-
-	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Booking> bookings = new ArrayList<>();
 	
-	// private Integer pointBalance ;
 	
 	private Integer balance = 0;
 	

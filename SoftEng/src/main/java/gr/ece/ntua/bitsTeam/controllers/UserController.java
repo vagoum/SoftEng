@@ -1,25 +1,35 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
+import java.util.Locale;
+import java.util.UUID;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gr.ece.ntua.bitsTeam.login.SecurityService;
-import gr.ece.ntua.bitsTeam.login.UserValidator;
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Parent;
+import gr.ece.ntua.bitsTeam.model.PasswordResetToken;
+import gr.ece.ntua.bitsTeam.model.User;
+import gr.ece.ntua.bitsTeam.model.jparepos.PasswordTokenRepository;
 import gr.ece.ntua.bitsTeam.service.UserService;
 
 @Controller
@@ -29,11 +39,19 @@ public class UserController {
 	private UserService userService;
 
 	@Autowired
-	private SecurityService securityService;
-
+	private SecurityService securityUserService;
+	
 	@Autowired
-	private UserValidator userValidator;
-
+	private PasswordTokenRepository passwordTokenRepository;
+	
+	@Autowired
+	private MessageSource messages;
+	
+	@Autowired
+	private JavaMailSender mailSender;
+	
+	@Autowired
+	private Environment env;
 	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model) {
@@ -44,47 +62,17 @@ public class UserController {
 	}
 
 	
-	@RequestMapping(value = "/users/parents/registration1", method = RequestMethod.POST)
-	public String registrationParent(@ModelAttribute("parentForm") Parent parent, BindingResult bindingResult,
-			HttpServletRequest request, Model model) {
-		userValidator.validate(parent, bindingResult);
-
-		if (bindingResult.hasErrors()) {
-			return "registration";
-		}
-
-		userService.save(parent, "ROLE_PARENT");
-
-		securityService.autologin(parent.getEmail(), parent.getPassword());
-
-		return "redirect:/";
-	}
-
-	
-	@RequestMapping(value = "users/organizers/registration1", method = RequestMethod.POST)
-	public String registrationOrganizer(@ModelAttribute("organizerForm") Organizer organizer,
-			BindingResult bindingResult, HttpServletRequest request, Model model) {
-		userValidator.validate(organizer, bindingResult);
-
-		if (bindingResult.hasErrors()) {
-			return "registration";
-		}
-
-		userService.save(organizer, "ROLE_ORGANIZER");
-
-		securityService.autologin(organizer.getEmail(), organizer.getPassword());
-
-		return "redirect:/";
-	}
 
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(@RequestParam(value = "success",required = false) String param, Model model, String error, String logout) {
+		/*
         if (error != null)
             model.addAttribute("error", "Your username and password is invalid.");
  
         if (logout != null)
             model.addAttribute("message", "You have been logged out successfully.");
+        */
            
         return "index";
        
@@ -100,7 +88,7 @@ public class UserController {
         boolean isParent = authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_PARENT"));
         boolean isOrganizer = authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ORGANIZER"));
         if (isParent || isOrganizer)
-            return "index";
+            return "redirect:/index";
  
         return "login_failure";
        
@@ -112,7 +100,82 @@ public class UserController {
         if (auth != null){    
             new SecurityContextLogoutHandler().logout(request, response, auth);
         }
-        return "index";
+        return "redirect:/index";
+    }
+    
+    
+    
+    @RequestMapping(value = "/user/resetPassword", method = RequestMethod.GET)
+    public String showChangePasswordPage(Model model) {
+    		model.addAttribute("emailForm", new User());
+    		return "reset_password_request";
+    }
+    
+ 
+    @RequestMapping(value = "/user/changePassword", method = RequestMethod.POST)
+    public String resetPassword(@ModelAttribute User user, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        final User currUser = userService.findByEmail(user.getEmail());
+        if (currUser != null) {
+            final String token = UUID.randomUUID().toString();
+            userService.createPasswordResetTokenForUser(currUser, token);
+            mailSender.send(constructResetTokenEmail(getAppUrl(request), request.getLocale(), token, currUser));
+            redirectAttributes.addAttribute("success", "true");
+        } else {
+        	redirectAttributes.addAttribute("failure", "true");
+        }
+
+        return "redirect:/user/resetPassword";
+    }
+
+    
+    @RequestMapping(value = "/user/changePassword", method = RequestMethod.GET)
+    public String showChangePasswordPage(Model model, @RequestParam("id") long id, @RequestParam("token") String token) {
+        final String result = securityUserService.validatePasswordResetToken(id, token);
+        if (result == null) {
+        	model.addAttribute("passwordForm", new User());
+            return "reset_password";
+           
+        }
+        return "redirect:/error";
+    }
+    
+    
+    
+    @RequestMapping(value = "/user/updatePassword", method = RequestMethod.POST)
+    public String changePassword(@ModelAttribute User user, Model model, @RequestParam("id") long id, @RequestParam("token") String token) {
+    	final String result = securityUserService.validatePasswordResetToken(id, token);
+    	if (result == null) {
+    		PasswordResetToken passToken = passwordTokenRepository.findByToken(token);
+            User currUser = passToken.getUser();
+            userService.changeUserPassword(currUser, user.getPassword());
+            return "redirect:/index";
+        } else {
+        	return "redirect:/error";
+        }
+            
+    }
+    
+    
+    // ------------- utility methods --------------- //
+    
+    
+    private SimpleMailMessage constructResetTokenEmail(final String contextPath, final Locale locale, final String token, final User user) {
+        final String url = contextPath + "/user/changePassword?id=" + user.getUserId() + "&token=" + token;
+        final String message = "Please change your password by clicking the following link";
+        return constructEmail("Reset Password", message + " \r\n" + url, user);
+    }
+
+    private SimpleMailMessage constructEmail(String subject, String body, User user) {
+        final SimpleMailMessage email = new SimpleMailMessage();
+        email.setSubject(subject);
+        email.setText(body);
+        email.setTo(user.getEmail());
+        email.setFrom(env.getProperty("support.email"));
+        return email;
+    }
+    
+    private String getAppUrl(HttpServletRequest request) {
+        return "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath();
     }
  
 }

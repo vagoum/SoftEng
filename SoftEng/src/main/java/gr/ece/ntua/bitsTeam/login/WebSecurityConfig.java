@@ -3,6 +3,7 @@ package gr.ece.ntua.bitsTeam.login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,8 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-
-
+import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
@@ -47,7 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
     public AuthenticationSuccessHandler successHandler() {
     	SimpleUrlAuthenticationSuccessHandler handler = new SimpleUrlAuthenticationSuccessHandler();
@@ -55,8 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	handler.setDefaultTargetUrl("/index");
     	return handler;
     }
-    
-    
+
+
     /*
     @Bean
     public AuthenticationFailureHandler authenticationFailureHandler() {
@@ -66,11 +66,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     	return handler;
     }
     */
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
+                	.antMatchers("/user/updatePassword*", "/user/savePassword*", "/updatePassword*")
+                	.hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
                     .antMatchers("/resources/**", "/registration2", "/**", "/index").permitAll()
                     .anyRequest().authenticated()
                     .and()
@@ -91,13 +93,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
-    
+
     @Bean(name="authenticationManager")
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
     	return super.authenticationManagerBean();
     }
-    
+
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
@@ -105,7 +107,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return authenticationProvider;
     }
-    
+
     /*
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {
@@ -119,23 +121,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             securityConstraint.addCollection(collection);
             context.addConstraint(securityConstraint);
           }
-        };  
+        };
       tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
       return tomcat;
     }
-    
-    
+
+
     private Connector initiateHttpConnector() {
       Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
       connector.setScheme("http");
       connector.setPort(8080);
       connector.setSecure(false);
       connector.setRedirectPort(8443);
-      
+
       return connector;
   }
-  
+
   */
-    
-    
+
+
 }
