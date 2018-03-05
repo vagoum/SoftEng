@@ -4,7 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
@@ -29,14 +28,16 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-
+  
 <!-- CSS files -->
 <link rel="stylesheet" href="./css/index_carousel.css">
 <link rel="stylesheet" href="./css/activity_view.css">
 <link rel="stylesheet" href="./css/index_footer.css">
+<link rel="stylesheet" href="alert/dist/sweetalert.css">
 
 <!-- js files -->
+ <script src="alert/dist/sweetalert-dev.js"></script>
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript" src="./js/activity_view-controller.js"></script>
 <script type="text/javascript"
 	src="./js/activity_view-calendar_controller.js"></script>
@@ -45,57 +46,6 @@
 </head>
 
 <body>
-	<!-- Carousel -->
-	<div class="container">
-		<div class="row">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel"
-				data-interval="10000">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-
-					<div class="item">
-						<img class="second-slide"
-							src="https://www.w3schools.com/w3images/workbench.jpg"
-							alt="Second slide" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>For Parents</h3>
-							<p>Explore Amazing Activies</p>
-						</div>
-					</div>
-
-					<div class="item">
-						<img class="third-slide"
-							src="https://www.w3schools.com/w3images/coffee.jpg"
-							alt="Third slide" style="width: 100%;">
-						<div class="carousel-caption">
-							<h3>For Activity Organizers</h3>
-							<p>Create great experiences and adventures for amazing
-								customers</p>
-						</div>
-					</div>
-				</div>
-
-				<!-- Left and right controls -->
-				<a class="left carousel-control" href="#myCarousel"
-					data-slide="prev"> <span
-					class="glyphicon glyphicon-chevron-left"></span> <span
-					class="sr-only">Previous</span>
-				</a> <a class="right carousel-control" href="#myCarousel"
-					data-slide="next"> <span
-					class="glyphicon glyphicon-chevron-right"></span> <span
-					class="sr-only">Next</span>
-				</a>
-			</div>
-		</div>
-	</div>
-
 			    <!-- Generic Navbar -->
        
     <sec:authorize access="!hasRole('ROLE_ORGANIZER') and !hasRole('ROLE_PARENT')">
@@ -156,6 +106,73 @@
         </div>
     </sec:authorize>
    
+   
+    <!-- Parent Navbar -->
+    <sec:authorize access="hasRole('ROLE_PARENT')">
+    <div class="container side-bordering">
+ 
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs-block" href="#">Menu</a>
+                </div>
+ 
+                <div class="collapse navbar-collapse js-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">Home</a></li>
+                    </ul>
+ 
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/parent">Profile</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    </sec:authorize>
+ 
+ 
+ 
+    <!-- Organizer Navbar -->
+    <sec:authorize access="hasRole('ROLE_ORGANIZER')">
+    <div class="container side-bordering">
+ 
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs-block" href="#">Menu</a>
+                </div>
+ 
+                <div class="collapse navbar-collapse js-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">Home</a></li>
+                        <li><a href="/activity_create">Create Activity</a></li>
+                    </ul>
+ 
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/organizer">Profile</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+ 
+                </div>
+            </nav>
+        </div>
+    </div>
+    </sec:authorize>
+   
 
 	<!-- Content -->
 	<div class="container side-bordering">
@@ -170,12 +187,13 @@
 					<div id="activity-details-text">
 						${activity.activityDescription}</div>
 
-					<h4 class="my-3" style="padding-top: 20px;">Activity Details</h4>
+					<h4 class="my-3" style="padding-top: 20px;">Activity Category</h4>
 					<hr>
 					<ul id="activity-details-list">
 						<li>${activity.category}</li>
 					</ul>
 					<br>
+					<sec:authorize access="hasRole('ROLE_PARENT')">
 					<div
 						class="col-xl-8 col-lg-8 col-md-10 col-sm-12 col-xs-12 activity-tickets">
 						<h4 class="x-price" id="activity-details-price">Price per
@@ -192,6 +210,23 @@
 								Now</button>
 						</form>
 					</div>
+					</sec:authorize>
+					<sec:authorize access="!hasRole('ROLE_ORGANIZER') and !hasRole('ROLE_PARENT')">
+					<div
+						class="col-xl-8 col-lg-8 col-md-10 col-sm-12 col-xs-12 log-in-prompt-tickets">
+						<h4 class="x-price" id="activity-details-price">Price per
+							Ticket: ${activity.cost} Activity Points</h4>
+						<form
+							id="booking_form">
+							<h3 for="proirty"><font size="4">Sign in to</font></label>
+							 
+							<button type="button" class="btn btn-default" 
+								id="dummy-button" style="margin-right: -15px;">Book
+							Now</button>
+						</form>	
+						
+					</div>	
+					</sec:authorize>
 				</div>
 			</div>
 
@@ -306,9 +341,10 @@
 
 			<div class="col-xl-2 col-lg-3 col-md-3 col-sm-3 col-xs-12 col-xl-offset-2">
 				<address class="event-address">
-					<h3>Address</h3><br><br>
-					<strong>${location.address}</strong><br><abbr title="Email">e:</abbr> ${organizer.email }<br>
-					<abbr title="Phone">P:</abbr> ${organizer.phone }
+					<h3>Contact us:</h3><br><br>
+					<strong>${location.address}</strong>
+					<br>E-mail: ${organizer.email }
+					<br>Phone: ${organizer.phone }
 				</address>
 			</div>
 

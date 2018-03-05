@@ -281,7 +281,7 @@
                                     <div class="dropdown-menu dropdown-menu-right" role="menu">
                                         <form class="form-horizontal" role="form">
                                             <div class="form-group" style="margin-bottom: 25px">
-                                                <label for="filter">Sort by</label> <select
+                                                <label for="sort">Sort by</label> <select
                                                     class="form-control">
                                                     <option value="0" selected>No Sort</option>
                                                     <option value="1">Alphabetical Order</option>
@@ -290,6 +290,17 @@
                                                     <option value="4">Cost</option>
                                                 </select>
                                             </div>
+                                           
+                                            <div class="form-group" style="margin-bottom: 25px">
+                                                <label for="categories">Choose Category</label> <select
+                                                    class="form-control">
+                                                    <option value="0" selected>Select no category</option>
+                                                    <option value="1">Aquatics</option>
+                                                    <option value="2">Sports</option>
+                                                    <option value="3">Art</option>
+                                                </select>
+                                            </div>
+                                            
                                             <div class="slider_container row" style="margin-bottom: 25px">
                                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"
                                                     style="margin-left: -15px;padding-top: 20px">
@@ -313,25 +324,28 @@
                                                 </div>
                                             </div>
                                            
-                                            <div class="slider_container row">
+                                            <div class="slider_container row" style="margin-bottom: 5px">
                                                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"
                                                     style="margin-left: -15px;padding-top: 20px">
                                                     <label for="proximity_slider" class="slider_label">
                                                     <font size="2" face="verdana" color="black">Cost range</font></label>
                                                 </div>
-                                                <div style="margin-bottom: 25px"
+                                                <div style="margin-bottom: 5px"
                                                     class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
                                                     <input type="text" id="range_cost" value="" name="range_cost" />
                                                 </div>
                                                 <div class="form-group"></div>
-                                                <p align="center">
-                                                <button type="button" id="search_button1" style="width:60px"
+                                             </div>
+                                           	<li class="divider"></li>
+                                           	
+                                             <div class="slider_container row">     
+                                             
+                                                <button type="button" id="search_button1" style="width:100px;height:30px"
                                                 name="search_button1" class="btn btn-primary">
                                                     <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-                                                </button>
-                                                <input type="hidden" value="test">
-                                                </p>
-                                            </div>
+                                                </button>                
+                                               	<input type="hidden">
+											</div>
                                         </form>
                                     </div>
                                 </div>

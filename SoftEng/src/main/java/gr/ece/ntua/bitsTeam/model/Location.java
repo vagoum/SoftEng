@@ -87,5 +87,4 @@ public class Location {
 		return "Location [id=" + id + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode
 				+ ", longtitude=" + longtitude + ", latitude=" + latitude + "]";
 	}
-
 }
