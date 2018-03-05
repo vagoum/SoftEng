@@ -28,11 +28,9 @@ public class IndexController {
 
 		Object o = (Object) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		// anonymous
-		if (o instanceof String) {
-			model.addAttribute("longtitude", 23.728063);
-			model.addAttribute("latitude", 37.981091);
-		} else if (o instanceof org.springframework.security.core.userdetails.User) {
+		model.addAttribute("longtitude", 23.728063);
+		model.addAttribute("latitude", 37.981091);
+		if (o instanceof org.springframework.security.core.userdetails.User) {
 			org.springframework.security.core.userdetails.User u = (org.springframework.security.core.userdetails.User) o;
 			User user = userRepository.findByEmail(u.getUsername());
 			if (user!=null) {

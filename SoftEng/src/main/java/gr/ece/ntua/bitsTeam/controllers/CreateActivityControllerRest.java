@@ -30,9 +30,6 @@ import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.OrganizerRepository;
-
-
-// binary dependency
 import gr.ece.ntua.bitsTeam.watermark.Watermark;
 
 
