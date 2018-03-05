@@ -1,5 +1,7 @@
 package gr.ece.ntua.bitsTeam.service;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,8 +39,9 @@ public class BookingServiceImpl implements BookingService {
 		}
 		
 		if (totalCost <= balance) {
-			Booking new_booking = new Booking(activity, parent, ticketsBought);
-			bookingRepository.save(new_booking);
+			Booking newBooking = new Booking(activity, parent, ticketsBought, new Date());
+			
+			bookingRepository.save(newBooking);
 			parent.setBalance(balance - totalCost);
 			parentRepository.save(parent);
 			return "success";

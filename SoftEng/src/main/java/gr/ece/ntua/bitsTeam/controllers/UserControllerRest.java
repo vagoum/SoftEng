@@ -17,45 +17,43 @@ import gr.ece.ntua.bitsTeam.service.UserService;
 
 @RestController
 public class UserControllerRest {
-    @Autowired
-    private UserService userService;
+	@Autowired
+	private UserService userService;
 
-    
 	@Autowired
 	private SecurityService securityService;
-	
-	
-    @RequestMapping(value = "/parent_registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String  register(@RequestBody Parent parent)  {
-    	
-    	
-    	System.out.println(parent);
 
-    	
-        if (userService.findByEmail(parent.getEmail()) != null) {
-        }
+	@RequestMapping(value = "/parent_registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String register(@RequestBody Parent parent) {
 
-        
-        userService.save(parent, "ROLE_PARENT");
-        
-		securityService.autologin(parent.getEmail(), parent.getPasswordConfirm());
+		boolean exists = userService.findByEmail(parent.getEmail()) != null;
 
-        return "success";
+		if (!exists) {
 
-    }
-    
-    @RequestMapping(value = "/organizer_registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String register(@RequestBody Organizer organizer)  {
+			userService.save(parent, "ROLE_PARENT");
 
-        if (userService.findByEmail(organizer.getEmail()) != null) {
-        }
+			securityService.autologin(parent.getEmail(), parent.getPasswordConfirm());
 
-        userService.save(organizer, "ROLE_ORGANIZER");
-        
-		securityService.autologin(organizer.getEmail(), organizer.getPasswordConfirm());
+			return "success";
+		}
+		return "mail_used";
 
-        return "success";
-    }
-    
-    
+	}
+
+	@RequestMapping(value = "/organizer_registration", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public String register(@RequestBody Organizer organizer) {
+
+		boolean exists = userService.findByEmail(organizer.getEmail()) != null;
+
+		if (!exists) {
+
+			userService.save(organizer, "ROLE_ORGANIZER");
+
+			securityService.autologin(organizer.getEmail(), organizer.getPasswordConfirm());
+
+			return "success";
+		}
+		return "mail_used";
+	}
+
 }

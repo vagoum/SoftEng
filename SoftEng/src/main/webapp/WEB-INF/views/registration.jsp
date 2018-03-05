@@ -20,14 +20,18 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	<!-- CSS files -->
+	<link  rel="stylesheet" href="./css/validation.css">
 	<link  rel="stylesheet" href="./css/index_carousel.css">
 	<link  rel="stylesheet" href="./css/registration_panel.css">
 	<link  rel="stylesheet" href="./css/index_footer.css">
 	<title>Little Explorers</title>
 
 	<!-- js files -->
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 	<script type="text/javascript" src="./js/registration-controller.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJOMB6wHxG1D4Y1ZCl3TXlH0NptQ8PWk&libraries=places"></script>
+<script type="text/javascript" src="./js/jqeury.validate.js"></script>
 
 </head>
 
@@ -108,33 +112,33 @@
 										<div class="row">
 											<div class="col-sm-6 form-group">
 												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control" name="parent-first_name">
+												<input type="text" placeholder="Enter your First Name" class="form-control" id="parent-first_name" name="parent-first_name">
 											</div>
 											<div class="col-sm-6 form-group">
 												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control" name="parent-last_name">
+												<input type="text" placeholder="Enter your Last Name" class="form-control" id="parent-last_name" name="parent-last_name">
 											</div>
 										</div>					
 										<div class="form-group">
 											<label>Address</label>
-											<input type="text" placeholder="Enter your Address" class="form-control pac-input" name="parent-address">
+											<input type="text" placeholder="Enter your Address" class="form-control pac-input"  id="parent-address" name="parent-address">
 										</div>
 										<div class="map"></div>				
 										<div class="form-group">
 											<label>Phone Number</label>
-											<input type="number" placeholder="Enter your Phone Number" class="form-control" name="parent-phone">
+											<input type="number" placeholder="Enter your Phone Number" class="form-control" id="parent-phone" name="parent-phone">
 										</div>		
 										<div class="form-group">
 											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address" class="form-control" name="parent-email">
+											<input type="text" placeholder="Enter your Email Address" class="form-control" id="parent-email" name="parent-email">
 										</div>	
 										<div class="form-group">
 											<label>Password</label>
-											<input type="password" placeholder="Enter your Password" class="form-control" name="parent-password"/>
+											<input type="password" placeholder="Enter your Password" class="form-control" id="parent-password" name="parent-password"/>
 										</div>	
 										<div class="form-group">
 											<label>Password Again</label>
-											<input  type="password" placeholder="Enter your Password Again" class="form-control" name="parentpasswordConfirm"/>
+											<input  type="password" placeholder="Enter your Password Again" class="form-control" id="parentpasswordConfirm" name="parentpasswordConfirm"/>
 										</div>
 										<div class="form-group">
 											<div class="row">
@@ -154,43 +158,43 @@
 										<div class="row">
 											<div class="col-sm-6 form-group">
 												<label>First Name</label>
-												<input type="text" placeholder="Enter your First Name" class="form-control" name="organizer-first_name">
+												<input type="text" placeholder="Enter your First Name" class="form-control" id="organizer-first_name" name="organizer-first_name">
 											</div>
 											<div class="col-sm-6 form-group">
 												<label>Last Name</label>
-												<input type="text" placeholder="Enter your Last Name" class="form-control" name="organizer-last_name">
+												<input type="text" placeholder="Enter your Last Name" class="form-control" id="organizer-last_name" name="organizer-last_name">
 											</div>
 										</div>		
 										<div class="form-group">
 											<label>Company Name</label>
-											<input type="text" placeholder="Enter your Company Name" class="form-control" name="company_name">
+											<input type="text" placeholder="Enter your Company Name" class="form-control" id="company_name" name="company_name">
 										</div>
 										<div class="form-group">
 											<label>Company Details</label>
-											<textarea placeholder="Please specify details about your organization" rows="3" class="form-control" name="company_details" style="resize: none;"></textarea>
+											<textarea placeholder="Please specify details about your organization" rows="3" class="form-control" id="company_details" name="company_details" style="resize: none;"></textarea>
 										</div>
 										<div class="form-group">
 											<label>Address</label>
-											<input type="text" placeholder="Enter your Address" class="form-control pac-input" name="organizer-address">
+											<input type="text" placeholder="Enter your Address" class="form-control pac-input" id="organizer-address" name="organizer-address">
 										</div>
 
 										<div class="map"></div>
 
 										<div class="form-group">
 											<label>Phone Number</label>
-											<input type="number" placeholder="Enter your Phone Number" class="form-control" name="organizer-phone">
+											<input type="number" placeholder="Enter your Phone Number" class="form-control" id="organizer-phone" name="organizer-phone">
 										</div>		
 										<div class="form-group">
 											<label>Email Address</label>
-											<input type="text" placeholder="Enter your Email Address" class="form-control" name="organizer-email">
+											<input type="text" placeholder="Enter your Email Address" class="form-control" id="organizer-email" name="organizer-email">
 										</div>	
 										<div class="form-group">
 											<label>Password</label>
-											<input type="password" placeholder="Enter your Password" class="form-control" name="organizer-password"/>
+											<input type="password" placeholder="Enter your Password" class="form-control" id="organizer-password" name="organizer-password"/>
 										</div>	
 										<div class="form-group">
 											<label>Password Again</label>
-											<input  type="password" placeholder="Enter your Password Again" class="form-control" name="organizer-passwordConfirm"/>
+											<input  type="password" placeholder="Enter your Password Again" class="form-control" id="organizer-passwordConfirm" name="organizer-passwordConfirm"/>
 										</div>
 										<div class="form-group">
 											<div class="row">

@@ -1,5 +1,7 @@
 package gr.ece.ntua.bitsTeam.model;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,11 +27,14 @@ public class Booking {
 	
 	private Integer ticketsBought;
 
-	public Booking(Activity activity, Parent parent, Integer ticketsBought) {
+	private Date timestamp;
+
+	public Booking(Activity activity, Parent parent, Integer ticketsBought, Date timestamp) {
 		super();
 		this.activity = activity;
 		this.parent = parent;
 		this.ticketsBought = ticketsBought;
+		this.setTimestamp(timestamp);
 	}
 	
 	public Booking() {
@@ -67,6 +72,14 @@ public class Booking {
 	
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Date getTimestamp() {
+		return timestamp;
+	}
+
+	public void setTimestamp(Date timestamp) {
+		this.timestamp = timestamp;
 	}
 	
 }

@@ -76,6 +76,9 @@ $( document ).ready(function() {
     // to do
     getDataIndex(function(activities) {
     	console.log(JSON.stringify(activities,null,2));
+
+
+    	
     	for (var i=0; i<activities.length; i++) {
         	console.log(activities[i]);
     		createMarkerAndInfoWindow(map,activities[i]);
@@ -146,43 +149,45 @@ $( document ).ready(function() {
 	// Handling Search
 	$("#search_button1").on("click",function(e){	
 		e.preventDefault();
+		
 		// Handle Text input
-		if($("#search-text").val() != ""){
-			appliedSearchFilters.text = $("#search-text").val();
+		if($("#free-search-text").val() != ""){
+			appliedSearchFilters.text = $("#free-search-text").val();
 		}
 		
 		console.log(appliedSearchFilters);
 		
-		// to do
 	    getDataSearch(JSON.stringify(appliedSearchFilters), function(activities) {
+	    	
+	    	$('malakia').remove();
+
+	    	
 	    	for (var i=0; i<activities.length; i++) {
 	    		attachActivity(activities[i]);
 	    		createMarkerAndInfoWindow(map,activities[i]);
 	    	}
 	    }, function(data) {
 	    	console.log("error: "+data);
-	    });
 
-		/*
-		 * $.ajax({ type : "POST", contentType : "application/json", url :
-		 * "/search", data : JSON.stringify(appliedSearchFilters), dataType :
-		 * 'text', success : function(result) { console.log(result); //
-		 * window.location.href = "/index"; }, error : function(e) {
-		 * console.log(e); alert("Error!") console.log("ERROR: ", e); } });
-		 */
+	    });
 
 	});
 
 	$("#search_button2").on("click",function(e){	
 		e.preventDefault();
+		
 		// Handle Text input
-		if($("#search-text").val() != ""){
-			appliedSearchFilters.text = $("#search-text").val();
+		if($("#free-search-text").val() != ""){
+			appliedSearchFilters.text = $("#free-search-text").val();
 		}
 		
 		console.log(appliedSearchFilters);
 		
 	    getDataSearch(JSON.stringify(appliedSearchFilters), function(activities) {
+	    	
+	    	$('malakia').remove();
+
+	    	
 	    	for (var i=0; i<activities.length; i++) {
 	    		attachActivity(activities[i]);
 	    		createMarkerAndInfoWindow(map,activities[i]);
@@ -233,7 +238,7 @@ function getDataSearch(data, success, failure){
 		contentType : "application/json",
 		url : "/search",
 		processData : false,
-		contentType : "json",
+		contentType : "application/json",
 		data : data,
 		success : function(result) {
 			//console.log(result);
@@ -268,6 +273,7 @@ function attachActivity(activity){
 	var actitiesDOM = $(".activities");
 	var currentActivityCard = document.createElement('div');
 	currentActivityCard = $(currentActivityCard);
+	currentActivityCard.addClass("malakia");
 	currentActivityCard.addClass("col-xl-2 col-lg-3 col-md-3 col-sm-4 col-xs-12");
 	currentActivityCard.html($('<div class="card"><div class="card-header bg-transparent"><h4>' + activity.name +
 	 	'</h4></div><div class="card-body"><img class="card-photo" src="'+ activity.thumbNail.url+

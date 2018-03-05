@@ -20,7 +20,7 @@ public class ActivityControllerRest {
 	private ActivityRepository activityRepository;
 
 	@GetMapping(value = "/getActivities")
-	public List<Activity> getActivities() throws JsonGenerationException, JsonMappingException, IOException {
+	public List<Activity> getActivities(){
 
 
 		List<Activity> activities = activityRepository.findAll();

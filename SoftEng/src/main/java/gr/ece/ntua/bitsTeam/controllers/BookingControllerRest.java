@@ -24,6 +24,7 @@ public class BookingControllerRest {
 		String email = auth.getName();
 		String status;
 		
+		
 		Long activityId = bookActivityWrapper.getActivityId();
 		Integer ticketsBought = bookActivityWrapper.getTicketsBought();
 		

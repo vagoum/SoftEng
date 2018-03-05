@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -267,76 +266,84 @@
 		</div>
 
 		<div class="container">
-			<div class="row">
-				<div
-					class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xl-offset-3 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
-					<div class="input-group" id="adv-search">
-						<input type="text" id="search-text" class="form-control" placeholder="Search for snippets" />
-						<div class="input-group-btn">
-							<div class="btn-group" role="group">
-								<div class="dropdown dropdown-lg">
-									<button type="button" class="btn btn-default dropdown-toggle"
-										data-toggle="dropdown" aria-expanded="false">
-										<span class="caret"></span>
-									</button>
-									<div class="dropdown-menu dropdown-menu-right" role="menu">
-										<form class="form-horizontal" role="form">
-											<div class="form-group">
-												<label for="filter">Filter by</label> <select
-													class="form-control">
-													<option value="0" selected>All Snippets</option>
-													<option value="1">Featured</option>
-													<option value="2">Most popular</option>
-													<option value="3">Top rated</option>
-													<option value="4">Most commented</option>
-												</select>
-											</div>
-											<div class="slider_container row">
-												<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"
-													style="margin-left: -15px;">
-													<label for="proximity_slider" class="slider_label">Distance</label>
-												</div>
-												<div
-													class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
-													<input type="text" id="range_distance" value="" name="range_distance" />
-												</div>
-											</div>
-											<div class="slider_container row">
-												<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"
-													style="margin-left: -15px;">
-													<label for="proximity_slider" class="slider_label">Age</label>
-												</div>
-												<div
-													class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
-													<input type="text" id="range_age" value="" name="range_age" />
-												</div>
-											</div>
-											<div class="slider_container row">
-												<div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"
-													style="margin-left: -15px;">
-													<label for="proximity_slider" class="slider_label">Cost</label>
-												</div>
-												<div
-													class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
-													<input type="text" id="range_cost" value="" name="range_cost" />
-												</div>
-												<div class="form-group"></div>
-												<button type="button" id="search_button1" name="search_button1" class="btn btn-primary">
-													<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-												</button>
-											</div>
-										</form>
-									</div>
-								</div>
-								<button type="button" id="search_button2" name="search_button" class="btn btn-primary">
-									<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
-								</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+            <div class="row">
+                <div
+                    class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12 col-xl-offset-3 col-lg-offset-3 col-md-offset-3 col-sm-offset-3">
+                    <div class="input-group" id="adv-search">
+                        <input type="text" id="free-search-text" class="form-control" placeholder="Search for snippets" />
+                        <div class="input-group-btn">
+                            <div class="btn-group" role="group">
+                                <div class="dropdown dropdown-lg">
+                                    <button type="button" class="btn btn-lg btn-block dropdown-toggle" style="height:34px"
+                                        data-toggle="dropdown" aria-expanded="false">
+                                        <span class="caret"></span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <form class="form-horizontal" role="form">
+                                            <div class="form-group" style="margin-bottom: 25px">
+                                                <label for="filter">Sort by</label> <select
+                                                    class="form-control">
+                                                    <option value="0" selected>No Sort</option>
+                                                    <option value="1">Alphabetical Order</option>
+                                                    <option value="2">Most Popular</option>
+                                                    <option value="3">Date</option>
+                                                    <option value="4">Cost</option>
+                                                </select>
+                                            </div>
+                                            <div class="slider_container row" style="margin-bottom: 25px">
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"
+                                                    style="margin-left: -15px;padding-top: 20px">
+                                                    <label for="proximity_slider" class="slider_label">
+                                                    <font size="2" face="verdana" color="black">Radius(km)</font></label>
+                                                </div>
+                                                <div
+                                                    class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
+                                                    <input type="text" id="range_distance" value="" name="range_distance" />
+                                                </div>
+                                            </div>
+                                            <div class="slider_container row" style="margin-bottom: 25px">
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"
+                                                    style="margin-left: -15px;padding-top: 20px">
+                                                    <label for="proximity_slider" class="slider_label">
+                                                    <font size="2" face="verdana" color="black">Age range</font></label>
+                                                </div>
+                                                <div
+                                                    class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
+                                                    <input type="text" id="range_age" value="" name="range_age" />
+                                                </div>
+                                            </div>
+                                           
+                                            <div class="slider_container row">
+                                                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2 col-xs-4"
+                                                    style="margin-left: -15px;padding-top: 20px">
+                                                    <label for="proximity_slider" class="slider_label">
+                                                    <font size="2" face="verdana" color="black">Cost range</font></label>
+                                                </div>
+                                                <div style="margin-bottom: 25px"
+                                                    class="col-xl-10 col-lg-10 col-md-10 col-sm-10 col-xs-8">
+                                                    <input type="text" id="range_cost" value="" name="range_cost" />
+                                                </div>
+                                                <div class="form-group"></div>
+                                                <p align="center">
+                                                <button type="button" id="search_button1" style="width:60px"
+                                                name="search_button1" class="btn btn-primary">
+                                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                                </button>
+                                                <input type="hidden" value="test">
+                                                </p>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <button type="button" id="search_button2" style="height:34px" name="search_button2" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 	<br>
 		<!-- Activities -->

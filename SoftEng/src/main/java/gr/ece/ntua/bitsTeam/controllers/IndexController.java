@@ -28,7 +28,8 @@ public class IndexController {
 	public String index(Locale locale, Model model) {
 
 		Object o = (Object) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
+		model.addAttribute("longtitude", 23.728063);
+		model.addAttribute("latitude", 37.981091);
 		// anonymous
 		if (o instanceof String) {
 			model.addAttribute("longtitude", 23.728063);

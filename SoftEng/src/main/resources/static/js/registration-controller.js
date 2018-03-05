@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+	
 	var userData = {
 			firstName : "",
 			lastName : "",
@@ -14,7 +15,160 @@ $(document).ready(function() {
 			}
 	};
 	
+	
+	 $("#parent-registration-form").validate({
+	        rules: {
+	            "parent-first_name": {
+	                required: true,
+	            },
+	            "parent-last_name": {
+	                required: true,
+	            },
 
+	            "parent-address": {
+	                required: true,
+	            },
+	            "parent-email": {
+	                required: true,
+	                email: true
+	            },
+	            "parent-password": {
+	                required: true,
+                    minlength: 6,
+                    maxlength: 25,
+
+	            },
+	            "parentpasswordConfirm": {
+	                required: true,
+                    equalTo: "#parent-password",
+                    minlength: 6,
+                    maxlength: 25,
+	            },
+	        },
+	        messages: {
+	            "parent-first_name": {
+	                required: "Please, enter a firstname"
+	            },
+	            "parent-last_name": {
+	                required: "Please, enter a lastname"
+	            },
+	            "parent-address": {
+	                required: "Please, enter a lastname"
+	            },
+	            "parent-password": {
+	                required: "Please, enter a password",
+                    minlength: "Password must be at least 6 characters",
+                    maxlength: "Password must be less than 25 characters",
+
+	            },
+	            "parentpasswordConfirm": {
+	                required: "Please, confirm your password",
+                    equalTo: "Password do not match",
+                    minlength: "Password must be at least 6 characters",
+                    maxlength: "Password must be less than 25 characters",
+	            },
+	            
+	            "parent-email": {
+	                required: "Please, enter an email",
+	                email: "Email is invalid"
+	            }
+	        },
+	        invalidHandler: function(event, validator) {
+	            // 'this' refers to the form
+	            var errors = validator.numberOfInvalids();
+	            if (errors) {
+	              var message = 'Invalid form';
+	              $("div.error span").html(message);
+	              $("div.error").show();
+	            } else {
+	              $("div.error").hide();
+	            }
+	          }
+	    });
+	 
+	 
+	 
+	 $("#organizer-registration-form").validate({
+	        rules: {
+	            "organizer-first_name": {
+	                required: true,
+	            },
+	            "organizer-last_name": {
+	                required: true,
+	            },
+	            "organizer-address": {
+	                required: true,
+	            },
+	            "organizer-email": {
+	                required: true,
+	                email: true
+	            },
+	            "company_name": {
+	                required: true,
+	            },
+	            "company_details": {
+	                required: true,
+	            },
+	            "organizer-password": {
+	                required: true,
+                 minlength: 6,
+                 maxlength: 25,
+
+	            },
+	            "organizer-passwordConfirm": {
+	                required: true,
+                 equalTo: "#organizer-password",
+                 minlength: 6,
+                 maxlength: 25,
+	            },
+	        },
+	        messages: {
+	            "organizer-first_name": {
+	                required: "Please, enter a firstname"
+	            },
+	            "organizer-last_name": {
+	                required: "Please, enter a lastname"
+	            },
+	            "organizer-address": {
+	                required: "Please, enter an address"
+	            },
+	            "organizer-password": {
+	                required: "Please, enter a password",
+                 minlength: "Password must be at least 6 characters",
+                 maxlength: "Password must be less than 25 characters",
+
+	            },
+	            "organizer-passwordConfirm": {
+	                required: "Please, confirm your password",
+                 equalTo: "Password do not match",
+                 minlength: "Password must be at least 6 characters",
+                 maxlength: "Password must be less than 25 characters",
+	            },
+	            "organizer-email": {
+	                required: "Please, enter an email",
+	                email: "Email is invalid"
+	            },
+	            "company_name": {
+	                required: "Please enter a company name",
+	            },
+	            "company_details": {
+	                required: "Please enter details for your company",
+	            },
+	        },
+	        invalidHandler: function(event, validator) {
+	            // 'this' refers to the form
+	            var errors = validator.numberOfInvalids();
+	            if (errors) {
+	              var message = 'Invalid form';
+	              $("div.error span").html(message);
+	              $("div.error").show();
+	            } else {
+	              $("div.error").hide();
+	            }
+	          }
+	    });
+	 
+	
 	function initMap(currentForm) {
 
         var map = new google.maps.Map(currentForm.find($(".map")).get(0), {
@@ -127,6 +281,7 @@ $(document).ready(function() {
 
 		console.log(JSON.stringify(userData));
 		
+		 if ($("#parent-registration-form").valid()) {
 		$.ajax({
 			type : "POST",
 			contentType : "application/json",
@@ -134,16 +289,22 @@ $(document).ready(function() {
 			data : JSON.stringify(userData),
 			dataType : 'text',
 			success : function(result) {
-				console.log(result);
-
-  				window.location.href = "/index";
+				if (result == "success")
+					window.location.href = "/index";
+				else {
+					alert("Mail already used")
+				}
 			},
 			error : function(e) {
 				console.log(e);
 				alert("Error!")
 				console.log("ERROR: ", e);
 			}
-		});
+			});
+		 }
+		 else {
+		alert("Invalid registration");  //to fix
+	}
 		
 	});
 
@@ -160,7 +321,7 @@ $(document).ready(function() {
 		userData.passwordConfirm = $("input[name=organizer-passwordConfirm]").val();
 
 		
-		console.log(JSON.stringify(userData));
+		 if ($("#organizer-registration-form").valid()) {
 
 		$.ajax({
 			type : "POST",
@@ -169,7 +330,11 @@ $(document).ready(function() {
 			data : JSON.stringify(userData),
 			dataType : 'text',
 			success : function(result) {
-  				window.location.href = "/index";
+				if (result == "success")
+					window.location.href = "/index";
+				else {
+					alert("Mail already used")
+				}
 			},
 			error : function(e) {
 				console.log(e);
@@ -177,6 +342,10 @@ $(document).ready(function() {
 				console.log("ERROR: ", e);
 			}
 		});
+		 }
+		 else {
+		alert("Invalid registration");  //to fix
+	}
 	});
 		
 
