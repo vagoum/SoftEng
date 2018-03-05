@@ -1,6 +1,5 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
-import java.util.ArrayList;
 import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import gr.ece.ntua.bitsTeam.model.Activity;
+import gr.ece.ntua.bitsTeam.model.Categories;
 import gr.ece.ntua.bitsTeam.model.Location;
 import gr.ece.ntua.bitsTeam.model.User;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
@@ -28,8 +27,7 @@ public class IndexController {
 	public String index(Locale locale, Model model) {
 
 		Object o = (Object) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		model.addAttribute("longtitude", 23.728063);
-		model.addAttribute("latitude", 37.981091);
+
 		// anonymous
 		if (o instanceof String) {
 			model.addAttribute("longtitude", 23.728063);
@@ -51,7 +49,8 @@ public class IndexController {
 				model.addAttribute("latitude", 37.981091);				
 			}
 		}
-
+		Categories categories = new Categories();
+		model.addAttribute("categories", categories.getCategories());
 		return "index";
 	}
 

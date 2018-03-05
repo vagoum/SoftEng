@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import gr.ece.ntua.bitsTeam.model.Activity;
+import gr.ece.ntua.bitsTeam.model.Categories;
 import gr.ece.ntua.bitsTeam.model.Location;
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Photo;
@@ -124,11 +125,8 @@ public class ActivityController {
 		// request.getSession().getAttribute("parentId_");
 		Organizer organizer = organizerRepository.findByEmail(email);
 		if (organizer.getVerified()) {
-			List<String> categories = new ArrayList<>();
-			categories.add("Sports");
-			categories.add("Camps");
-			categories.add("Music");
-			model.addAttribute("categories", categories);
+			
+			model.addAttribute("categories", new Categories().getCategories());
 			return "activity_create";
 		}
 		return "organizer_verification_failure";

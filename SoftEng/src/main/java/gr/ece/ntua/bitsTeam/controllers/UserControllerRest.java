@@ -1,16 +1,14 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import gr.ece.ntua.bitsTeam.login.SecurityService;
+import gr.ece.ntua.bitsTeam.model.Location;
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.service.UserService;
@@ -31,7 +29,7 @@ public class UserControllerRest {
 		if (!exists) {
 
 			userService.save(parent, "ROLE_PARENT");
-
+			//checkLocation(parent.getLocation());
 			securityService.autologin(parent.getEmail(), parent.getPasswordConfirm());
 
 			return "success";
@@ -55,5 +53,6 @@ public class UserControllerRest {
 		}
 		return "mail_used";
 	}
+	
 
 }

@@ -25,13 +25,15 @@ public class Location {
 
 	private String postalCode = "";
 
+
+	
 	private Double longtitude = 23.728063;
 
-	// @Column(name = "longtitude", insertable = true, updatable = true,
-	// nullable = false, length = 255)
-	// @ColumnDefault("37.981091")
+
 	private Double latitude = 37.981091;
 
+	
+	
 	public String getAddress() {
 		return address;
 	}

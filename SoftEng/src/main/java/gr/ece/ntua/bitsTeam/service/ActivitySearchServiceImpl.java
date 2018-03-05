@@ -41,11 +41,10 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		String costMax = searchFiltersWrapper.getCostMax();
 		String ageMin = searchFiltersWrapper.getAgeMin();
 		String ageMax = searchFiltersWrapper.getAgeMax();
-		int radius = 1000;
+		int radius = Integer.parseInt(proximity) * 1000;
 		String basequery = "SELECT activity.activity_id FROM activity, location_table as l  WHERE "
-				+ "activity.cost > :costmin and activity.cost < :costmax and " +
+				+ "activity.cost > :costmin and activity.cost < :costmax and " 
 				// "activity.ageMin > :ageMin and activity.ageMax < :ageMax" +
-				"activity.name LIKE :text and "
 				+ " activity.location_id=l.id and earth_box(ll_to_earth(:lat, :long), :prox) @> ll_to_earth(l.latitude, l.longtitude)";
 
 		
@@ -60,10 +59,8 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		if (costMax.equals("")) {
 			costMax = minValueCompare;
 		}
-		if (proximity.equals("") || proximity.equals("0")) {
+		if (proximity.equals("")) {
 			radius = 100000000;
-		} else {
-			radius = Integer.parseInt(proximity) * 1000;
 		}
 		if (!text.equals("")) {
 				basequery += " and activity.name LIKE :text ;";
@@ -73,7 +70,7 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		}
 
 		if (text.equals("")) {
-			q = entityManagerFactory.createEntityManager().createNativeQuery(basequery).setParameter("text", text)
+			q = entityManagerFactory.createEntityManager().createNativeQuery(basequery)
 				.setParameter("long", longt)
 				.setParameter("lat", lat)
 				.setParameter("prox", radius)
@@ -82,7 +79,7 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 				
 		}
 		else {
-			q = entityManagerFactory.createEntityManager().createNativeQuery(basequery).setParameter("text", text)
+			q = entityManagerFactory.createEntityManager().createNativeQuery(basequery)
 					.setParameter("long", longt)
 					.setParameter("lat", lat)
 					.setParameter("prox", radius)
@@ -91,8 +88,6 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 					.setParameter("text", text);
 			
 		}
-	
-		// in psql long is mapped with BigInteger
 		List<Long> longList = new ArrayList<>();
 		for (Object o : q.getResultList()) {
 			BigInteger b = (BigInteger) o;
@@ -103,5 +98,6 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		return activityRepository.findAll(longList);
 
 	}
+
 
 }

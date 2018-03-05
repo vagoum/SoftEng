@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -295,9 +296,10 @@
                                                 <label for="categories">Choose Category</label> <select
                                                     class="form-control">
                                                     <option value="0" selected>Select no category</option>
-                                                    <option value="1">Aquatics</option>
-                                                    <option value="2">Sports</option>
-                                                    <option value="3">Art</option>
+                                                    <c:forEach items="${categories}" var="category"  varStatus="loop">
+                                                    
+                                                    <option value="${loop.index}">${category }</option>
+                                                    </c:forEach>
                                                 </select>
                                             </div>
                                             

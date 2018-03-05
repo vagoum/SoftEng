@@ -58,8 +58,11 @@ public class Activity {
 
 	private String time;
 	
-	private String ageRange;
-
+	private String ageMin = "";
+	
+	private String ageMax = "";
+	
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "activityDetailsId")
 	private List<Photo> photos = new ArrayList<>();
@@ -132,12 +135,23 @@ public class Activity {
 		this.date = date;
 	}
 
-	public String getAgeRange() {
-		return ageRange;
+
+	public String getAgeMin() {
+		return ageMin;
 	}
+	
 	@JsonIgnore
-	public void setAgeRange(String ageRange) {
-		this.ageRange = ageRange;
+	public void setAgeMin(String ageMin) {
+		this.ageMin = ageMin;
+	}
+
+	public String getAgeMax() {
+		return ageMax;
+	}
+
+	@JsonIgnore
+	public void setAgeMax(String ageMax) {
+		this.ageMax = ageMax;
 	}
 
 	public List<Photo> getPhotos() {

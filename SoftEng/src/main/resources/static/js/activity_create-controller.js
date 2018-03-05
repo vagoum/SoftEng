@@ -7,8 +7,8 @@ $(document).ready(function(){
         cost: "",
         date:"",
         time:"",
-        age_min:"",   //new
-        age_max:"",   //new
+        ageMin:"",   //new
+        ageMax:"",   //new
         category:"",
         location : {
 			address :"",
@@ -231,8 +231,8 @@ $(document).ready(function(){
         activityData.date = timeAndDate[0];
         activityData.time = timeAndDate[1]+" "+timeAndDate[2];
         console.log(activityData.time);
-        activityData.age_min = $("#activity-form-age_min").val();   //new
-        activityData.age_max = $("#activity-form-age_max").val();   //new
+        activityData.ageMin = $("#activity-form-age_min").val();   //new
+        activityData.ageMax = $("#activity-form-age_max").val();   //new
         
         
         var form = $('#activity-form')[0];
