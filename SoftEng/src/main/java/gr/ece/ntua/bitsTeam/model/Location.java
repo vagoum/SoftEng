@@ -19,16 +19,18 @@ public class Location {
 	private Integer id;
 	
 	
-	private String address;
+	private String address = "";
 	
-	private String city;
+	private String city = "";
 	
 	
-	private String postalCode;
+	private String postalCode = "";
 	
-	private Double longtitude;
 	
-	private Double latitude;
+	// default location
+	private Double longtitude = 23.728063;
+	
+	private Double latitude = 37.981091;
 
 	public String getAddress() {
 		return address;
