@@ -6,6 +6,15 @@
     padding:15px
 }
 
+.log-in-prompt-tickets{
+    border: 1px solid red;
+    border-radius: 10px;
+    webkit-box-shadow: none;
+    box-shadow: none;
+    padding:10px;
+    width:300px
+}
+
 
 /* Main Image carousel*/
 .main-carousel-inner>.item>img, .main-carousel-inner>.item>a>img {

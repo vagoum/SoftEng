@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -227,18 +227,18 @@
 					${organizer.firstName} ${organizer.lastName}</h3>
 
 				<hr>
-				<form action="users/resetpassword.jsp" method="get"
+				<form action="users/changepassword.jsp" method="get"
 					id="reset-pass_form">
-					<label for="proirty">Forgot your pasword?</label>
+					<label for="proirty">Change Password: </label>
 
 					<button type="submit" form="reset-pass_form"
 						class="btn btn-success" id="activity-details-book-btn"
-						style="margin-left: 15px;">Reset Password!</button>
+						style="margin-left: 15px;">Change Password</button>
 				</form>
 				<hr>
 
-				<h4 class="x-price" id="activity-details-price">Current Point
-					Balance: 280</h4>
+				<h4 class="x-price" id="activity-details-price">
+				Total Revenue this month is: ${totalrevenue}€</h4>
 
 			</div>
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -255,27 +255,29 @@
 			<div class="well">
 				<h1 class="text-center">Scheduled Activities</h1>
 				<div class="list-group">
-					<c:forEach var="activity" items="${scheduledActivities}">
+					<c:forEach var="wrap" items="${scheduledActivities}">
 						<div class="list-group-item">
 							<div class="media col-md-3">
 								<figure class="pull-left">
 									<img
 										class="media-object img-rounded img-responsive activy-image"
-										src=${activity.thumbNail.url}>
+										src=${wrap.activity.thumbNail.url}>
 								</figure>
 							</div>
 							<div class="col-md-6">
-								<h3 class="list-group-item-heading activy-title">${activity.name}</h3>
+								<h3 class="list-group-item-heading activy-title">${wrap.activity.name}</h3>
 								<p class="list-group-item-text activity-details">
-									${activity.activityDescription}</p>
+									${wrap.activity.activityDescription}</p>
 							</div>
 							<br>
-							<p>
-								<b>Metrics:</b> Tickets Sold: 500 Ticket Revenues: 4000€
-							</p>
 							<div class="col-md-3 text-center">
-							    <a href="/activity_view?id=${activity.activityId}" type="button" class="btn btn-success btn-lg btn-block book-btn">View</a>
+							    <a href="/activity_view?id=${wrap.activity.activityId}" type="button" class="btn btn-success btn-lg btn-block book-btn">View</a>
 							</div>
+							<p>
+								<c:if test="${wrap.totalTickets != null}">
+								<b>Monthly statistics:</b> Tickets Left: ${wrap.activity.ticketsLeft} Tickets Sold: ${wrap.totalTickets} Ticket Revenues: ${wrap.totalTickets*wrap.activity.cost}€
+								</c:if>
+							</p>
 						</div>
 					</c:forEach>
 
@@ -288,24 +290,32 @@
 			<div class="well">
 				<h1 class="text-center">Past Activities</h1>
 				<div class="list-group">
-					<c:forEach var="activity" items="${completedActivities}">
+					<c:forEach var="wrap" items="${completedActivities}">
 
 						<div class="list-group-item">
 							<div class="media col-md-3">
 								<figure class="pull-left">
 									<img
 										class="media-object img-rounded img-responsive activy-image"
-										src=${activity.thumbNail.url}  >
+										src=${wrap.activity.thumbNail.url}  >
 								</figure>
 							</div>
 							<div class="col-md-6">
-								<h3 class="list-group-item-heading activy-title">${activity.name}</h3>
+								<h3 class="list-group-item-heading activy-title">${wrap.activity.name}</h3>
 								<p class="list-group-item-text activity-details">
-									${activity.activityDescription}</p>
+									${wrap.activity.activityDescription}</p>
 							</div>
 							<div class="col-md-3 text-center">
 							    <a href="/activity_view?id=${activity.activityId}" type="button" class="btn btn-success btn-lg btn-block book-btn">View</a>
 							</div>
+							<p>
+							<c:if test="${wrap.totalTickets != null}">
+								<b>Monthly statistics:</b> Tickets Sold: ${wrap.totalTickets} Ticket Revenues: ${wrap.totalTickets*wrap.activity.cost}€
+							</c:if>
+							<c:if test="${wrap.totalTickets == null}">
+								Activity completed before this month
+							</c:if>							
+							</p>
 						</div>
 					</c:forEach>
 				</div>
