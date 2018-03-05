@@ -164,13 +164,14 @@
                                                     <label class="sr-only" for="exampleInputPassword2">Password</label>
                                                     <input type="password" class="form-control"placeholder="Password" required name="password">
                                                 </div>
- 
+ 												
                                                 <input type="hidden" name="${_csrf.parameterName}"
                                                     value="${_csrf.token}" />
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-success btn-block">Sign
                                                         in</button>
                                                 </div>
+                                                <a href="/user/resetPassword">Forgot your password?</a>
                                             </form>
                                         </div>
                                     </div>

@@ -1,14 +1,20 @@
 package gr.ece.ntua.bitsTeam.login;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Arrays;
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+
+import gr.ece.ntua.bitsTeam.model.PasswordResetToken;
+import gr.ece.ntua.bitsTeam.model.User;
+import gr.ece.ntua.bitsTeam.model.jparepos.PasswordTokenRepository;
 
 @Service
 public class SecurityServiceImpl implements SecurityService{
@@ -17,8 +23,9 @@ public class SecurityServiceImpl implements SecurityService{
 
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-
-    private static final Logger logger = LoggerFactory.getLogger(SecurityServiceImpl.class);
+    
+    @Autowired
+    private PasswordTokenRepository passwordTokenRepository;
 
     @Override
     public String findLoggedInUsername() {
@@ -40,7 +47,25 @@ public class SecurityServiceImpl implements SecurityService{
 
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-            logger.debug(String.format("Auto login %s successfully!", email));
         }
     }
+    
+    @Override
+    public String validatePasswordResetToken(long id, String token) {
+        final PasswordResetToken passToken = passwordTokenRepository.findByToken(token);
+        if ((passToken == null) || (passToken.getUser().getUserId() != id)) {
+            return "invalidToken";
+        }
+
+        final Calendar cal = Calendar.getInstance();
+        if ((passToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
+            return "expired";
+        }
+
+        final User user = passToken.getUser();
+        final Authentication auth = new UsernamePasswordAuthenticationToken(user, null, Arrays.asList(new SimpleGrantedAuthority("CHANGE_PASSWORD_PRIVILEGE")));
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        return null;
+    }
+    
 }

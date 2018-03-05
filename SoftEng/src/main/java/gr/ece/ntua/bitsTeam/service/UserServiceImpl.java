@@ -4,22 +4,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import gr.ece.ntua.bitsTeam.model.PasswordResetToken;
 import gr.ece.ntua.bitsTeam.model.Role;
 import gr.ece.ntua.bitsTeam.model.User;
-import gr.ece.ntua.bitsTeam.model.jparepos.RoleRepository;
+import gr.ece.ntua.bitsTeam.model.jparepos.PasswordTokenRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.UserRepository;
 
 @Service
 public class UserServiceImpl implements UserService {
-    @Autowired
+	
+    @SuppressWarnings("rawtypes")
+	@Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private RoleRepository roleRepository;
+    private PasswordTokenRepository passwordTokenRepository;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Override
+    
+	@SuppressWarnings("unchecked")
+	@Override
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         if (user.getUserId() == null) {
@@ -36,7 +41,8 @@ public class UserServiceImpl implements UserService {
         }
     }
     
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public void save(User user, String authority) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         if (user.getUserId() == null) {
@@ -55,5 +61,21 @@ public class UserServiceImpl implements UserService {
 	public User findByEmail(String email) {
         return userRepository.findByEmail(email);
 
+	}
+	
+	public void createPasswordResetTokenForUser(User user, String token) {
+	    PasswordResetToken myToken = new PasswordResetToken(token, user);
+	    passwordTokenRepository.save(myToken);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void changeUserPassword(User user, String password) {
+	    user.setPassword(bCryptPasswordEncoder.encode(password));
+	    userRepository.save(user);
+	}
+	
+	@Override
+    public boolean checkIfValidOldPassword(User user, String oldPassword) {
+        return bCryptPasswordEncoder.matches(oldPassword, user.getPassword());
 	}
 }
