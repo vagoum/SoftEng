@@ -269,6 +269,10 @@
 								<p class="list-group-item-text activity-details">
 									${activity.activityDescription}</p>
 							</div>
+							<br>
+							<p>
+								<b>Metrics:</b> Tickets Sold: 500 Ticket Revenues: 4000€
+							</p>
 							<div class="col-md-3 text-center">
 							    <a href="/activity_view?id=${activity.activityId}" type="button" class="btn btn-success btn-lg btn-block book-btn">View</a>
 							</div>

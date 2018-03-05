@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="ISO-8859-1"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -244,6 +244,18 @@
 						<textarea type="text" class="form-control" id="activity-form-description" name="activity_description" placeholder="Enter the activity description" rows="3"></textarea required>
 					</div>
 
+					<div class="form-group" style="padding-top: 10px; margin-left: -10px; margin-right: -10px;">
+						<div class="col-sm-4">
+							<label><h4 class="my-3">Minimum age</h4></label>
+							<input type="number" class="form-control" id="activity-form-age_min" name="age_min" placeholder="3" required>
+						</div> 
+
+						<div class="col-sm-4">
+							<label><h4 class="my-3">Maximum age</h4></label>
+							<input type="number" class="form-control" id="activity-form-age_max" name="age_max" placeholder="16" required>
+						</div>
+					</div>
+					
 					<div class="form-group" style="padding-top: 10px; margin-left: -10px; margin-right: -10px;">
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Number of Tickets</h4></label>
