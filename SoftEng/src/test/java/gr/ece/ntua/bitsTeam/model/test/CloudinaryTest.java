@@ -5,7 +5,6 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -19,7 +18,7 @@ import com.cloudinary.utils.ObjectUtils;
 
 import gr.ece.ntua.bitsTeam.Application;
 import gr.ece.ntua.bitsTeam.cloudinary.CloudinaryConfig;
-import gr.ece.ntua.bitsTeam.cloudinary.Watermark;
+import gr.ece.ntua.bitsTeam.watermark.Watermark;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)

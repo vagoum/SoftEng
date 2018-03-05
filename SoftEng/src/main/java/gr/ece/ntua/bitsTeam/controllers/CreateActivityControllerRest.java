@@ -25,12 +25,15 @@ import com.cloudinary.Transformation;
 import com.cloudinary.utils.ObjectUtils;
 
 import gr.ece.ntua.bitsTeam.cloudinary.CloudinaryConfig;
-import gr.ece.ntua.bitsTeam.cloudinary.Watermark;
 import gr.ece.ntua.bitsTeam.model.Activity;
 import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
 import gr.ece.ntua.bitsTeam.model.jparepos.OrganizerRepository;
+
+
+// binary dependency
+import gr.ece.ntua.bitsTeam.watermark.Watermark;
 
 
 @RestController

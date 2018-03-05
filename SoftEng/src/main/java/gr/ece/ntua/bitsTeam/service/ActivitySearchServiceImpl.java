@@ -41,7 +41,7 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		String costMax = searchFiltersWrapper.getCostMax();
 		String ageMin = searchFiltersWrapper.getAgeMin();
 		String ageMax = searchFiltersWrapper.getAgeMax();
-		int radius = Integer.parseInt(proximity) * 1000;
+		int radius = 1000;
 		String basequery = "SELECT activity.activity_id FROM activity, location_table as l  WHERE "
 				+ "activity.cost > :costmin and activity.cost < :costmax and " +
 				// "activity.ageMin > :ageMin and activity.ageMax < :ageMax" +
@@ -60,8 +60,10 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		if (costMax.equals("")) {
 			costMax = minValueCompare;
 		}
-		if (proximity.equals("")) {
+		if (proximity.equals("") || proximity.equals("0")) {
 			radius = 100000000;
+		} else {
+			radius = Integer.parseInt(proximity) * 1000;
 		}
 		if (!text.equals("")) {
 				basequery += " and activity.name LIKE :text ;";
@@ -89,6 +91,8 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 					.setParameter("text", text);
 			
 		}
+	
+		// in psql long is mapped with BigInteger
 		List<Long> longList = new ArrayList<>();
 		for (Object o : q.getResultList()) {
 			BigInteger b = (BigInteger) o;
@@ -99,6 +103,5 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		return activityRepository.findAll(longList);
 
 	}
-
 
 }

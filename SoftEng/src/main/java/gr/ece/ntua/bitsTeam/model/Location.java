@@ -1,12 +1,13 @@
 package gr.ece.ntua.bitsTeam.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.geo.Point;
+import org.hibernate.annotations.ColumnDefault;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,26 +18,24 @@ public class Location {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
-	
+
 	private String address = "";
-	
+
 	private String city = "";
-	
-	
+
 	private String postalCode = "";
-	
-	
-	// default location
+
 	private Double longtitude = 23.728063;
-	
+
+	// @Column(name = "longtitude", insertable = true, updatable = true,
+	// nullable = false, length = 255)
+	// @ColumnDefault("37.981091")
 	private Double latitude = 37.981091;
 
 	public String getAddress() {
 		return address;
 	}
 
-	
 	public void setAddress(String address) {
 		this.address = address;
 	}
@@ -46,7 +45,6 @@ public class Location {
 		return city;
 	}
 
-	
 	public void setCity(String city) {
 		this.city = city;
 	}
@@ -54,6 +52,7 @@ public class Location {
 	public String getPostalCode() {
 		return postalCode;
 	}
+
 	@JsonIgnore
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
@@ -64,7 +63,11 @@ public class Location {
 	}
 
 	public void setLongtitude(Double longtitude) {
-		this.longtitude = longtitude;
+		if (longtitude == null)
+			longtitude = 23.728063;
+		else {
+			this.longtitude = longtitude;
+		}
 	}
 
 	public Double getLatitude() {
@@ -72,9 +75,13 @@ public class Location {
 	}
 
 	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
+		if (latitude == null) {
+			latitude = 37.981091;
+		} else {
+			this.latitude = latitude;
+		}
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Location [id=" + id + ", address=" + address + ", city=" + city + ", postalCode=" + postalCode
