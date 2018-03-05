@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	<!-- CSS files -->
+		<link  rel="stylesheet" href="./css/validation.css">
 	<link  rel="stylesheet" href="./css/index_carousel.css">
 	<link  rel="stylesheet" href="./css/activity_create.css">
 	<link  rel="stylesheet" href="./css/index_footer.css">
@@ -36,7 +37,11 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
 	<!-- js files -->
 	<script type="text/javascript" src="./js/activity_create-controller.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script type="text/javascript" src="./js/registration-controller.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJOMB6wHxG1D4Y1ZCl3TXlH0NptQ8PWk&libraries=places"></script>
+<script type="text/javascript" src="./js/jqeury.validate.js"></script>
 
 	<title>Little Explorers</title>
 </head>

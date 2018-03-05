@@ -7,8 +7,8 @@ $(document).ready(function(){
         cost: "",
         date:"",
         time:"",
-        "age_min":"",   //new
-        "age_max":"",   //new
+        age_min:"",   //new
+        age_max:"",   //new
         category:"",
         location : {
 			address :"",
@@ -16,6 +16,67 @@ $(document).ready(function(){
 			longtitude : ""
 		}
     };
+    
+    
+    $("#activity-form").validate({
+        rules: {
+            "activity_title": {
+                required: true,
+            },
+            "activity_description": {
+                required: true,
+            },
+            "ticket_number": {
+                range: [1,10000],
+                integer: true,
+            },
+            "ticket_price": {
+                range: [1,1000],
+                integer: true,
+                required: true,
+            },
+            "date": {
+                required: true,
+                date: true,
+            },
+            "address": {
+                required: true,
+            },
+            "photo_file" : {
+                extension: "jpg",
+                //filesize: 4000000, //4MB
+            }, 
+        },
+        messages: {
+            "activity_title": {
+                required: "Please, enter an activity title"
+            },
+            "activity_description": {
+                required: "Please, enter description"
+            },
+            "ticket_number": {
+                required: "Please, enter a number of tickets",
+                range: "Please, enter a valid ticket number",
+            },
+            "ticket_price": {
+                required: "Please, enter a price",
+                range: "Please, enter a valid ticket price",
+            },
+            "date": {
+                required: "Please, enter a date",
+                date: "Please insert a valid date",
+            },
+            "address": {
+                required: "Please, enter an address",
+            }, 
+            "photo_file": { 
+                extension: "Please upload only jpg, png format",
+                filesize: "Please upload maximum 500Kb",
+            } 
+        }
+    });
+    
+    
 
     function initMap(currentForm) {
         var map = new google.maps.Map($(".map").get(0), {
@@ -105,7 +166,15 @@ $(document).ready(function(){
             alert("Please select at least one photo");
             return false;
         }
-        
+        var imageFile = topEntry.find("input[name=photo_file]")[0].files[0];
+        console.log(imageFile);
+        if (! imageFile.type.match('image/jpeg') && !imageFile.type.match('image/png')) {
+        	alert("Image must be jpg jpeg or png")
+        }
+        else if (imageFile.size > 4000000) {
+        	alert("Image more than 4MB")
+        }
+        else {
         var newEntry = $(topEntry.clone());
         newEntry.find('input').val(null)
             .find('btn')
@@ -117,6 +186,7 @@ $(document).ready(function(){
             .removeClass('btn-add').addClass('btn-remove')
             .removeClass('btn-success').addClass('btn-danger')
             .html('<span class="glyphicon glyphicon-minus"></span>');
+        }
     });
 
     controlForm.on("click", ".btn-remove",function(e){
@@ -185,7 +255,7 @@ $(document).ready(function(){
         
         
         console.log(JSON.stringify(formData));
-        
+        if ($("#activity-form").valid()) {
         $.ajax({
 			type : "POST",
 			url : "/activity/create",
@@ -203,6 +273,15 @@ $(document).ready(function(){
 			}
 		});
         }
+        else {
+    		alert("Invalid Activity Create");  //to fix
+        }
+        }
        });
 
 });
+/*
+$.validator.addMethod('filesize', function (value, element, param) {
+    return this.optional(element) || (element.files[0].size <= param)
+}, 'File size must be less than {0}');
+*/

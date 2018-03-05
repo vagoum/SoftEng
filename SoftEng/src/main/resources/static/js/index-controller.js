@@ -150,6 +150,7 @@ $( document ).ready(function() {
 	$("#search_button1").on("click",function(e){	
 		e.preventDefault();
 		
+
 		// Handle Text input
 		if($("#free-search-text").val() != ""){
 			appliedSearchFilters.text = $("#free-search-text").val();
@@ -159,8 +160,10 @@ $( document ).ready(function() {
 		
 	    getDataSearch(JSON.stringify(appliedSearchFilters), function(activities) {
 	    	
-	    	$('malakia').remove();
+			$(".activities").eq(0).html(""); // reset cards
+		    var map = initMap(c_latitude, c_longtitude);
 
+		    setInitialMarker(map, c_latitude, c_longtitude);
 	    	
 	    	for (var i=0; i<activities.length; i++) {
 	    		attachActivity(activities[i]);
@@ -185,8 +188,10 @@ $( document ).ready(function() {
 		
 	    getDataSearch(JSON.stringify(appliedSearchFilters), function(activities) {
 	    	
-	    	$('malakia').remove();
+			$(".activities").eq(0).html(""); // reset cards
+		    var map = initMap(c_latitude, c_longtitude);
 
+		    setInitialMarker(map, c_latitude, c_longtitude);
 	    	
 	    	for (var i=0; i<activities.length; i++) {
 	    		attachActivity(activities[i]);
