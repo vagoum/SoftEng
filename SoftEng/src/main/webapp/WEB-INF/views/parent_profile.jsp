@@ -227,13 +227,13 @@
 					${parent.firstName} ${parent.lastName}</h3>
 
 				<hr>
-				<form action="users/resetpassword.jsp" method="get"
+				<form action="users/changepassword.jsp" method="get"
 					id="reset-pass_form">
-					<label for="proirty">Forgot your pasword?</label>
+					<label for="proirty">Change Password: </label>
 
 					<button type="submit" form="reset-pass_form"
 						class="btn btn-success" id="activity-details-book-btn"
-						style="margin-left: 15px;">Reset Password!</button>
+						style="margin-left: 15px;">Change Password</button>
 				</form>
 				<hr>
 

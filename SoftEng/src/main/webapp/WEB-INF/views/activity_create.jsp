@@ -48,58 +48,6 @@
 
 <body>
 	
-	<!-- Carousel -->
-	<div class="container">
-		<div class="row">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-
-					<div class="item active">
-						<img class="first-slide" src="https://www.w3schools.com/w3images/workbench.jpg" alt="First slide" style="width:100%;">
-						<div class="carousel-caption">
-							<h3>Little Explorers</h3>      
-							<p>Adventures For Our Little Friends</p>
-						</div>
-					</div>
-
-					<div class="item">
-						<img class="second-slide" src="https://www.w3schools.com/w3images/workbench.jpg" alt="Second slide" style="width:100%;">
-						<div class="carousel-caption">
-							<h3>For Parents</h3>
-							<p>Explore Amazing Activies</p>
-						</div>
-					</div>
-
-					<div class="item">
-						<img class="third-slide" src="https://www.w3schools.com/w3images/coffee.jpg" alt="Third slide" style="width:100%;">
-						<div class="carousel-caption">
-							<h3>For Activity Organizers</h3>
-							<p>Create great experiences and adventures for amazing customers</p>
-						</div>
-					</div>
-				</div>
-
-				<!-- Left and right controls -->
-				<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#myCarousel" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-		</div>
-	</div>
-
 			    <!-- Generic Navbar -->
        
     <sec:authorize access="!hasRole('ROLE_ORGANIZER') and !hasRole('ROLE_PARENT')">
@@ -116,7 +64,7 @@
                     </button>
                     <a class="navbar-brand visible-xs-block" href="#">Menu</a>
                 </div>
- 
+
                 <div class="collapse navbar-collapse js-navbar-collapse">
                
                     <ul class="nav navbar-nav navbar-right">
@@ -249,27 +197,27 @@
 						<textarea type="text" class="form-control" id="activity-form-description" name="activity_description" placeholder="Enter the activity description" rows="3"></textarea required>
 					</div>
 
-					<div class="form-group" style="padding-top: 10px; margin-left: -10px; margin-right: -10px;">
+					<div class="form-group" style="padding-top: 10px; margin-left: -14px; margin-right: -10px;">
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Minimum age</h4></label>
-							<input type="number" class="form-control" id="activity-form-age_min" name="age_min" placeholder="3" required>
+							<input type="number" class="form-control" id="activity-form-age_min" name="age_min" style="width:160px" placeholder="3" required onkeypress="if (event.keyCode ==13) {return false;}">
 						</div> 
 
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Maximum age</h4></label>
-							<input type="number" class="form-control" id="activity-form-age_max" name="age_max" placeholder="16" required>
+							<input type="number" class="form-control" id="activity-form-age_max" name="age_max" style="width:160px" placeholder="16" required onkeypress="if (event.keyCode ==13) {return false;}">
 						</div>
 					</div>
 					
-					<div class="form-group" style="padding-top: 10px; margin-left: -10px; margin-right: -10px;">
+					<div class="form-group" style="padding-top: 20px; margin-left: -15px; margin-right: -10px;">
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Number of Tickets</h4></label>
-							<input type="number" class="form-control" id="activity-form-ticket_number" name="ticket_number" placeholder="20" required onkeypress="if (event.keyCode ==13) {return false;}">
+							<input type="number" class="form-control" id="activity-form-ticket_number" name="ticket_number" style="width:160px" placeholder="20" required onkeypress="if (event.keyCode ==13) {return false;}">
 						</div> 
 
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Ticket Price</h4></label>
-							<input type="number" class="form-control" id="activity-form-ticket_price" name="ticket_price" placeholder="8" required onkeypress="if (event.keyCode ==13) {return false;}">
+							<input type="number" class="form-control" id="activity-form-ticket_price" name="ticket_price" style="width:160px" placeholder="8" required onkeypress="if (event.keyCode ==13) {return false;}">
 						</div>
 
 						<div class="col-sm-4">

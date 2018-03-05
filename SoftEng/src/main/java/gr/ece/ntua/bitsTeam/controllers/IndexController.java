@@ -37,13 +37,18 @@ public class IndexController {
 		} else if (o instanceof org.springframework.security.core.userdetails.User) {
 			org.springframework.security.core.userdetails.User u = (org.springframework.security.core.userdetails.User) o;
 			User user = userRepository.findByEmail(u.getUsername());
-			if (user.getLocation() != null) {
-				Location loc = user.getLocation();
-				model.addAttribute("longtitude", loc.getLongtitude());
-				model.addAttribute("latitude", loc.getLatitude());
+			if (user!=null) {
+				if (user.getLocation() != null) {
+					Location loc = user.getLocation();
+					model.addAttribute("longtitude", loc.getLongtitude());
+					model.addAttribute("latitude", loc.getLatitude());
+				} else {
+					model.addAttribute("longtitude", 23.728063);
+					model.addAttribute("latitude", 37.981091);
+				}
 			} else {
 				model.addAttribute("longtitude", 23.728063);
-				model.addAttribute("latitude", 37.981091);
+				model.addAttribute("latitude", 37.981091);				
 			}
 		}
 

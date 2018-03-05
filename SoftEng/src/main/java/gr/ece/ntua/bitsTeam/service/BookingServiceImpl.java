@@ -32,12 +32,12 @@ public class BookingServiceImpl implements BookingService {
 		Integer totalCost = activity.getCost() * ticketsBought;
 		Integer balance = parent.getBalance();
 		if (activity.getTicketsLeft() >= ticketsBought) {
-			
+
 			if (totalCost <= balance) {
 				Booking newBooking = new Booking(activity, parent, ticketsBought, new Date());
 				activity.setTicketsLeft(activity.getTicketsLeft() - ticketsBought);
 				activity.getBookings().add(newBooking);
-				
+
 				bookingRepository.save(newBooking);
 				parent.setBalance(balance - totalCost);
 				parentRepository.save(parent);
@@ -45,7 +45,7 @@ public class BookingServiceImpl implements BookingService {
 				return "success";
 			}
 			else {
-				return "no tickets left";
+				return "not enough points";
 			}
 		}
 		else {

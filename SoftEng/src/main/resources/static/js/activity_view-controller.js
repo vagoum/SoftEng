@@ -44,10 +44,10 @@ $(document).ready(function() {
 					window.location.href = "/parent";
 				}
 				else if (result == "no tickets left"){
-					alert("no tickets left")
+					 swal("No tickets left", "The event doesn't have the amount of requested tickets", "error");
 				}
 				else if (result == "not enough points"){
-					alert("not enough points")
+					 swal("Not enough points", "Not enough points", "error");
 				}
 			},
 			error : function(e) {

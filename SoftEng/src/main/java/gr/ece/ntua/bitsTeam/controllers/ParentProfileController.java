@@ -153,11 +153,11 @@ public class ParentProfileController {
 		List<Activity> completedActivities  = new ArrayList<>();
 		for(Booking booking: bookings) {
 			
-			if (booking.getActivity().getElapsed()) {
-				completedActivities.add(booking.getActivity());
+			if (date.compareTo(booking.getActivity().getDate()) < 0) {
+				scheduledActivities.add(booking.getActivity());
 			}
 			else {
-				scheduledActivities.add(booking.getActivity());
+				completedActivities.add(booking.getActivity());
 			}
 		}
         
