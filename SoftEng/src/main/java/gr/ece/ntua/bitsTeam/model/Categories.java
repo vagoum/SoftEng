@@ -6,7 +6,7 @@ import java.util.List;
 public class Categories {
 
 	private List<String> categories = Arrays.asList("Football", "Basketball", "Swimming", "Ballet", "Music",
-			"Painting");
+			"Painting","Martial Arts","Snow Sports");
 
 	public List<String> getCategories() {
 		return categories;

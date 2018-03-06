@@ -139,10 +139,16 @@ $(document).ready(function(){
             activityData.location.longtitude = activity.location.longtitude;
 
             var geocoder = new google.maps.Geocoder;
+            var address = ""
             geocoder.geocode({'location': positionDoubleclick}, function(results, status) {
               if (status === 'OK') {
                 if (results[0]) { 
                     activity.name =  activity.name + ":<br>" + results[0].formatted_address;
+                    address = results[0].formatted_address;
+                    console.log(address);
+                   //  $('#activity-form-address input').val(address);
+                    $('input[name="address"').val(address);
+
                 }else{
                     console.log(results);
                 }

@@ -191,7 +191,7 @@
 		</div>
 
 		<div class="row">
-			<form id="activity-form" action="activities/create.jsp" method="post" role="form" style="display: block;">
+			<form id="activity-form" action="activities/create.jsp" method="post" role="form" style="display: block; onkeypress="if (event.keyCode ==13) {return false;}"">
 
 				<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
 					<div class="col-6 form-group">

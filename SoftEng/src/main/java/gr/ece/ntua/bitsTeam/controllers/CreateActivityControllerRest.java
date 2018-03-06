@@ -65,6 +65,7 @@ public class CreateActivityControllerRest {
 		for (MultipartFile file : files) {
 			
 			Photo photo = uploadFile(file);
+			if (photo != null) {
 			if (photo.getName() != null)  {
 				if (flag) {
 					activity.setThumbNail(photo);
@@ -72,6 +73,7 @@ public class CreateActivityControllerRest {
 				}
 				else
 					activity.getPhotos().add(photo);
+			}
 			}
 		}
 		
