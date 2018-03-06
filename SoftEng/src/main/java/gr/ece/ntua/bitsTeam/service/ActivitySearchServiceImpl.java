@@ -2,6 +2,7 @@ package gr.ece.ntua.bitsTeam.service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
@@ -32,7 +33,7 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 
 		Integer prox, costmin, costmax;
 		Float lat, longt;
-		String[] options = new String[10];
+
 		String text = searchFiltersWrapper.getText();
 		String latitude = searchFiltersWrapper.getLatitude();
 		String longtitude = searchFiltersWrapper.getLongtitude();
@@ -41,52 +42,64 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 		String costMax = searchFiltersWrapper.getCostMax();
 		String ageMin = searchFiltersWrapper.getAgeMin();
 		String ageMax = searchFiltersWrapper.getAgeMax();
-		int radius = Integer.parseInt(proximity) * 1000;
+		String sortBy = searchFiltersWrapper.getSortBy();
+		String category = searchFiltersWrapper.getCategory();
+		int radius;
 		String basequery = "SELECT activity.activity_id FROM activity, location_table as l  WHERE "
-				+ "activity.cost > :costmin and activity.cost < :costmax and " 
-				// "activity.ageMin > :ageMin and activity.ageMax < :ageMax" +
-				+ " activity.location_id=l.id and earth_box(ll_to_earth(:lat, :long), :prox) @> ll_to_earth(l.latitude, l.longtitude)";
+				+ "activity.cost > :costmin and activity.cost < :costmax and "
+				+ " activity.age_min > :agemin and activity.age_max < :agemax and " 
+				+ " activity.location_id=l.id and earth_box(ll_to_earth(:lat, :long), :prox) @> ll_to_earth(l.latitude, l.longtitude) "
+				+ " and activity.category LIKE :category ";
 
-		
 		Query q;
 
 		lat = Float.parseFloat(latitude);
 		longt = Float.parseFloat(longtitude);
 
+		if (ageMin.equals("")) {
+			ageMin = "0";
+		}
+		if (ageMax.equals("")) {
+			ageMax = "20";
+		}
 		if (costMin.equals("")) {
 			costMin = maxValueCompare;
 		}
 		if (costMax.equals("")) {
 			costMax = minValueCompare;
 		}
-		if (proximity.equals("")) {
+		if (!proximity.equals("")) {
+			radius = Integer.parseInt(proximity) * 1000;
+		} else {
 			radius = 100000000;
 		}
+		if (category.equals("Select no category")) {
+			category = "%";
+		}
 		if (!text.equals("")) {
-				basequery += " and activity.name LIKE :text ;";
-			
+			basequery += " and activity.name LIKE :text ;";
+
 		} else {
 			basequery += " ;";
 		}
+		
 
 		if (text.equals("")) {
-			q = entityManagerFactory.createEntityManager().createNativeQuery(basequery)
-				.setParameter("long", longt)
-				.setParameter("lat", lat)
-				.setParameter("prox", radius)
-				.setParameter("costmin", Integer.parseInt(costMin))
-				.setParameter("costmax", Integer.parseInt(costMax));
-				
-		}
-		else {
-			q = entityManagerFactory.createEntityManager().createNativeQuery(basequery)
-					.setParameter("long", longt)
-					.setParameter("lat", lat)
-					.setParameter("prox", radius)
+			q = entityManagerFactory.createEntityManager().createNativeQuery(basequery).setParameter("long", longt)
+					.setParameter("lat", lat).setParameter("prox", radius)
+					.setParameter("agemin", Integer.parseInt(ageMin))
+					.setParameter("agemax", Integer.parseInt(ageMax))
 					.setParameter("costmin", Integer.parseInt(costMin))
-					.setParameter("costmax", Integer.parseInt(costMax))
-					.setParameter("text", text);
-			
+					.setParameter("costmax", Integer.parseInt(costMax)).setParameter("category", category);
+
+		} else {
+			q = entityManagerFactory.createEntityManager().createNativeQuery(basequery).setParameter("long", longt)
+					.setParameter("agemin", Integer.parseInt(ageMin))
+					.setParameter("agemax", Integer.parseInt(ageMax))
+					.setParameter("lat", lat).setParameter("prox", radius)
+					.setParameter("costmin", Integer.parseInt(costMin))
+					.setParameter("costmax", Integer.parseInt(costMax)).setParameter("text", text).setParameter("category", category);
+
 		}
 		List<Long> longList = new ArrayList<>();
 		for (Object o : q.getResultList()) {
@@ -94,10 +107,22 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 			longList.add(b.longValueExact());
 		}
 
-		
-		return activityRepository.findAll(longList);
+		List<Activity> activities = activityRepository.findAll(longList);
+
+		switch (sortBy) {
+		case "No Sort":
+			break;
+		case "Alphabetical Order":
+			activities.sort((o1, o2) -> o2.getName().compareTo(o1.getName()));
+		case "Date":
+			activities.sort((o1, o2) -> o1.getDate().compareTo(o2.getDate()));
+		case "Cost":
+			activities.sort((o1, o2) -> o2.getCost().compareTo(o1.getCost()));
+		default:
+		}
+
+		return activities;
 
 	}
-
 
 }

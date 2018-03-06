@@ -251,7 +251,7 @@
 						<div class="controls">
 							<div class="entry input-group col-xs-3" style="padding-bottom: 7px;">
 
-								<input class="btn btn-primary" name="photo_file" type="file" onkeypress="if (event.keyCode ==13) {return false;}"/>
+								<input class="btn btn-primary" name="photo_file" type="file" accept="image/*" onkeypress="if (event.keyCode ==13) {return false;}"/>
 								<span class="input-group-btn">
 									<button class="btn btn-success btn-add" type="button">
 										<span class="glyphicon glyphicon-plus"></span>

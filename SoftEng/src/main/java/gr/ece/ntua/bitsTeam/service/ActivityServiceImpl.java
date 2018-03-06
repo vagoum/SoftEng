@@ -22,7 +22,7 @@ public class ActivityServiceImpl implements ActivityService{
 	@Override
 	public List<Activity> findInRadius(Location location, int radius) {
 		
-		Query q =  entityManagerFactory.createEntityManager().createNativeQuery("SELECT activity.activity_id FROM activity, location_table as l WHERE activity.location_id=l.id and earth_box(ll_to_earth(?, ?), ?) @> ll_to_earth(l.latitude, l.longtitude);").setParameter(1, radius).setParameter(2, location.getLatitude()).setParameter(3, location.getLongtitude());
+		Query q =  entityManagerFactory.createEntityManager().createNativeQuery("SELECT activity FROM activity, location_table as l WHERE activity.location_id=l.id and earth_box(ll_to_earth(?, ?), ?) @> ll_to_earth(l.latitude, l.longtitude);").setParameter(1, radius).setParameter(2, location.getLatitude()).setParameter(3, location.getLongtitude());
 		List<Long> list = q.getResultList();
 		List<Activity> activityList = activityRepository.findAll(list);
 		return activityList;

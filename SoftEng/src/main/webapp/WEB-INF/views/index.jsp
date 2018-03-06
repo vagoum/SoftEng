@@ -283,18 +283,17 @@
                                     <div class="dropdown-menu dropdown-menu-right" role="menu">
                                         <form class="form-horizontal" role="form">
                                             <div class="form-group" style="margin-bottom: 25px">
-                                                <label for="sort">Sort by</label> <select
+                                                <label for="sort">Sort by</label> <select id="select-sort"
                                                     class="form-control">
                                                     <option value="0" selected>No Sort</option>
                                                     <option value="1">Alphabetical Order</option>
-                                                    <option value="2">Most Popular</option>
                                                     <option value="3">Date</option>
                                                     <option value="4">Cost</option>
                                                 </select>
                                             </div>
                                            
                                             <div class="form-group" style="margin-bottom: 25px">
-                                                <label for="categories">Choose Category</label> <select
+                                                <label for="categories">Choose Category</label> <select id="select-category"
                                                     class="form-control">
                                                     <option value="0" selected>Select no category</option>
                                                     <c:forEach items="${categories}" var="category"  varStatus="loop">

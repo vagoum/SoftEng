@@ -58,9 +58,9 @@ public class Activity {
 
 	private String time;
 	
-	private String ageMin = "";
+	private Integer ageMin;
 	
-	private String ageMax = "";
+	private Integer ageMax;
 	
 	
 	@OneToMany(cascade = CascadeType.ALL)
@@ -136,21 +136,21 @@ public class Activity {
 	}
 
 
-	public String getAgeMin() {
+	public Integer getAgeMin() {
 		return ageMin;
 	}
 	
-	@JsonIgnore
-	public void setAgeMin(String ageMin) {
+	
+	public void setAgeMin(Integer ageMin) {
 		this.ageMin = ageMin;
 	}
 
-	public String getAgeMax() {
+	public Integer getAgeMax() {
 		return ageMax;
 	}
 
-	@JsonIgnore
-	public void setAgeMax(String ageMax) {
+	
+	public void setAgeMax(Integer ageMax) {
 		this.ageMax = ageMax;
 	}
 

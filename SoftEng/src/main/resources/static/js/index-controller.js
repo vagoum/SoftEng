@@ -13,11 +13,11 @@ $( document ).ready(function() {
 		"sortBy":""
 	};
 	
-	c_longtitude ="";
-	c_latitude = "";
+	var c_longtitude ="";
+	var c_latitude = "";
 	
-	var c_longtitude = parseFloat(document.getElementById("longtitude-id").value);
-	var c_latitude = parseFloat(document.getElementById("latitude-id").value);
+	c_longtitude = parseFloat(document.getElementById("longtitude-id").value);
+	c_latitude = parseFloat(document.getElementById("latitude-id").value);
 	console.log(c_longtitude);
 	console.log(c_latitude);
 	
@@ -155,8 +155,12 @@ $( document ).ready(function() {
 		if($("#free-search-text").val() != ""){
 			appliedSearchFilters.text = $("#free-search-text").val();
 		}
+
+		appliedSearchFilters.category = $("#select-category :selected").text();
+		appliedSearchFilters.sortBy = $("#select-sort :selected").text();
+
 		
-		console.log(appliedSearchFilters);
+		console.log(appliedSearchFilters.category);
 		
 	    getDataSearch(JSON.stringify(appliedSearchFilters), function(activities) {
 	    	
@@ -184,6 +188,11 @@ $( document ).ready(function() {
 			appliedSearchFilters.text = $("#free-search-text").val();
 		}
 		
+		appliedSearchFilters.category = $("#select-category :selected").text();
+		appliedSearchFilters.sortBy = $("#select-sort :selected").text();
+
+		
+		console.log(appliedSearchFilters.category);
 		console.log(appliedSearchFilters);
 		
 	    getDataSearch(JSON.stringify(appliedSearchFilters), function(activities) {
