@@ -143,7 +143,9 @@
                 </div>
  
                 <div class="collapse navbar-collapse js-navbar-collapse">
-               
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">Home</a></li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/registration">Register</a></li>
  

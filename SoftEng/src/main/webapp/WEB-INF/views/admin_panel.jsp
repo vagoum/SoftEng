@@ -59,10 +59,6 @@
 		<ul class="nav navbar-right top-nav">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 				data-toggle="dropdown">Admin User<b class="fa fa-angle-down"></b></a>
-				<ul class="dropdown-menu">
-					<li><a href="#"><i class="fa fa-fw fa-power-off"></i>
-							Logout</a></li>
-				</ul></li>
 		</ul>
 
 		<!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
@@ -117,6 +113,7 @@
 									<thead>
 										<th>Company Name</th>
 										<th>Email</th>
+										<th>Address</th>
 										<th>Contact</th>
 										<th>Block/Unblock</th>
 										<th>Delete</th>
@@ -182,7 +179,8 @@
 											<c:forEach items="${userList}" var="user">
 											<tr>
 												<td id="user_company_name">${user.companyName}</td>
-												<td id="user_email">${user.email}</td>									
+												<td id="user_email">${user.email}</td>
+												<td id="user_address">${user.location.address}</td>									
                                                 <td id="user_phone">${user.phone}</td>
 												<td>
 													<!-- Block Button -->

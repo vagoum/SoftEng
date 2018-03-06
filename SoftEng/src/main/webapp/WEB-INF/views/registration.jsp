@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	
+	pageEncoding="UTF-8"%>	
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,55 +38,141 @@
 </head>
 
 <body>
-	<!-- Carousel -->
-	<div class="container">
-		<div class="row">
-			<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="10000">
-				<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-
-				<!-- Wrapper for slides -->
-				<div class="carousel-inner">
-
-
-					<div class="item">
-						<img class="second-slide" src="https://www.w3schools.com/w3images/workbench.jpg" alt="Second slide" style="width:100%;">
-						<div class="carousel-caption">
-							<h3>For Parents</h3>
-							<p>Explore Amazing Activies</p>
-						</div>
-					</div>
-
-					<div class="item">
-						<img class="third-slide" src="https://www.w3schools.com/w3images/coffee.jpg" alt="Third slide" style="width:100%;">
-						<div class="carousel-caption">
-							<h3>For Activity Organizers</h3>
-							<p>Create great experiences and adventures for amazing customers</p>
-						</div>
-					</div>
-				</div>
-
-				<!-- Left and right controls -->
-				<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-					<span class="glyphicon glyphicon-chevron-left"></span>
-					<span class="sr-only">Previous</span>
-				</a>
-				<a class="right carousel-control" href="#myCarousel" data-slide="next">
-					<span class="glyphicon glyphicon-chevron-right"></span>
-					<span class="sr-only">Next</span>
-				</a>
-			</div>
-		</div>
-	</div>
 
   <input type="hidden" name="country1" value="Norway">
     <input type="hidden" name="country2" value="Norway">
       <input type="hidden" name="country3" value="Norway">
-      
+
+			    <!-- Generic Navbar -->
+       
+    <sec:authorize access="!hasRole('ROLE_ORGANIZER') and !hasRole('ROLE_PARENT')">
+        <div class="container side-bordering">
+   
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs-block" href="#">Menu</a>
+                </div>
+ 
+                <div class="collapse navbar-collapse js-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">Home</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/registration">Register</a></li>
+ 
+                        <li class="dropdown">
+                            <a href="http://www.jquery2dotnet.com" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
+                            <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form class="form" role="form" method="post" action="/login" accept-charset="UTF-8" id="login-nav">
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail2">Welcome Back!</label>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputEmail2">Email address</label>
+                                                    <input type="email" class="form-control" name="email"placeholder="Email address" required>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="exampleInputPassword2">Password</label>
+                                                    <input type="password" class="form-control"placeholder="Password" required name="password">
+                                                </div>
+ 												
+                                                <input type="hidden" name="${_csrf.parameterName}"
+                                                    value="${_csrf.token}" />
+                                                <div class="form-group">
+                                                    <button type="submit" class="btn btn-success btn-block">Sign
+                                                        in</button>
+                                                </div>
+                                                <a href="/user/resetPassword">Forgot your password?</a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul></li>
+                    </ul>
+ 
+                </div>
+                </nav>
+            </div>
+        </div>
+    </sec:authorize>
+   
+   
+    <!-- Parent Navbar -->
+    <sec:authorize access="hasRole('ROLE_PARENT')">
+    <div class="container side-bordering">
+ 
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs-block" href="#">Menu</a>
+                </div>
+ 
+                <div class="collapse navbar-collapse js-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">Home</a></li>
+                    </ul>
+ 
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/parent">Profile</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+    </sec:authorize>
+ 
+ 
+ 
+    <!-- Organizer Navbar -->
+    <sec:authorize access="hasRole('ROLE_ORGANIZER')">
+    <div class="container side-bordering">
+ 
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-xs-block" href="#">Menu</a>
+                </div>
+ 
+                <div class="collapse navbar-collapse js-navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">Home</a></li>
+                        <li><a href="/activity_create">Create Activity</a></li>
+                    </ul>
+ 
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/organizer">Profile</a></li>
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+ 
+                </div>
+            </nav>
+        </div>
+    </div>
+    </sec:authorize>
+          
 	<!-- Content -->
 	<div class="container side-bordering">
 		<!-- Sign-In or Register -->
