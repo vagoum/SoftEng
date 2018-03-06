@@ -4,7 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import gr.ece.ntua.bitsTeam.model.Activity;
 import gr.ece.ntua.bitsTeam.model.Booking;
 import gr.ece.ntua.bitsTeam.model.Location;
-import gr.ece.ntua.bitsTeam.model.Organizer;
 import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.model.Photo;
 import gr.ece.ntua.bitsTeam.model.jparepos.ActivityRepository;
@@ -30,12 +31,12 @@ public class ParentProfileController {
 
 	@Autowired
 	private ParentRepository parentRepository;
-	
+
 	@Autowired
 	private ActivityRepository activityRepository;
-	
+
 	private void createTestParent() {
-		
+
 		Date date1 = null;
 		Date date2 = null;
 		Date date3 = null;
@@ -63,10 +64,9 @@ public class ParentProfileController {
 		parent.setPhone("6940200292");
 		parent.setResetPassword(false);
 		parent.setBalance(200);
-		
+
 		parentRepository.save(parent);
 
-		
 		Booking booking1 = new Booking();
 		booking1.setParent(parent);
 		Booking booking2 = new Booking();
@@ -80,9 +80,10 @@ public class ParentProfileController {
 
 		Photo photo = new Photo();
 		photo.setUrl("http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png");
-		
+
 		Activity activity1 = new Activity();
-		activity1.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
+		activity1.setActivityDescription(
+				"Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
 		activity1.setName("Play Football");
 		activity1.setDate(date1);
 		activity1.setThumbNail(photo);
@@ -91,9 +92,10 @@ public class ParentProfileController {
 		activity1.getBookings().add(booking1);
 		booking1.setActivity(activity1);
 		activity1.setElapsed(true);
-		
+
 		Activity activity2 = new Activity();
-		activity2.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
+		activity2.setActivityDescription(
+				"Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
 		activity2.setName("Play Football");
 		activity2.setDate(date2);
 		activity2.getBookings().add(booking2);
@@ -104,7 +106,8 @@ public class ParentProfileController {
 		activity2.setElapsed(false);
 
 		Activity activity3 = new Activity();
-		activity3.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
+		activity3.setActivityDescription(
+				"Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
 		activity3.setName("Play Football");
 		activity3.setDate(date3);
 		activity3.getBookings().add(booking3);
@@ -115,7 +118,8 @@ public class ParentProfileController {
 		activity3.setElapsed(true);
 
 		Activity activity4 = new Activity();
-		activity4.setActivityDescription("Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
+		activity4.setActivityDescription(
+				"Qui diam libris ei, vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo offendit ea mea. Nostro blandit sea");
 		activity4.setName("Play Football");
 		activity4.setDate(date4);
 		activity4.getBookings().add(booking4);
@@ -131,39 +135,43 @@ public class ParentProfileController {
 		activityRepository.save(activity2);
 
 	}
-	
+
 	private Boolean flag = true;
-	
+
 	@RequestMapping()
 	public String account(HttpServletRequest request, Model model) {
 		// set test objects
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
-		String email = auth.getName();
-		
-		// Long organizerId = (Long) request.getSession().getAttribute("parentId_");
-		Parent parent = parentRepository.findByEmail(email);
-		
-        model.addAttribute("parent", parent);
 
-		
-        Date date = new Date();
+		String email = auth.getName();
+
+		// Long organizerId = (Long)
+		// request.getSession().getAttribute("parentId_");
+		Parent parent = parentRepository.findByEmail(email);
+
+		model.addAttribute("parent", parent);
+
+		Set<Integer> set = new HashSet<>();
+		Date date = new Date();
 		List<Booking> bookings = parent.getBookings();
 		List<Activity> scheduledActivities = new ArrayList<>();
-		List<Activity> completedActivities  = new ArrayList<>();
-		for(Booking booking: bookings) {
-			
-			if (date.compareTo(booking.getActivity().getDate()) < 0) {
-				scheduledActivities.add(booking.getActivity());
+		List<Activity> completedActivities = new ArrayList<>();
+		for (Booking booking : bookings) {
+			if (!set.contains(booking.getId())) {
+				if (date.compareTo(booking.getActivity().getDate()) < 0) {
+					scheduledActivities.add(booking.getActivity());
+				} else {
+					completedActivities.add(booking.getActivity());
+				}
 			}
 			else {
-				completedActivities.add(booking.getActivity());
+				set.add(booking.getId());
 			}
 		}
-        
-        model.addAttribute("scheduledBookings", scheduledActivities);
-        model.addAttribute("completedBookings", completedActivities);
-	
+
+		model.addAttribute("scheduledBookings", scheduledActivities);
+		model.addAttribute("completedBookings", completedActivities);
+
 		return "parent_profile";
 	}
 

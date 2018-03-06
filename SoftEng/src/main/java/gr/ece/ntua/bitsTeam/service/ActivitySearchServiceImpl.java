@@ -3,6 +3,7 @@ package gr.ece.ntua.bitsTeam.service;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
@@ -123,6 +124,12 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 			break;
 		}
 
+		for (Activity act: activities) {
+			if (act.getDate().compareTo(new Date()) < 0) {
+				activities.remove(act);
+			}
+		}
+		
 		return activities;
 
 	}

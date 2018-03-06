@@ -22,10 +22,14 @@
 	<!-- CSS files -->
 	<link  rel="stylesheet" href="./css/payment_panel.css">
 	<link  rel="stylesheet" href="./css/index_footer.css">
+	<link  rel="stylesheet" href="./css/validation.css">
 
 	<!-- JS files -->
 	<script type="text/javascript" src="./js/reset_password-controller.js"></script>
-
+	<script type="text/javascript" src="./js/reset_password-controller.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	
 	<title>Little Explorers</title>
 </head>
 

@@ -155,9 +155,7 @@ $( document ).ready(function() {
 		
 
 		// Handle Text input
-		if($("#free-search-text").val() != ""){
 			appliedSearchFilters.text = $("#free-search-text").val();
-		}
 
 		appliedSearchFilters.category = $("#select-category :selected").text();
 		appliedSearchFilters.sortBy = $("#select-sort :selected").text();
@@ -186,9 +184,8 @@ $( document ).ready(function() {
 		e.preventDefault();
 		
 		// Handle Text input
-		if($("#free-search-text").val() != ""){
 			appliedSearchFilters.text = $("#free-search-text").val();
-		}
+		
 		
 		appliedSearchFilters.category = $("#select-category :selected").text();
 		appliedSearchFilters.sortBy = $("#select-sort :selected").text();

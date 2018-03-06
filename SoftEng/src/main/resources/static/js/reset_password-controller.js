@@ -1,16 +1,32 @@
 $( document ).ready(function() {
-	var form = $("#password-form");
-	$("#submit_btn").on('click', function(e){
-		e.preventDefault();
+	 $("#password-form").validate({
+	        rules: {
+	            "password1": {
+	            	required: true,
+	                 minlength: 6,
+	                 maxlength: 25,	  
+	            },
+	            "passwordConfirm": {
+	            	required: true,
+	                 equalTo: "#password1",
+	                 minlength: 6,
+	                 maxlength: 25,		            },
+	        },
+	        messages: {
+	            "password1": {
+	                required: "Please, enter a password",
+                 minlength: "Password must be at least 6 characters",
+                 maxlength: "Password must be less than 25 characters",
 
-		var pass1 = $('input[name=password1]').val();
-		var pass2 = $('input[name=password2]').val();
-
-		if(pass1 == pass2){
-			form.submit();
-		}else{
-			alert("The provided passwords dont match");
-		}
-  	});
+	            },
+	            "passwordConfirm": {
+	                required: "Please, confirm your password",
+                 equalTo: "Password do not match",
+                 minlength: "Password must be at least 6 characters",
+                 maxlength: "Password must be less than 25 characters",
+	            }
+	        },
+	       
+	    });
 
 });
