@@ -171,7 +171,7 @@ $( document ).ready(function() {
 	    	
 			$(".activities").eq(0).html(""); // reset cards
 
-		    setInitialMarker(map, c_latitude, c_longtitude);
+		    //setInitialMarker(map, c_latitude, c_longtitude);
 	    	
 	    	for (var i=0; i<activities.length; i++) {
 	        	console.log(activities[i]);
@@ -204,7 +204,7 @@ $( document ).ready(function() {
 	    	
 			$(".activities").eq(0).html(""); // reset cards
 
-		    setInitialMarker(map, c_latitude, c_longtitude);
+		    //setInitialMarker(map, c_latitude, c_longtitude);
 	    	
 	    	for (var i=0; i<activities.length; i++) {
 	        	console.log(activities[i]);

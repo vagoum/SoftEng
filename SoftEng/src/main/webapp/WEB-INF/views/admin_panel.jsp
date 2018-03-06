@@ -116,7 +116,6 @@
 										<th>Address</th>
 										<th>Contact</th>
 										<th>Block/Unblock</th>
-										<th>Delete</th>
 										<th>Password Reset</th>										
 										<th>Verify</th>
 									</thead>
@@ -200,17 +199,6 @@
 													</p>
 												</td>
 
-												<td>
-													<!-- Delete Button -->
-													<p data-placement="top" data-toggle="tooltip"
-														title="Delete">
-														<button class="btn btn-danger btn-sm" id="delete_btn"
-															data-title="Delete" data-toggle="modal"
-															data-target="#delete">
-															<span class="glyphicon glyphicon-trash"></span>
-														</button>
-													</p>
-												</td>
 												<td>
 												
 													<!-- Password Reset Button -->

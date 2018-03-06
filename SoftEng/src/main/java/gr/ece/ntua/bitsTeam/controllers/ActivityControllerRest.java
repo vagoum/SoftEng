@@ -1,6 +1,8 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,14 @@ public class ActivityControllerRest {
 		List<Activity> activities = activityRepository.findAll();
 
     
-        return activities;
+		List<Activity> returnActivities = new ArrayList<>();
+		for (Activity act: activities) {
+			if (act.getDate().compareTo(new Date()) > 0) {
+				returnActivities.add(act);
+			}
+		}
+		
+		return returnActivities;
 	}
 
 }

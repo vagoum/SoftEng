@@ -2,7 +2,6 @@ package gr.ece.ntua.bitsTeam.service;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -124,13 +123,14 @@ public class ActivitySearchServiceImpl implements ActivitySearchService {
 			break;
 		}
 
+		List<Activity> returnActivities = new ArrayList<>();
 		for (Activity act: activities) {
-			if (act.getDate().compareTo(new Date()) < 0) {
-				activities.remove(act);
+			if (act.getDate().compareTo(new Date()) > 0) {
+				returnActivities.add(act);
 			}
 		}
 		
-		return activities;
+		return returnActivities;
 
 	}
 
