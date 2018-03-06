@@ -25,7 +25,7 @@ import gr.ece.ntua.bitsTeam.model.Parent;
 public class PdfCreator {
  
     /** Path to the resulting PDF file. */
-    public static final String RESULT = "/home/dimlek/test.pdf";
+    public static final String RESULT = "booking_confirmation.pdf";
     
     /** Path to the resources. */
     public static final String RESOURCE = "/home/dimlek/Desktop/ticket_pic.png";   

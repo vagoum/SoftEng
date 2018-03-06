@@ -1,5 +1,6 @@
 package gr.ece.ntua.bitsTeam.controllers;
 
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -17,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gr.ece.ntua.bitsTeam.jsonClasses.EmailActionWrapper;
+import gr.ece.ntua.bitsTeam.login.CustomUserDetailsService;
 import gr.ece.ntua.bitsTeam.model.Organizer;
+import gr.ece.ntua.bitsTeam.model.Parent;
+import gr.ece.ntua.bitsTeam.model.Role;
 import gr.ece.ntua.bitsTeam.model.User;
 import gr.ece.ntua.bitsTeam.model.jparepos.UserRepository;
 import gr.ece.ntua.bitsTeam.service.UserService;
@@ -30,6 +34,9 @@ public class AdminControllerRest {
 	
 	@Autowired
 	private UserRepository<User> userRepository;
+	
+	@Autowired
+	private CustomUserDetailsService userDetailsService;
 	
 	@Autowired
 	private JavaMailSender mailSender;
@@ -52,6 +59,33 @@ public class AdminControllerRest {
 			switch (action) {
 			case "block":
 				user.setBlocked(!user.getBlocked());
+				/*
+				if (user.getBlocked() == true) {
+					for (Iterator<Role> iter = user.getRoles().listIterator(); iter.hasNext(); ) {
+					    Role role = iter.next();
+					    System.out.println("Authority = " + role.getAuthority());
+					    if ((role.getAuthority().equals("ROLE_PARENT")) || (role.getAuthority().equals("ROLE_ORGANIZER"))) {
+					    	System.out.println("Mphka");
+					        iter.remove();
+					    }
+					}
+					
+				} else {
+					Role role = new Role();
+		        	role.setEmail(user.getEmail());
+		        	role.setUser(user);
+		        	if (user instanceof Parent) {
+		        		role.setAuthority("ROLE_PARENT");
+		        	}
+		        		
+		        	else if (user instanceof Organizer)
+		        		role.setAuthority("ROLE_ORGANIZER");
+		        	else
+		        		System.out.println("Error");
+		        	user.getRoles().add(role);
+						
+				}
+				*/
 				userRepository.save(user);
 				break;
 			case "reset":

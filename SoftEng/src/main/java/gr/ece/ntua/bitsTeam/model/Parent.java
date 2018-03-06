@@ -7,9 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+
 
 @Entity
 @DiscriminatorValue("parent")
@@ -18,8 +17,21 @@ public class Parent extends User {
 	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Booking> bookings = new ArrayList<>();
 	
+	@OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+	private List<Payment> payments = new ArrayList<>();
 	
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
+	}
+
 	private Integer balance = 0;
+	
+	private Integer pointsToReward = 0;
+	
 	
 	public Integer getBalance() {
 		return balance;
@@ -42,5 +54,14 @@ public class Parent extends User {
 	public String toString() {
 		return "Parent [bookings=" + bookings + "]";
 	}
+
+	public Integer getPointsToReward() {
+		return pointsToReward;
+	}
+
+	public void setPointsToReward(Integer pointsToReward) {
+		this.pointsToReward = pointsToReward;
+	}
+
 
 }

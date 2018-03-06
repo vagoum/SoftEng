@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
         	role.setUser(user);
         	user.getRoles().add(role);
         	userRepository.save(user);
-        }
+        } 
     }
     
     @SuppressWarnings("unchecked")

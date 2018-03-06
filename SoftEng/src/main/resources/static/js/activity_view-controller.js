@@ -9,13 +9,13 @@ $(document).ready(function() {
 	       return results[1] || 0;
 	    }
 	}
-	
-	
+
+
 	var bookData = {
 			ticketsBought: "",
 			activityId : ""
 	};
-	
+
 	$("#activity-details-title");
 
 	$("#activity-details-text");
@@ -30,7 +30,7 @@ $(document).ready(function() {
         e.preventDefault();
 		bookData.ticketsBought = $("input[id=activity-details-tickets]").val();
 		bookData.activityId = $.urlParam('id');
-		
+
 		console.log(JSON.stringify(bookData));
 		$.ajax({
 			type : "POST",
@@ -41,7 +41,9 @@ $(document).ready(function() {
 			success : function(result) {
 				console.log(JSON.stringify(result));
 				if (result == "success") {
-					window.location.href = "/parent";
+					swal("Booking completed!", "You will shortly receive an email with booking details and electronic ticket!", "success").then((value) => {
+						window.location.href = "/parent";
+					});
 				}
 				else if (result == "no tickets left"){
 					 swal("No tickets left", "The event doesn't have the amount of requested tickets", "error");
@@ -57,7 +59,7 @@ $(document).ready(function() {
 			}
 		});
 
-		
+
 	});
 
 });

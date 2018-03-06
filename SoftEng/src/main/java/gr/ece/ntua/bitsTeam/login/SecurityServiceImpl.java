@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import gr.ece.ntua.bitsTeam.model.PasswordResetToken;
 import gr.ece.ntua.bitsTeam.model.User;
 import gr.ece.ntua.bitsTeam.model.jparepos.PasswordTokenRepository;
+import gr.ece.ntua.bitsTeam.model.jparepos.UserRepository;
 
 @Service
 public class SecurityServiceImpl implements SecurityService{
@@ -26,6 +27,8 @@ public class SecurityServiceImpl implements SecurityService{
     
     @Autowired
     private PasswordTokenRepository passwordTokenRepository;
+
+	private UserRepository userRepository;
 
     @Override
     public String findLoggedInUsername() {
@@ -41,13 +44,13 @@ public class SecurityServiceImpl implements SecurityService{
     public void autologin(String email, String password) {
 
         UserDetails userDetails = customUserDetailsService.loadUserByUsername(email);
+
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());
-
         authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
         if (usernamePasswordAuthenticationToken.isAuthenticated()) {
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+        	SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
         }
+
     }
     
     @Override

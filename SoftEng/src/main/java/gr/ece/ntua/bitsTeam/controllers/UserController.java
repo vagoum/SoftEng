@@ -151,8 +151,7 @@ public class UserController {
             return "redirect:/index";
         } else {
         	return "redirect:/error";
-        }
-            
+        }       
     }
     
     

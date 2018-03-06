@@ -1,6 +1,7 @@
 package gr.ece.ntua.bitsTeam.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,8 @@ import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
@@ -71,8 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                	.antMatchers("/user/updatePassword*", "/user/savePassword*", "/updatePassword*")
-                	.hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
+                	.antMatchers("/user/updatePassword*", "/user/savePassword*", "/updatePassword*").hasAuthority("CHANGE_PASSWORD_PRIVILEGE")
                     .antMatchers("/resources/**", "/registration2", "/**", "/index").permitAll()
                     .anyRequest().authenticated()
                     .and()
@@ -84,6 +86,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .passwordParameter("password")
                     .permitAll()
                     .and()
+                    .requiresChannel()		//config request to use the mapping to a required channel
+					.anyRequest().requiresSecure()
+        			.and()
                 .logout()
                     .permitAll()
                     .logoutSuccessUrl("/index");
@@ -107,37 +112,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationProvider.setPasswordEncoder(bCryptPasswordEncoder());
         return authenticationProvider;
     }
-
-    /*
-    @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
-      TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory() {
-          @Override
-          protected void postProcessContext(Context context) {
-            SecurityConstraint securityConstraint = new SecurityConstraint();
-            securityConstraint.setUserConstraint("CONFIDENTIAL");
-            SecurityCollection collection = new SecurityCollection();
-            collection.addPattern("/*");
-            securityConstraint.addCollection(collection);
-            context.addConstraint(securityConstraint);
-          }
-        };
-      tomcat.addAdditionalTomcatConnectors(initiateHttpConnector());
-      return tomcat;
-    }
-
-
-    private Connector initiateHttpConnector() {
-      Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
-      connector.setScheme("http");
-      connector.setPort(8080);
-      connector.setSecure(false);
-      connector.setRedirectPort(8443);
-
-      return connector;
-  }
-
-  */
 
 
 }
