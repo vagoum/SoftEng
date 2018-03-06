@@ -28,8 +28,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  
 <!-- CSS files -->
 <link rel="stylesheet" href="./css/index_carousel.css">
 <link rel="stylesheet" href="./css/activity_view.css">
@@ -48,10 +47,10 @@
 
 <body>
 			    <!-- Generic Navbar -->
-
+       
     <sec:authorize access="!hasRole('ROLE_ORGANIZER') and !hasRole('ROLE_PARENT')">
         <div class="container side-bordering">
-
+   
         <div class="row">
             <nav class="navbar navbar-inverse">
                 <div class="navbar-header">
@@ -63,12 +62,14 @@
                     </button>
                     <a class="navbar-brand visible-xs-block" href="#">Menu</a>
                 </div>
-
+ 
                 <div class="collapse navbar-collapse js-navbar-collapse">
-
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">Home</a></li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/registration">Register</a></li>
-
+ 
                         <li class="dropdown">
                             <a href="http://www.jquery2dotnet.com" class="dropdown-toggle" data-toggle="dropdown">Sign in <b class="caret"></b></a>
                             <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
@@ -87,31 +88,32 @@
                                                     <label class="sr-only" for="exampleInputPassword2">Password</label>
                                                     <input type="password" class="form-control"placeholder="Password" required name="password">
                                                 </div>
-
+ 												
                                                 <input type="hidden" name="${_csrf.parameterName}"
                                                     value="${_csrf.token}" />
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-success btn-block">Sign
                                                         in</button>
                                                 </div>
+                                                <a href="/user/resetPassword">Forgot your password?</a>
                                             </form>
                                         </div>
                                     </div>
                                 </li>
                             </ul></li>
                     </ul>
-
+ 
                 </div>
                 </nav>
             </div>
         </div>
     </sec:authorize>
-
-
+   
+   
     <!-- Parent Navbar -->
     <sec:authorize access="hasRole('ROLE_PARENT')">
     <div class="container side-bordering">
-
+ 
         <div class="row">
             <nav class="navbar navbar-inverse">
                 <div class="navbar-header">
@@ -123,12 +125,12 @@
                     </button>
                     <a class="navbar-brand visible-xs-block" href="#">Menu</a>
                 </div>
-
+ 
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="/index">Home</a></li>
                     </ul>
-
+ 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/parent">Profile</a></li>
                         <li><a href="/logout">Log Out</a></li>
@@ -138,13 +140,13 @@
         </div>
     </div>
     </sec:authorize>
-
-
-
+ 
+ 
+ 
     <!-- Organizer Navbar -->
     <sec:authorize access="hasRole('ROLE_ORGANIZER')">
     <div class="container side-bordering">
-
+ 
         <div class="row">
             <nav class="navbar navbar-inverse">
                 <div class="navbar-header">
@@ -156,24 +158,23 @@
                     </button>
                     <a class="navbar-brand visible-xs-block" href="#">Menu</a>
                 </div>
-
+ 
                 <div class="collapse navbar-collapse js-navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="/index">Home</a></li>
                         <li><a href="/activity_create">Create Activity</a></li>
                     </ul>
-
+ 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/organizer">Profile</a></li>
                         <li><a href="/logout">Log Out</a></li>
                     </ul>
-
+ 
                 </div>
             </nav>
         </div>
     </div>
     </sec:authorize>
-
 
 	<!-- Content -->
 	<div class="container side-bordering">
@@ -188,10 +189,10 @@
 					<div id="activity-details-text">
 						${activity.activityDescription}</div>
 
-					<h4 class="my-3" style="padding-top: 20px;">Activity Category</h4>
+					<h4 class="my-3" style="padding-top: 20px;">Activity Details</h4>
 					<hr>
 					<ul id="activity-details-list">
-						<li>${activity.category}</li>
+						<li>${activity.category}, for age ${activity.ageMin} to ${activity.ageMax}</li>
 					</ul>
 					<br>
 					<sec:authorize access="hasRole('ROLE_PARENT')">
@@ -220,13 +221,13 @@
 						<form
 							id="booking_form">
 							<h3 for="proirty"><font size="4">Sign in to</font></label>
-
-							<button type="button" class="btn btn-default"
+							 
+							<button type="button" class="btn btn-default" 
 								id="dummy-button" style="margin-right: -15px;">Book
 							Now</button>
-						</form>
-
-					</div>
+						</form>	
+						
+					</div>	
 					</sec:authorize>
 				</div>
 			</div>
@@ -276,7 +277,7 @@
 												<a class="thumbnail" ><img alt=""
 													src=${thumbnail.url}></a>
 											</div>
-											<c:if test="${ 0 < fn:length(photos)}">
+											<c:if test="${ 0 < fn:length(photos)}">										
 											<div class="col-md-4 col-xs-4">
 												<a class="thumbnail" >
 													<img alt="" src=${photos[0].url}></a>
@@ -289,36 +290,36 @@
 											</div>
 											</c:if>
 										</div>
-									</div>
-
+									</div>											
+										
 										<c:forEach begin="2" end="${fn:length(photos)}" step="3" var="photo" items="${photos}" varStatus="loop">
 											<c:if test="${loop.index != fn:length(photos)}">
 											<div class="thumbnail-carousel-item item">
 												<div class="row">
-
+													
 													<div class="col-md-4 col-xs-4">
 														<a class="thumbnail" >
 														<img alt="" src=${photos[loop.index].url}></a>
-													</div>
+													</div>														
 													<c:if test="${loop.index +1 < fn:length(photos)}">
 													<div class="col-md-4 col-xs-4">
 														<a class="thumbnail" >
 														<img alt="" src=${photos[loop.index+1].url}></a>
-													</div>
+													</div>															
 													</c:if>
 													<c:if test="${loop.index +2 < fn:length(photos)}">
 													<div class="col-md-4 col-xs-4">
 														<a class="thumbnail" >
 														<img alt="" src=${photos[loop.index+2].url}></a>
-													</div>
-													</c:if>
+													</div>														
+													</c:if>														
 												</div>
 											</div>
 											</c:if>
-										</c:forEach>
-
+										</c:forEach>							
+									
 							<!-- Thumbnail Carousel nav -->
-							<a class="left carousel-control" href="#thumbnail-carousel" data-slide="prev"><</a>
+							<a class="left carousel-control" href="#thumbnail-carousel" data-slide="prev"><</a> 
 							<a class="right carousel-control" href="#thumbnail-carousel" data-slide="next">></a>
 
 						</div>
@@ -326,8 +327,8 @@
 				</div>
 			</div>
 		</div>
-
-
+		
+		
 
 		<div class="row event-address-date">
 			<h4>Event Date & Address</h4>

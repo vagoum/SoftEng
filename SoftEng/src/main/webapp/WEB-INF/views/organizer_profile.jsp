@@ -107,7 +107,9 @@
                 </div>
  
                 <div class="collapse navbar-collapse js-navbar-collapse">
-               
+                    <ul class="nav navbar-nav">
+                        <li><a href="/index">Home</a></li>
+                    </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="/registration">Register</a></li>
  
@@ -129,13 +131,14 @@
                                                     <label class="sr-only" for="exampleInputPassword2">Password</label>
                                                     <input type="password" class="form-control"placeholder="Password" required name="password">
                                                 </div>
- 
+ 												
                                                 <input type="hidden" name="${_csrf.parameterName}"
                                                     value="${_csrf.token}" />
                                                 <div class="form-group">
                                                     <button type="submit" class="btn btn-success btn-block">Sign
                                                         in</button>
                                                 </div>
+                                                <a href="/user/resetPassword">Forgot your password?</a>
                                             </form>
                                         </div>
                                     </div>
@@ -226,15 +229,6 @@
 				<h3 class="my-4" id="activity-details-title">Welcome:
 					${organizer.firstName} ${organizer.lastName}</h3>
 
-				<hr>
-				<form action="users/changepassword.jsp" method="get"
-					id="reset-pass_form">
-					<label for="proirty">Change Password: </label>
-
-					<button type="submit" form="reset-pass_form"
-						class="btn btn-success" id="activity-details-book-btn"
-						style="margin-left: 15px;">Change Password</button>
-				</form>
 				<hr>
 
 				<h4 class="x-price" id="activity-details-price">

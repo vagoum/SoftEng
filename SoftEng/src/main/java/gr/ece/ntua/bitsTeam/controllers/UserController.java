@@ -142,14 +142,19 @@ public class UserController {
     
     
     @RequestMapping(value = "/user/updatePassword", method = RequestMethod.POST)
-    public String changePassword(@ModelAttribute User user, Model model, @RequestParam("id") long id, @RequestParam("token") String token) {
+    public String changePassword(@ModelAttribute User user, Model model, @RequestParam("id") long id, @RequestParam("token") String token, RedirectAttributes redirectAttributes) {
     	final String result = securityUserService.validatePasswordResetToken(id, token);
     	if (result == null) {
     		PasswordResetToken passToken = passwordTokenRepository.findByToken(token);
             User currUser = passToken.getUser();
-            userService.changeUserPassword(currUser, user.getPassword());
-            return "redirect:/index";
-        } else {
+            if (!user.getPassword().equals(user.getPasswordConfirm())) {
+            	redirectAttributes.addAttribute("failure", "true");
+            	return "redirect:/user/changePassword?id=" + id + "&token=" + token;
+            } else {
+            	userService.changeUserPassword(currUser, user.getPassword());
+            	return "redirect:/index";		
+            	} 
+    	} else {
         	return "redirect:/error";
         }       
     }
