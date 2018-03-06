@@ -27,6 +27,5 @@ public class PaymentControllerRest {
 		status = paymentService.executePayment(email, points.getPoints());
 		return status;
 	}
-	
 
 }

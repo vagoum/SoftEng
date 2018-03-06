@@ -56,7 +56,8 @@ dependencies {
     compile group: 'org.gridkit.lab', name: 'vicluster-core', version: '0.8.13'
  
    
- 
+ 	compile group: 'org.springframework', name: 'spring-context-support', version: '4.3.14.RELEASE'
+ 	compile group: 'org.springframework', name: 'spring-webmvc', version: '4.3.14.RELEASE'
    
     compile('org.springframework.boot:spring-boot-starter-web','org.apache.tomcat.embed:tomcat-embed-jasper', 'org.springframework.boot:spring-boot-starter-tomcat')
     compile('org.springframework.boot:spring-boot-devtools')    

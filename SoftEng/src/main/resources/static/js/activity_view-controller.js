@@ -41,7 +41,9 @@ $(document).ready(function() {
 			success : function(result) {
 				console.log(JSON.stringify(result));
 				if (result == "success") {
-					window.location.href = "/parent";
+					swal("Booking completed!", "You will shortly receive an email with booking details and electronic ticket!", "success").then((value) => {
+						window.location.href = "/parent";
+					});
 				}
 				else if (result == "no tickets left"){
 					alert("no tickets left")

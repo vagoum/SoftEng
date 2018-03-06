@@ -22,9 +22,18 @@ $(document).ready(function() {
 			dataType : 'text',
 			success : function(result) {
 				console.log(JSON.stringify(result));
-				if (result == "success") {
+				var fields = result.split(':');
+
+				var status = fields[0];
+				if (status == "success") {
 					window.location.href = "/parent";
-				}
+				} 
+				else if (status == "reward") {
+					var rewardPoints = fields[1];
+					swal("Congratulations!", "You have been awarded " + rewardPoints + " activity points for free!", "success").then((value) => {
+						window.location.href = "/parent";
+					});
+				} 
 				else {
 					alert("Error!")
 				}

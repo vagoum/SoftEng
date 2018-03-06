@@ -26,7 +26,7 @@ public class BookingServiceImpl implements BookingService {
 	private BookingRepository bookingRepository;
 
 	@Transactional
-	public String book(String email, Long activityId, Integer ticketsBought) {
+	public String book(String email, Long activityId, Integer ticketsBought, Booking booking) {
 		Parent parent = parentRepository.findByEmail(email);
 		Activity activity = activityRepository.findOne(activityId);
 		Integer totalCost = activity.getCost() * ticketsBought;
@@ -39,9 +39,12 @@ public class BookingServiceImpl implements BookingService {
 		}
 		
 		if (totalCost <= balance) {
-			Booking newBooking = new Booking(activity, parent, ticketsBought, new Date());
+			booking.setActivity(activity);
+			booking.setParent(parent);
+			booking.setTicketsBought(ticketsBought);
+			booking.setTimestamp(new Date());
 			
-			bookingRepository.save(newBooking);
+			bookingRepository.save(booking);
 			parent.setBalance(balance - totalCost);
 			parentRepository.save(parent);
 			return "success";

@@ -35,6 +35,9 @@ public class Payment {
 		this.timestamp = timestamp;
 		this.activityPoints = activityPoints;
 	}
+	
+	public Payment() {
+	}
 
 	public Parent getParent() {
 		return parent;

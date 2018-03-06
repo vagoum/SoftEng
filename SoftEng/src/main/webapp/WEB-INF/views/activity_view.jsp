@@ -30,7 +30,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <!-- CSS files -->
 <link rel="stylesheet" href="./css/index_carousel.css">
 <link rel="stylesheet" href="./css/activity_view.css">

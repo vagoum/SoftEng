@@ -23,6 +23,7 @@
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 <script type="text/javascript" src="./js/payment_panel-controller.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <!-- CSS files -->
 <link rel="stylesheet" href="./css/index_carousel.css">
