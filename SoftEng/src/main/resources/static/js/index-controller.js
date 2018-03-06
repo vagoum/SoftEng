@@ -16,6 +16,7 @@ $( document ).ready(function() {
 	var c_longtitude ="";
 	var c_latitude = "";
 	var markersArray = [];
+	var activityMarkers = [];
 
 	c_longtitude = parseFloat(document.getElementById("longtitude-id").value);
 	c_latitude = parseFloat(document.getElementById("latitude-id").value);
@@ -72,8 +73,8 @@ $( document ).ready(function() {
 	// Initialize map view
     var map = initMap(c_latitude, c_longtitude);
 
-    setInitialMarker(map, c_latitude, c_longtitude);
-    
+    var initMarker = setInitialMarker(map, c_latitude, c_longtitude);
+    markersArray.push(initMarker)
     // to do
     getDataIndex(function(activities) {
     	console.log(JSON.stringify(activities,null,2));
@@ -82,8 +83,10 @@ $( document ).ready(function() {
     	
     	for (var i=0; i<activities.length; i++) {
         	console.log(activities[i]);
-    		createMarkerAndInfoWindow(map,activities[i]);
+        	var m = createMarkerAndInfoWindow(map,activities[i]);
     		attachActivity(activities[i]);
+    		activityMarkers.push(m);
+    		
     	}
     }, function(activities) {
     	console.log("error: "+activities);
@@ -118,7 +121,7 @@ $( document ).ready(function() {
     google.maps.event.addListener(map, 'click', function(e) {
     	
     	console.log("clicked");
-    	clearOverlays();
+    	clearOverlays(markersArray);
 
         var positionDoubleclick = e.latLng;
         var activity = {
@@ -152,7 +155,8 @@ $( document ).ready(function() {
 	// Handling Search
 	$("#search_button1").on("click",function(e){	
 		e.preventDefault();
-		
+		clearOverlays(activityMarkers);
+
 
 		// Handle Text input
 			appliedSearchFilters.text = $("#free-search-text").val();
@@ -170,8 +174,10 @@ $( document ).ready(function() {
 		    setInitialMarker(map, c_latitude, c_longtitude);
 	    	
 	    	for (var i=0; i<activities.length; i++) {
+	        	console.log(activities[i]);
+	        	var m = createMarkerAndInfoWindow(map,activities[i]);
 	    		attachActivity(activities[i]);
-	    		createMarkerAndInfoWindow(map,activities[i]);
+	    		activityMarkers.push(m);
 	    	}
 	    }, function(data) {
 	    	console.log("error: "+data);
@@ -182,7 +188,7 @@ $( document ).ready(function() {
 
 	$("#search_button2").on("click",function(e){	
 		e.preventDefault();
-		
+		clearOverlays(activityMarkers);
 		// Handle Text input
 			appliedSearchFilters.text = $("#free-search-text").val();
 		
@@ -201,8 +207,10 @@ $( document ).ready(function() {
 		    setInitialMarker(map, c_latitude, c_longtitude);
 	    	
 	    	for (var i=0; i<activities.length; i++) {
+	        	console.log(activities[i]);
+	        	var m = createMarkerAndInfoWindow(map,activities[i]);
 	    		attachActivity(activities[i]);
-	    		createMarkerAndInfoWindow(map,activities[i]);
+	    		activityMarkers.push(m);
 	    	}
 	    }, function(data) {
 	    	console.log("error: "+data);
@@ -212,7 +220,7 @@ $( document ).ready(function() {
 	});
 
 
-	function clearOverlays() {
+	function clearOverlays(markersArray) {
 		  for (var i = 0; i < markersArray.length; i++ ) {
 		   markersArray[i].setMap(null);
 		  }

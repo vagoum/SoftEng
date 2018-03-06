@@ -36,4 +36,5 @@ function setInitialMarker(map, latitude, longtitude){
     });
     userMarker.setPosition({lat:latitude, lng: longtitude});
     activityInfoWindow.open(map, userMarker);
+    return userMarker;
 }

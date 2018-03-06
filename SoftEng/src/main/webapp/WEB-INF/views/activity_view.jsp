@@ -204,7 +204,7 @@
 							id="booking_form">
 							<label for="proirty">Number of Tickets:</label> <input
 								type="number" class="form-control" id="activity-details-tickets"
-								name="ticket_price" min="1" max="50" placeholder="2" required
+								name="ticket_price" min="1" max="50" value="1" required
 								style="width: 60px; display: inline-block;">
 							<button type="submit" form="booking_form" class="btn btn-success"
 								id="activity-details-book-btn" style="margin-left: 15px;">Book

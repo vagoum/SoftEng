@@ -292,7 +292,7 @@ $(document).ready(function() {
 				if (result == "success")
 					window.location.href = "/index";
 				else {
-					alert("Mail already used")
+					swal("Mail already used")
 				}
 			},
 			error : function(e) {
@@ -302,9 +302,6 @@ $(document).ready(function() {
 			}
 			});
 		 }
-		 else {
-		alert("Invalid registration");  //to fix
-	}
 		
 	});
 
@@ -333,7 +330,7 @@ $(document).ready(function() {
 				if (result == "success")
 					window.location.href = "/index";
 				else {
-					alert("Mail already used")
+					swal("Mail already used")
 				}
 			},
 			error : function(e) {
@@ -343,9 +340,7 @@ $(document).ready(function() {
 			}
 		});
 		 }
-		 else {
-		alert("Invalid registration");  //to fix
-	}
+
 	});
 		
 

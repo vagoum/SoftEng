@@ -17,6 +17,7 @@ $(document).ready(function(){
 		}
     };
     
+    markersArray = []
     
     $("#activity-form").validate({
         rules: {
@@ -121,6 +122,39 @@ $(document).ready(function(){
           anchorPoint: new google.maps.Point(0, -29)
         });
 
+        google.maps.event.addListener(map, 'click', function(e) {
+        	
+        	console.log("clicked");
+        	clearOverlays(markersArray);
+
+            var positionDoubleclick = e.latLng;
+            var activity = {
+                "name":"Current User Location",
+                "location":{
+                    "latitude": positionDoubleclick.lat(),
+                    "longtitude": positionDoubleclick.lng()
+                }
+            };
+            activityData.location.latitude = activity.location.latitude;
+            activityData.location.longtitude = activity.location.longtitude;
+
+            var geocoder = new google.maps.Geocoder;
+            geocoder.geocode({'location': positionDoubleclick}, function(results, status) {
+              if (status === 'OK') {
+                if (results[0]) { 
+                    activity.name =  activity.name + ":<br>" + results[0].formatted_address;
+                }else{
+                    console.log(results);
+                }
+              }else{
+                console.log(status);
+              }
+              var marker = createMarkerAndInfoWindow(map,activity);
+             markersArray.push(marker);
+              
+            });
+        });
+        
         autocomplete.addListener('place_changed', function(e) {
             infowindow.close();
             marker.setVisible(false);
@@ -280,11 +314,15 @@ $(document).ready(function(){
 			}
 		});
         }
-        else {
-    		alert("Invalid Activity Create");  //to fix
-        }
+
         }
        });
+    
+	function clearOverlays(markersArray) {
+		  for (var i = 0; i < markersArray.length; i++ ) {
+		   markersArray[i].setMap(null);
+		  }
+		}
 
 });
 /*
