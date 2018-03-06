@@ -35,17 +35,23 @@ $(document).ready(function(){
                 integer: true,
                 required: true,
             },
+            "age_max" : {
+            	range: [3,18],
+            	integer: true,
+            	required: true,
+            },
+            "age_min" : {
+            	range: [3,18],
+            	integer: true,
+            	required: true,
+            },
             "date": {
                 required: true,
                 date: true,
             },
             "address": {
                 required: true,
-            },
-            "photo_file" : {
-                extension: "jpg",
-                //filesize: 4000000, //4MB
-            }, 
+            }
         },
         messages: {
             "activity_title": {
@@ -62,6 +68,14 @@ $(document).ready(function(){
                 required: "Please, enter a price",
                 range: "Please, enter a valid ticket price",
             },
+            "age_min": {
+            	range: "Must be in range 3-18",
+                required: "Please, enter a minimum age",
+            },
+            "age_max": {
+            	range: "Must be in range 3-18",
+                required: "Please, enter a maximum age",
+            },
             "date": {
                 required: "Please, enter a date",
                 date: "Please insert a valid date",
@@ -69,10 +83,6 @@ $(document).ready(function(){
             "address": {
                 required: "Please, enter an address",
             }, 
-            "photo_file": { 
-                extension: "Please upload only jpg, png format",
-                filesize: "Please upload maximum 500Kb",
-            } 
         }
     });
     
@@ -168,11 +178,8 @@ $(document).ready(function(){
         }
         var imageFile = topEntry.find("input[name=photo_file]")[0].files[0];
         console.log(imageFile);
-        if (! imageFile.type.match('image/jpeg') && !imageFile.type.match('image/png')) {
-        	alert("Image must be jpg jpeg or png")
-        }
-        else if (imageFile.size > 4000000) {
-        	alert("Image more than 4MB")
+        if (imageFile.size > 4000000) {
+        	swal("Image more than 4MB")
         }
         else {
         var newEntry = $(topEntry.clone());

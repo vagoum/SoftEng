@@ -21,6 +21,7 @@ function createMarkerAndInfoWindow(map, activity){
     });
     userMarker.setPosition({lat:activity.location.latitude, lng: activity.location.longtitude});
     activityInfoWindow.open(map, userMarker);
+    return userMarker;
 }
 
 function setInitialMarker(map, latitude, longtitude){

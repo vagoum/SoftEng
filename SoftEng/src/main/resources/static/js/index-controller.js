@@ -15,7 +15,8 @@ $( document ).ready(function() {
 	
 	var c_longtitude ="";
 	var c_latitude = "";
-	
+	var markersArray = [];
+
 	c_longtitude = parseFloat(document.getElementById("longtitude-id").value);
 	c_latitude = parseFloat(document.getElementById("latitude-id").value);
 	console.log(c_longtitude);
@@ -28,9 +29,9 @@ $( document ).ready(function() {
 	    type: "double",
 	    grid: false,
 	    min: 0,
-	    max: 100,
+	    max: 1000,
 	    from: 0,
-	    to: 400,
+	    to: 1000,
 	    prefix: "",
 	    onChange: function (data) {
 	    	appliedSearchFilters.cost_min = data.from;
@@ -56,7 +57,7 @@ $( document ).ready(function() {
 	    type: "double",
 	    grid: false,
 	    min: 3,
-	    max: 16,
+	    max: 18,
 	    from: 3,
 	    to: 16,
 	    prefix: "",
@@ -112,8 +113,13 @@ $( document ).ready(function() {
 		appliedSearchFilters.sortBy = $(this).children("input").attr("id").toLowerCase();
 	});
 
-    // Handling Double clicks on the map
-    google.maps.event.addListener(map, 'dblclick', function(e) {
+	
+		
+    google.maps.event.addListener(map, 'click', function(e) {
+    	
+    	console.log("clicked");
+    	clearOverlays();
+
         var positionDoubleclick = e.latLng;
         var activity = {
             "name":"Current User Location",
@@ -129,8 +135,6 @@ $( document ).ready(function() {
         geocoder.geocode({'location': positionDoubleclick}, function(results, status) {
           if (status === 'OK') {
             if (results[0]) { 
-                // userInfoWindow.setContent(userInfoWindow.getContent() +
-				// ":<br>" + results[0].formatted_address);
                 activity.name =  activity.name + ":<br>" + results[0].formatted_address;
             }else{
                 console.log(results);
@@ -138,11 +142,10 @@ $( document ).ready(function() {
           }else{
             console.log(status);
           }
-          createMarkerAndInfoWindow(map,activity);
+          var marker = createMarkerAndInfoWindow(map,activity);
+          markersArray.push(marker);
+          
         });
-
-        // if you don't do this, the map will zoom in
-        // e.stopPropagation();
     });
 
     var searchFlag = false;
@@ -165,7 +168,6 @@ $( document ).ready(function() {
 	    getDataSearch(JSON.stringify(appliedSearchFilters), function(activities) {
 	    	
 			$(".activities").eq(0).html(""); // reset cards
-		    var map = initMap(c_latitude, c_longtitude);
 
 		    setInitialMarker(map, c_latitude, c_longtitude);
 	    	
@@ -198,7 +200,6 @@ $( document ).ready(function() {
 	    getDataSearch(JSON.stringify(appliedSearchFilters), function(activities) {
 	    	
 			$(".activities").eq(0).html(""); // reset cards
-		    var map = initMap(c_latitude, c_longtitude);
 
 		    setInitialMarker(map, c_latitude, c_longtitude);
 	    	
@@ -213,35 +214,15 @@ $( document ).ready(function() {
 
 	});
 
-	/*
-	 * var activities = [ {"activityId":2,"name":"Play
-	 * Football1","category":"","activityDescription":"Qui diam libris ei,
-	 * vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo
-	 * offendit ea mea. Nostro blandit
-	 * sea","thumbNail":{"name":"","image":"","createdAt":1520024509663,"url":"http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png","isThumbnail":null},"date":"05/02/2017","location":{"longtitude":23.734851,"latitude":37.975443}},
-	 * {"activityId":6,"name":"Play
-	 * Football2","category":"","activityDescription":"Qui diam libris ei,
-	 * vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo
-	 * offendit ea mea. Nostro blandit
-	 * sea","thumbNail":{"name":"","image":"","createdAt":1520024509663,"url":"http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png","isThumbnail":null},"date":"05/02/2017","location":{"longtitude":23.734862,"latitude":37.975543}},
-	 * {"activityId":8,"name":"Play
-	 * Football3","category":"","activityDescription":"Qui diam libris ei,
-	 * vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo
-	 * offendit ea mea. Nostro blandit
-	 * sea","thumbNail":{"name":"","image":"","createdAt":1520024509663,"url":"http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png","isThumbnail":null},"date":"05/02/2019","location":{"longtitude":23.734873,"latitude":37.975243}},
-	 * {"activityId":10,"name":"Play
-	 * Football4","category":"","activityDescription":"Qui diam libris ei,
-	 * vidisse incorrupte at mel. His euismod salutandi dissentiunt eu. Habeo
-	 * offendit ea mea. Nostro blandit
-	 * sea","thumbNail":{"name":"","image":"","createdAt":1520024509663,"url":"http://res.cloudinary.com/dtsqo5emw/image/upload/v1519560140/vfmfkjvwdfo4hb2vfqzh.png","isThumbnail":null},"date":"05/02/2019","location":{"longtitude":23.734894,"latitude":37.977543}} ];
-	 * 
-	 * 
-	 * 
-	 * for(var i=0;i<activities.length;i++){ attachActivity(activities[i]);
-	 * createMarkerAndInfoWindow(map,activities[i]); }
-	 */
 
+	function clearOverlays() {
+		  for (var i = 0; i < markersArray.length; i++ ) {
+		   markersArray[i].setMap(null);
+		  }
+		}
+	
 });
+
 
 
 function getDataSearch(data, success, failure){
@@ -295,3 +276,5 @@ function attachActivity(activity){
 	 	+'" class="blue-button">Learn More</a></div></div>'));
 	actitiesDOM.append(currentActivityCard);
 }
+
+

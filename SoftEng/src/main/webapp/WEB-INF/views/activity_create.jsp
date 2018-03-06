@@ -42,6 +42,8 @@
 	<script type="text/javascript" src="./js/registration-controller.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUJOMB6wHxG1D4Y1ZCl3TXlH0NptQ8PWk&libraries=places"></script>
 <script type="text/javascript" src="./js/jqeury.validate.js"></script>
+<link rel="stylesheet" href="alert/dist/sweetalert.css">
+ <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 	<title>Little Explorers</title>
 </head>
@@ -212,12 +214,12 @@
 					<div class="form-group" style="padding-top: 20px; margin-left: -15px; margin-right: -10px;">
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Number of Tickets</h4></label>
-							<input type="number" class="form-control" id="activity-form-ticket_number" name="ticket_number" style="width:160px" placeholder="20" required onkeypress="if (event.keyCode ==13) {return false;}">
+							<input type="number" class="form-control" id="activity-form-ticket_number" name="ticket_number" style="width:160px" placeholder="100" required onkeypress="if (event.keyCode ==13) {return false;}">
 						</div> 
 
 						<div class="col-sm-4">
 							<label><h4 class="my-3">Ticket Price</h4></label>
-							<input type="number" class="form-control" id="activity-form-ticket_price" name="ticket_price" style="width:160px" placeholder="8" required onkeypress="if (event.keyCode ==13) {return false;}">
+							<input type="number" class="form-control" id="activity-form-ticket_price" name="ticket_price" style="width:160px" placeholder="10" required onkeypress="if (event.keyCode ==13) {return false;}">
 						</div>
 
 						<div class="col-sm-4">
