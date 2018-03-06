@@ -1,4 +1,12 @@
 $( document ).ready(function() {
+	
+	$('#submit_btn').click(function(e) {
+		var password = $("input[name=password1").val();
+		console.log(password);
+		// var passwordConfirm = ;
+		
+	});
+	
 	 $("#password-form").validate({
 	        rules: {
 	            "password1": {

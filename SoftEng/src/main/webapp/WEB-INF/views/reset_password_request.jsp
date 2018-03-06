@@ -168,55 +168,6 @@
 		</div>
 	</div>
 
-	<!-- Footer -->
-	<div class="container side-bordering">
-		<footer>
-			<div class="footer" id="footer">
-				<div class="row">
-					<div class="col-lg-2  col-md-2 col-sm-4 col-xs-12">
-						<h4>Company</h4>
-						<ul>
-							<li> <a href="#">Team</a></li>
-							<li> <a href="#">FAQ</a></li>
-							<li> <a href="#">Terms and Conditions</a></li>
-						</ul>
-					</div>
-					<div class="col-lg-2  col-md-2 col-sm-4 col-xs-12">
-						<h4>For Parents</h4>
-						<ul>
-							<li> <a href="#">Discover Activities</a> </li>
-							<li> <a href="#">Manage your Activities</a> </li>
-						</ul>
-					</div>
-					<div class="col-lg-2  col-md-2 col-sm-4 col-xs-12">
-						<h4>For Organizers</h4>
-						<ul>
-							<li> <a href="#">Create Activities</a></li>
-							<li> <a href="#">Manage your Activities</a></li>
-						</ul>
-					</div>
-					<div class="col-lg-3  col-md-3 col-sm-6 col-xs-12 pull-right">
-						<h4>Stay Up to Date</h4>
-						<ul>
-							<li>
-								<div class="input-append newsletter-box text-center">
-									<input type="text" class="full text-center" placeholder="example@email.com">
-
-									<button class="btn  bg-gray" type="button">Join our newslater<i class="fa fa-long-arrow-right"> </i> </button>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!--/.row--> 
-			</div>
-			<div class="footer-bottom">
-				<div class="container">
-					<p class="pull-left"> Copyright 2017. All rights reserved.</p>
-				</div>
-			</div>
-		</footer>
-		<!--/.footer --> 
-	</div>
+	
 
 </body>

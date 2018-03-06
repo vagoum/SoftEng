@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
+@Table(name = "password_reset_token", uniqueConstraints = {@UniqueConstraint(columnNames = "userId")})
 public class PasswordResetToken {
 
     private static final int EXPIRATION = 60 * 24;

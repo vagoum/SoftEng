@@ -6,10 +6,12 @@ import java.util.stream.Stream;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Service;
 
 import gr.ece.ntua.bitsTeam.model.PasswordResetToken;
 import gr.ece.ntua.bitsTeam.model.User;
 
+@Service
 public interface PasswordTokenRepository extends JpaRepository<PasswordResetToken, Long>{
 	
 	PasswordResetToken findByToken(String token);

@@ -1,4 +1,5 @@
 package gr.ece.ntua.bitsTeam.utils.mail;
+
 import java.io.IOException;
 import java.util.Properties;
 
@@ -37,7 +38,7 @@ import gr.ece.ntua.bitsTeam.model.Parent;
 import gr.ece.ntua.bitsTeam.model.User;
 
 public class MailSender {
-	
+
 	@Autowired
 	private JavaMailSender mailSender = new JavaMailSenderImpl();
 
@@ -45,7 +46,7 @@ public class MailSender {
 	private final String password = "Dimale1Dimale1";
 	private Properties props;
 	PdfCreator pdfGen;
-	
+
 	public MailSender() {
 		props = new Properties();
 		props.put("mail.smtp.auth", "true");
@@ -54,25 +55,21 @@ public class MailSender {
 		props.put("mail.smtp.port", "587");
 		pdfGen = new PdfCreator();
 	}
-	
+
 	public void sendBookingEmail(Booking booking) {
 		Activity details = booking.getActivity();
-		
+
 		Parent receiver = booking.getParent();
 		String receiverEmail = receiver.getEmail();
 		String receiverName = receiver.getFirstName();
 		Integer bookingId = booking.getId();
-		
-		
 
-		Session session = Session.getInstance(props,
-		  new javax.mail.Authenticator() {
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(serverEmail, password);
 			}
-		  });
-		
-		
+		});
+
 		try {
 
 			try {
@@ -82,88 +79,73 @@ public class MailSender {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			
+
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(serverEmail));
-			message.setRecipients(Message.RecipientType.TO,
-				InternetAddress.parse(receiverEmail));
-			
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(receiverEmail));
+
 			// Message Subject
 			message.setSubject("Electronic Ticket from KidA - Booking ID: " + bookingId);
- 
-	        BodyPart messageBodyPart = new MimeBodyPart();
 
-	        // Message Body
-	        messageBodyPart.setText("Dear, " + receiverName +
-	        						"\nThis is your Electronic Ticket and Receipt for your activity" +
-	        						"\nThank you for choosing us!" + 
-	        						"\n\nBest regards,\nKidA" +
-	        						"\n\nThis is a system generated e-mail and not possible to respond.\n");
-	         
-	        Multipart multipart = new MimeMultipart();
-	        multipart.addBodyPart(messageBodyPart);
+			BodyPart messageBodyPart = new MimeBodyPart();
 
-	        // PDF attachment
-	        messageBodyPart = new MimeBodyPart();
-	        String filename = PdfCreator.RESULT;
-	        DataSource source = new FileDataSource(filename);
-	        messageBodyPart.setDataHandler(new DataHandler(source));
-	        messageBodyPart.setFileName(filename);
-	        multipart.addBodyPart(messageBodyPart);
+			// Message Body
+			messageBodyPart
+					.setText("Dear, " + receiverName + "\nThis is your Electronic Ticket and Receipt for your activity"
+							+ "\nThank you for choosing us!" + "\n\nBest regards,\nKidA"
+							+ "\n\nThis is a system generated e-mail and not possible to respond.\n");
 
-	        // Send generated message
-	        message.setContent(multipart);
+			Multipart multipart = new MimeMultipart();
+			multipart.addBodyPart(messageBodyPart);
+
+			// PDF attachment
+			messageBodyPart = new MimeBodyPart();
+			String filename = PdfCreator.RESULT;
+			DataSource source = new FileDataSource(filename);
+			messageBodyPart.setDataHandler(new DataHandler(source));
+			messageBodyPart.setFileName(filename);
+			multipart.addBodyPart(messageBodyPart);
+
+			// Send generated message
+			message.setContent(multipart);
 			Transport.send(message);
 
 		} catch (MessagingException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	
+
 	/*
-	 public void sendBookingEmail(Booking booking) {
-		 	Activity details = booking.getActivity();		
-			Parent receiver = booking.getParent();
-			String receiverEmail = receiver.getEmail();
-			String receiverName = receiver.getFirstName();
-			Integer bookingId = booking.getId();
-			String ticketFile = "";
-			
-			try {
-				pdfGen = new PdfCreator();
-				ticketFile = pdfGen.createPdf(PdfCreator.RESULT, booking);
-			} catch (DocumentException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-					
-			String subject = "Electronic Ticket from KidA - Booking ID: " + bookingId;
-			String body = "Dear, " + receiverName +
-					"\nThis is your Electronic Ticket and booking confirmation for your activity" +
-					"\nThank you for choosing us!" + 
-					"\n\nBest regards,\nKidA" +
-					"\n\nThis is a system generated e-mail and not possible to respond.\n";
-			
-			MimeMessage message = mailSender.createMimeMessage();
-
-			
-			try{
-				MimeMessageHelper email = new MimeMessageHelper(message, true);
-				
-				email.setSubject(subject);
-				email.setText(body);
-				email.setTo(receiverEmail);
-				email.setFrom("kidA.comp@gmail.com");
-				
-				FileSystemResource file = new FileSystemResource(ticketFile);
-				email.addAttachment(file.getFilename(), file);
-			} catch (MessagingException e) {
-				throw new MailParseException(e);
-			}
-			    mailSender.send(message);
-
-	    }
-	 	*/
+	 * public void sendBookingEmail(Booking booking) { Activity details =
+	 * booking.getActivity(); Parent receiver = booking.getParent(); String
+	 * receiverEmail = receiver.getEmail(); String receiverName =
+	 * receiver.getFirstName(); Integer bookingId = booking.getId(); String
+	 * ticketFile = "";
+	 * 
+	 * try { pdfGen = new PdfCreator(); ticketFile =
+	 * pdfGen.createPdf(PdfCreator.RESULT, booking); } catch (DocumentException
+	 * e1) { e1.printStackTrace(); } catch (IOException e1) {
+	 * e1.printStackTrace(); }
+	 * 
+	 * String subject = "Electronic Ticket from KidA - Booking ID: " +
+	 * bookingId; String body = "Dear, " + receiverName +
+	 * "\nThis is your Electronic Ticket and booking confirmation for your activity"
+	 * + "\nThank you for choosing us!" + "\n\nBest regards,\nKidA" +
+	 * "\n\nThis is a system generated e-mail and not possible to respond.\n";
+	 * 
+	 * MimeMessage message = mailSender.createMimeMessage();
+	 * 
+	 * 
+	 * try{ MimeMessageHelper email = new MimeMessageHelper(message, true);
+	 * 
+	 * email.setSubject(subject); email.setText(body);
+	 * email.setTo(receiverEmail); email.setFrom("kidA.comp@gmail.com");
+	 * 
+	 * FileSystemResource file = new FileSystemResource(ticketFile);
+	 * email.addAttachment(file.getFilename(), file); } catch
+	 * (MessagingException e) { throw new MailParseException(e); }
+	 * mailSender.send(message);
+	 * 
+	 * }
+	 */
 }
