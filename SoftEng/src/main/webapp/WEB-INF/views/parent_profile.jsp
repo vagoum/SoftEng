@@ -252,7 +252,7 @@
 			<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-12">
 				<figure class="pull-right">
 					<img class="media-object img-rounded img-responsive activy-image"
-						src="http://placehold.it/350x250">
+						src="./images/profile_pic.jpg">
 				</figure>
 			</div>
 		</div>
